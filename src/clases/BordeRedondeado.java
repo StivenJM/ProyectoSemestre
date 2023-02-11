@@ -22,6 +22,10 @@ public class BordeRedondeado extends AbstractBorder {
         this.color = color;
         this.espesor = espesor;
     }
+    
+    public BordeRedondeado(int radio) {
+        this.radio = radio;
+    }
 
     @Override
     public void paintBorder(Component c, Graphics g, int x, int y, int ancho, int altura) {

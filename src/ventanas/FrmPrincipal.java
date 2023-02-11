@@ -8,8 +8,11 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import clases.*;
 
 public class FrmPrincipal extends javax.swing.JFrame {
+    
+    public static String imagenDeEleccion;
 
     public FrmPrincipal() {
         initComponents();
@@ -18,18 +21,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setTitle("CONSEJO NACIONAL ELECTORAL");
         setLocationRelativeTo(null);
         
-        ajustarImagenAJLabel(lblFondo, "src/imagenes/fondoBlanco2.jpg");
-        ajustarImagenAJLabel(lblLogoPrincipal, "src/imagenes/logoPrincipal.png");
+        ComponentesDeVentana.ajustarImagenAJLabel(lblFondo,
+                "src/imagenes/fondoBlanco2.jpg");
+        ComponentesDeVentana.ajustarImagenAJLabel(lblLogoPrincipal, 
+                "src/imagenes/logoPrincipal.png");
         
-        ajustarImagenAJButton(btnAdministracion, "src/imagenes/administracion.png");
-        ajustarImagenAJButton(btnResultados, "src/imagenes/resultados.png");
-        ajustarImagenAJButton(btnVotoTelematico, "src/imagenes/votoTelematico.png");
-        ajustarImagenAJButton(btnConsultaLugarVotacion, "src/imagenes/lugarVotacion.png");  
+        ComponentesDeVentana.ajustarImagenAJButton(btnAdministracion,
+                "src/imagenes/administracion.png");
+        ComponentesDeVentana.ajustarImagenAJButton(btnResultados,
+                "src/imagenes/resultados.png");
+        ComponentesDeVentana.ajustarImagenAJButton(btnVotoTelematico,
+                "src/imagenes/votoTelematico.png");
+        ComponentesDeVentana.ajustarImagenAJButton(btnConsultaLugarVotacion,
+                "src/imagenes/lugarVotacion.png");  
         
-        redondearBordesJButton(btnAdministracion);
-        redondearBordesJButton(btnResultados);
-        redondearBordesJButton(btnVotoTelematico);
-        redondearBordesJButton(btnConsultaLugarVotacion);
+        ComponentesDeVentana.redondearBordesJButton(btnAdministracion, Color.GRAY, 4);
+        ComponentesDeVentana.redondearBordesJButton(btnResultados, Color.GRAY, 4);
+        ComponentesDeVentana.redondearBordesJButton(btnVotoTelematico, Color.GRAY, 4);
+        ComponentesDeVentana.redondearBordesJButton(btnConsultaLugarVotacion, Color.GRAY, 4);
     }
     
     @Override
@@ -58,7 +67,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lblVotoTelematico = new javax.swing.JLabel();
         lblConsultaTuLugarDeVotacion = new javax.swing.JLabel();
         lblConsultaTuLugarDeVotacion1 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblDerechosReservados = new javax.swing.JLabel();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,7 +82,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btnAdministracionMouseExited(evt);
             }
         });
-        getContentPane().add(btnAdministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 175, 150));
+        btnAdministracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdministracionActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAdministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, 150, 150));
 
         btnResultados.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -83,7 +97,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btnResultadosMouseExited(evt);
             }
         });
-        getContentPane().add(btnResultados, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 175, 150));
+        getContentPane().add(btnResultados, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, 150, 150));
 
         btnVotoTelematico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -93,7 +107,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btnVotoTelematicoMouseExited(evt);
             }
         });
-        getContentPane().add(btnVotoTelematico, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 175, 150));
+        btnVotoTelematico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVotoTelematicoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnVotoTelematico, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 310, 150, 150));
 
         btnConsultaLugarVotacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -103,34 +122,39 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btnConsultaLugarVotacionMouseExited(evt);
             }
         });
-        getContentPane().add(btnConsultaLugarVotacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 280, 175, 150));
+        btnConsultaLugarVotacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaLugarVotacionActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnConsultaLugarVotacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 310, 150, 150));
 
         lblLogoPrincipal.setToolTipText("");
         getContentPane().add(lblLogoPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, -70, 800, 450));
 
-        lblAdministracion.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblAdministracion.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         lblAdministracion.setText("Administración");
-        getContentPane().add(lblAdministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, -1, -1));
+        getContentPane().add(lblAdministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 480, -1, -1));
 
-        lblResultados.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblResultados.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         lblResultados.setText("Resultados");
-        getContentPane().add(lblResultados, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, -1, -1));
+        getContentPane().add(lblResultados, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 480, -1, -1));
 
-        lblVotoTelematico.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblVotoTelematico.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         lblVotoTelematico.setText("Voto Telemático");
-        getContentPane().add(lblVotoTelematico, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 450, -1, -1));
+        getContentPane().add(lblVotoTelematico, new org.netbeans.lib.awtextra.AbsoluteConstraints(594, 480, -1, -1));
 
-        lblConsultaTuLugarDeVotacion.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblConsultaTuLugarDeVotacion.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         lblConsultaTuLugarDeVotacion.setText("de votación");
-        getContentPane().add(lblConsultaTuLugarDeVotacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 480, 110, 30));
+        getContentPane().add(lblConsultaTuLugarDeVotacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(865, 503, 110, 30));
 
-        lblConsultaTuLugarDeVotacion1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblConsultaTuLugarDeVotacion1.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         lblConsultaTuLugarDeVotacion1.setText("Consulta tu lugar");
-        getContentPane().add(lblConsultaTuLugarDeVotacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 450, 150, 30));
+        getContentPane().add(lblConsultaTuLugarDeVotacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 480, 150, 30));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel1.setText("EPN © Todos los Derechos Reservados.");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 620, 300, -1));
+        lblDerechosReservados.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        lblDerechosReservados.setText("EPN © Todos los Derechos Reservados.");
+        getContentPane().add(lblDerechosReservados, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 620, 300, -1));
         getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 700));
 
         pack();
@@ -183,29 +207,26 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnConsultaLugarVotacion.setSize(btnConsultaLugarVotacion.getWidth() - 10, 
                 btnConsultaLugarVotacion.getHeight() - 10);
     }//GEN-LAST:event_btnConsultaLugarVotacionMouseExited
-    
-    private void ajustarImagenAJLabel(JLabel label, String directorioImagen) {
-        ImageIcon imagen = new ImageIcon(directorioImagen);
-        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(
-                label.getWidth(), label.getHeight(),
-                Image.SCALE_DEFAULT));
-        label.setIcon(icono);
-        this.repaint();
-    }
-    
-    private void ajustarImagenAJButton(JButton button, String directorioImagen) {
-        ImageIcon icono = new ImageIcon(directorioImagen);
-        Image imagen = icono.getImage();
-        Image nuevaImagen = imagen.getScaledInstance(button.getWidth(), 
-                button.getHeight(), Image.SCALE_SMOOTH);
-        icono = new ImageIcon(nuevaImagen);
-        button.setIcon(icono);
-    }
-    
-    private void redondearBordesJButton(JButton button) {
-        button.setBorder(new BordeRedondeado(20, Color.LIGHT_GRAY, 4));
-        button.setContentAreaFilled(false);
-    }
+
+    private void btnAdministracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministracionActionPerformed
+        IniciarSesionAdministrador iniciarSesionAdministrador = 
+                new IniciarSesionAdministrador();
+        iniciarSesionAdministrador.setVisible(true);
+    }//GEN-LAST:event_btnAdministracionActionPerformed
+
+    private void btnVotoTelematicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVotoTelematicoActionPerformed
+        // TODO add your handling code here:
+        imagenDeEleccion = "src/imagenes/votoTelematico.png";
+        IniciarSesionCedula iniciarSesionCedula = new IniciarSesionCedula();
+        iniciarSesionCedula.setVisible(true);
+    }//GEN-LAST:event_btnVotoTelematicoActionPerformed
+
+    private void btnConsultaLugarVotacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaLugarVotacionActionPerformed
+        // TODO add your handling code here:
+        imagenDeEleccion = "src/imagenes/lugarVotacion.png";
+        IniciarSesionCedula iniciarSesionCedula = new IniciarSesionCedula();
+        iniciarSesionCedula.setVisible(true);
+    }//GEN-LAST:event_btnConsultaLugarVotacionActionPerformed
     
     /**
      * @param args the command line arguments
@@ -247,10 +268,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnConsultaLugarVotacion;
     private javax.swing.JButton btnResultados;
     private javax.swing.JButton btnVotoTelematico;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblAdministracion;
     private javax.swing.JLabel lblConsultaTuLugarDeVotacion;
     private javax.swing.JLabel lblConsultaTuLugarDeVotacion1;
+    private javax.swing.JLabel lblDerechosReservados;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblLogoPrincipal;
     private javax.swing.JLabel lblResultados;
