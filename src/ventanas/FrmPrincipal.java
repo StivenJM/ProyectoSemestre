@@ -1,6 +1,5 @@
 package ventanas;
 
-import clases.BordeRedondeado;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -9,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import clases.*;
+import herramientas.*;
 
 public class FrmPrincipal extends javax.swing.JFrame {
     
@@ -35,16 +35,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ComponentesDeVentana.ajustarImagenAJButton(btnConsultaLugarVotacion,
                 "src/imagenes/lugarVotacion.png");  
         
-        ComponentesDeVentana.redondearBordesJButton(btnAdministracion, Color.GRAY, 4);
-        ComponentesDeVentana.redondearBordesJButton(btnResultados, Color.GRAY, 4);
-        ComponentesDeVentana.redondearBordesJButton(btnVotoTelematico, Color.GRAY, 4);
-        ComponentesDeVentana.redondearBordesJButton(btnConsultaLugarVotacion, Color.GRAY, 4);
+        ComponentesDeVentana.redondearBordesJButton(btnAdministracion, 20, 2, Color.GRAY);
+        ComponentesDeVentana.redondearBordesJButton(btnResultados, 20, 2, Color.GRAY);
+        ComponentesDeVentana.redondearBordesJButton(btnVotoTelematico, 20, 2, Color.GRAY);
+        ComponentesDeVentana.redondearBordesJButton(btnConsultaLugarVotacion, 20, 2, Color.GRAY);
     }
     
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(
-                ClassLoader.getSystemResource("imagenes/logoCNE.png"));
+                ClassLoader.getSystemResource("imagenes/logoCNEConFondo.png"));
         return retValue;
     }
 

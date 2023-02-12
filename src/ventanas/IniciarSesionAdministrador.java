@@ -1,6 +1,6 @@
 package ventanas;
 
-import clases.ComponentesDeVentana;
+import herramientas.ComponentesDeVentana;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -30,7 +30,7 @@ public class IniciarSesionAdministrador extends javax.swing.JFrame {
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(
-                ClassLoader.getSystemResource("imagenes/logoCNE.png"));
+                ClassLoader.getSystemResource("imagenes/logoCNEConFondo.png"));
         return retValue;
     }
 

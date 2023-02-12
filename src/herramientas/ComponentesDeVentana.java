@@ -1,7 +1,10 @@
-package clases;
+package herramientas;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.geom.RoundRectangle2D;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,14 +29,15 @@ public class ComponentesDeVentana {
         button.setIcon(icono);
     }
     
-    public static void redondearBordesJButton(JButton button) {
-        button.setBorder(new BordeRedondeado(20));
-        button.setContentAreaFilled(false);
+    public static void redondearBordesJButton(JButton button, int radio, int espesor) {
+        RoundBorder.roundButton(button, radio, espesor);
     }
     
-    public static void redondearBordesJButton(JButton button, Color color,
-            int espesorBorde) {
-        button.setBorder(new BordeRedondeado(20, color, espesorBorde));
-        button.setContentAreaFilled(false);
+    public static void redondearBordesJButton(JButton button, int radio, int espesor, Color color) {
+        RoundBorder.roundButton(button, radio, espesor, color);
+    }
+    
+    public static void redondearBordesJLabel(JLabel label, int radio, int espesor) {
+        RoundBorder.roundLabel(label, radio, espesor);
     }
 }
