@@ -131,6 +131,8 @@ public class IniciarSesionAdministrador extends javax.swing.JFrame {
 
     private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
         // TODO add your handling code here:
+        dispose();
+        new Administracion().setVisible(true);
     }//GEN-LAST:event_btnAccederActionPerformed
 
     private void txtNombreUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreUsuarioMouseClicked
