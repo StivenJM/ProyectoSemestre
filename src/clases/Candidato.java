@@ -11,14 +11,12 @@ package clases;
 public class Candidato extends Persona{
     
     private String cargoPublicoPostulado;
-    private MovimientoPolitico movimientoPolitico;
 
     public Candidato(String cargoPublicoPostulado,
             MovimientoPolitico movimientoPolitico, String nombres, 
             String apellidos) {
         super(nombres, apellidos);
         this.cargoPublicoPostulado = cargoPublicoPostulado;
-        this.movimientoPolitico = movimientoPolitico;
     }
 
     public String getCargoPublicoPostulado() {
@@ -27,14 +25,6 @@ public class Candidato extends Persona{
 
     public void setCargoPublicoPostulado(String cargoPublicoPostulado) {
         this.cargoPublicoPostulado = cargoPublicoPostulado;
-    }
-
-    public MovimientoPolitico getMovimientoPolitico() {
-        return movimientoPolitico;
-    }
-
-    public void setMovimientoPolitico(MovimientoPolitico movimientoPolitico) {
-        this.movimientoPolitico = movimientoPolitico;
     }
     
 }

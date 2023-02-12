@@ -7,7 +7,7 @@ public class Votante extends Persona{
     }
     
     public void votarPorBinomio(Binomio binomio){
-        binomio.agregarVotoAFavor();
+        binomio.setNumeroDeVotosAFavor();
     }
     
 }

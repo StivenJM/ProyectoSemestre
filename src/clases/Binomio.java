@@ -2,37 +2,23 @@ package clases;
 
 public class Binomio {
     
-    private Candidato canditadoAPresidente;
-    private Candidato canditadoAVicepresidente;
-    private int numeroDatosAFavor;
+    private final MovimientoPolitico movimientoPolitico;
+    private int numeroDeVotosAFavor;
 
-    public Binomio(Candidato canditadoAPresidente, Candidato canditadoAVicepresidente) {
-        this.canditadoAPresidente = canditadoAPresidente;
-        this.canditadoAVicepresidente = canditadoAVicepresidente;
+    public Binomio(MovimientoPolitico movimientoPolitico) {
+        this.movimientoPolitico = movimientoPolitico;
+        this.numeroDeVotosAFavor = 0;
     }
 
-    public Candidato getCanditadoAPresidente() {
-        return canditadoAPresidente;
+    public MovimientoPolitico getMovimientoPolitico() {
+        return movimientoPolitico;
+    }
+    public int getNumeroDeVotosAFavor() {
+        return numeroDeVotosAFavor;
     }
 
-    public void setCanditadoAPresidente(Candidato canditadoAPresidente) {
-        this.canditadoAPresidente = canditadoAPresidente;
-    }
-
-    public Candidato getCanditadoAVicepresidente() {
-        return canditadoAVicepresidente;
-    }
-
-    public void setCanditadoAVicepresidente(Candidato canditadoAVicepresidente) {
-        this.canditadoAVicepresidente = canditadoAVicepresidente;
-    }
-
-    public int getNumeroDatosAFavor() {
-        return numeroDatosAFavor;
-    }
-
-    public void agregarVotoAFavor() {
-        this.numeroDatosAFavor++;
+    public void setNumeroDeVotosAFavor() {
+        this.numeroDeVotosAFavor++;
     }
     
 }

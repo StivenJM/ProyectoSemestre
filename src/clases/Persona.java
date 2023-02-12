@@ -5,7 +5,7 @@ public class Persona {
     protected String apellidos;
     protected int [] fechaNacimiento; // dia, mes, año
     protected String numeroCedula;
-    protected String ciudad;
+    protected String provincia;
 
     public Persona(String nombres, String apellidos, int[] fechaNacimiento, String numeroCedula) {
         this.nombres = nombres;
@@ -23,16 +23,8 @@ public class Persona {
         return nombres;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
     public String getApellidos() {
         return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
     }
 
     public int[] getFechaNacimiento() {
@@ -47,11 +39,12 @@ public class Persona {
         return numeroCedula;
     }
 
-    public String getCiudad() {
-        return ciudad;
+    public String getProvincia() {
+        return provincia;
     }
 
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
     }
+    
 }
