@@ -74,6 +74,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnAdministracion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAdministracion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnAdministracionMouseEntered(evt);
@@ -89,6 +90,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(btnAdministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, 150, 150));
 
+        btnResultados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnResultados.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnResultadosMouseEntered(evt);
@@ -99,6 +101,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(btnResultados, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, 150, 150));
 
+        btnVotoTelematico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVotoTelematico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnVotoTelematicoMouseEntered(evt);
@@ -114,6 +117,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(btnVotoTelematico, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 310, 150, 150));
 
+        btnConsultaLugarVotacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConsultaLugarVotacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnConsultaLugarVotacionMouseEntered(evt);
