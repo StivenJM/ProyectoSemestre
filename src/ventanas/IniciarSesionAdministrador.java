@@ -7,14 +7,17 @@ import java.awt.Toolkit;
 import javax.swing.border.EmptyBorder;
 
 public class IniciarSesionAdministrador extends javax.swing.JFrame {
+    
+    private FrmPrincipal ventanaPrincipal;
 
-    public IniciarSesionAdministrador() {
+    public IniciarSesionAdministrador(FrmPrincipal ventanaPrincipal) {
         initComponents();
         setSize(400, 550);
         setResizable(false);
         setTitle("Acceso al sistema");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.ventanaPrincipal = ventanaPrincipal;
         
         txtContraseniaOculta.setVisible(false);
         txtContraseniaOculta.setEchoChar('\u25CF');
@@ -54,6 +57,11 @@ public class IniciarSesionAdministrador extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(lblLogoPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 0, 360, 126));
         getContentPane().add(lblImagenOpcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 170, 170));
@@ -130,9 +138,11 @@ public class IniciarSesionAdministrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
-        // TODO add your handling code here:
-        dispose();
+        
+        ventanaPrincipal.dispose();
+        this.dispose();
         new Administracion().setVisible(true);
+        
     }//GEN-LAST:event_btnAccederActionPerformed
 
     private void txtNombreUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreUsuarioMouseClicked
@@ -180,6 +190,12 @@ public class IniciarSesionAdministrador extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtContraseniaOcultaFocusLost
     
+    /*Este metodo hace que se vuelva a habilitar la interaccion entre la ventana
+      principal cuando se cierre la ventana de Inicio de Sesion*/
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        ventanaPrincipal.setEnabled(true);
+    }//GEN-LAST:event_formWindowClosing
+    
     private void ponerCamposEnfocables() {
         txtNombreUsuario.setFocusable(true);
         txtContrasenia.setFocusable(true);
@@ -216,7 +232,8 @@ public class IniciarSesionAdministrador extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IniciarSesionAdministrador().setVisible(true);
+                new IniciarSesionAdministrador(
+                        FrmPrincipal.ventanaPrincipal).setVisible(true);
             }
         });
     }

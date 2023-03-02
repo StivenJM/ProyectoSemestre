@@ -22,7 +22,7 @@ public class GestionAdministradores extends javax.swing.JFrame {
         initComponents();
         
         setResizable(false);
-        setTitle("GESTIÓN DE BINOMIOS");
+        setTitle("GESTIÓN DE ADMINISTRADORES");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         

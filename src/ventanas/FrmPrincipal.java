@@ -11,21 +11,23 @@ import clases.*;
 import herramientas.*;
 
 public class FrmPrincipal extends javax.swing.JFrame {
-    
+
     public static String imagenDeEleccion;
+    public static FrmPrincipal ventanaPrincipal;
 
     public FrmPrincipal() {
         initComponents();
-        setSize(1100,700);
+        setSize(1100, 700);
         setResizable(false);
         setTitle("CONSEJO NACIONAL ELECTORAL");
         setLocationRelativeTo(null);
-        
+        ventanaPrincipal = this;
+
         ComponentesDeVentana.ajustarImagenAJLabel(lblFondo,
                 "src/imagenes/fondoBlanco2.jpg");
-        ComponentesDeVentana.ajustarImagenAJLabel(lblLogoPrincipal, 
+        ComponentesDeVentana.ajustarImagenAJLabel(lblLogoPrincipal,
                 "src/imagenes/logoPrincipal.png");
-        
+
         ComponentesDeVentana.ajustarImagenAJButton(btnAdministracion,
                 "src/imagenes/administracion.png");
         ComponentesDeVentana.ajustarImagenAJButton(btnResultados,
@@ -33,14 +35,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ComponentesDeVentana.ajustarImagenAJButton(btnVotoTelematico,
                 "src/imagenes/votoTelematico.png");
         ComponentesDeVentana.ajustarImagenAJButton(btnConsultaLugarVotacion,
-                "src/imagenes/lugarVotacion.png");  
-        
+                "src/imagenes/lugarVotacion.png");
+
         ComponentesDeVentana.redondearBordesJButton(btnAdministracion, 20, 2, Color.GRAY);
         ComponentesDeVentana.redondearBordesJButton(btnResultados, 20, 2, Color.GRAY);
         ComponentesDeVentana.redondearBordesJButton(btnVotoTelematico, 20, 2, Color.GRAY);
         ComponentesDeVentana.redondearBordesJButton(btnConsultaLugarVotacion, 20, 2, Color.GRAY);
     }
-    
+
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(
@@ -97,6 +99,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnResultadosMouseExited(evt);
+            }
+        });
+        btnResultados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResultadosActionPerformed(evt);
             }
         });
         getContentPane().add(btnResultados, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, 150, 150));
@@ -166,72 +173,81 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnAdministracionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdministracionMouseEntered
         // TODO add your handling code here:
-        btnAdministracion.setSize(btnAdministracion.getWidth() + 10, 
+        btnAdministracion.setSize(btnAdministracion.getWidth() + 10,
                 btnAdministracion.getHeight() + 10);
     }//GEN-LAST:event_btnAdministracionMouseEntered
 
     private void btnAdministracionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdministracionMouseExited
         // TODO add your handling code here:
-        btnAdministracion.setSize(btnAdministracion.getWidth() - 10, 
+        btnAdministracion.setSize(btnAdministracion.getWidth() - 10,
                 btnAdministracion.getHeight() - 10);
     }//GEN-LAST:event_btnAdministracionMouseExited
 
     private void btnResultadosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResultadosMouseEntered
         // TODO add your handling code here:
-        btnResultados.setSize(btnResultados.getWidth() + 10, 
+        btnResultados.setSize(btnResultados.getWidth() + 10,
                 btnResultados.getHeight() + 10);
     }//GEN-LAST:event_btnResultadosMouseEntered
 
     private void btnResultadosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResultadosMouseExited
         // TODO add your handling code here:
-        btnResultados.setSize(btnResultados.getWidth() - 10, 
+        btnResultados.setSize(btnResultados.getWidth() - 10,
                 btnResultados.getHeight() - 10);
     }//GEN-LAST:event_btnResultadosMouseExited
 
     private void btnVotoTelematicoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVotoTelematicoMouseEntered
         // TODO add your handling code here:
-        btnVotoTelematico.setSize(btnVotoTelematico.getWidth() + 10, 
+        btnVotoTelematico.setSize(btnVotoTelematico.getWidth() + 10,
                 btnVotoTelematico.getHeight() + 10);
     }//GEN-LAST:event_btnVotoTelematicoMouseEntered
 
     private void btnVotoTelematicoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVotoTelematicoMouseExited
         // TODO add your handling code here:
-        btnVotoTelematico.setSize(btnVotoTelematico.getWidth() - 10, 
+        btnVotoTelematico.setSize(btnVotoTelematico.getWidth() - 10,
                 btnVotoTelematico.getHeight() - 10);
     }//GEN-LAST:event_btnVotoTelematicoMouseExited
 
     private void btnConsultaLugarVotacionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaLugarVotacionMouseEntered
         // TODO add your handling code here:
-        btnConsultaLugarVotacion.setSize(btnConsultaLugarVotacion.getWidth() + 10, 
+        btnConsultaLugarVotacion.setSize(btnConsultaLugarVotacion.getWidth() + 10,
                 btnConsultaLugarVotacion.getHeight() + 10);
     }//GEN-LAST:event_btnConsultaLugarVotacionMouseEntered
 
     private void btnConsultaLugarVotacionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaLugarVotacionMouseExited
         // TODO add your handling code here:
-        btnConsultaLugarVotacion.setSize(btnConsultaLugarVotacion.getWidth() - 10, 
+        btnConsultaLugarVotacion.setSize(btnConsultaLugarVotacion.getWidth() - 10,
                 btnConsultaLugarVotacion.getHeight() - 10);
     }//GEN-LAST:event_btnConsultaLugarVotacionMouseExited
 
     private void btnAdministracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministracionActionPerformed
-        IniciarSesionAdministrador iniciarSesionAdministrador = 
-                new IniciarSesionAdministrador();
+        IniciarSesionAdministrador iniciarSesionAdministrador
+                = new IniciarSesionAdministrador(this);
         iniciarSesionAdministrador.setVisible(true);
+        this.setEnabled(false);
     }//GEN-LAST:event_btnAdministracionActionPerformed
 
     private void btnVotoTelematicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVotoTelematicoActionPerformed
         // TODO add your handling code here:
         imagenDeEleccion = "src/imagenes/votoTelematico.png";
-        IniciarSesionCedula iniciarSesionCedula = new IniciarSesionCedula();
+        IniciarSesionCedula iniciarSesionCedula = new IniciarSesionCedula(this);
         iniciarSesionCedula.setVisible(true);
+        this.setEnabled(false);
     }//GEN-LAST:event_btnVotoTelematicoActionPerformed
 
     private void btnConsultaLugarVotacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaLugarVotacionActionPerformed
         // TODO add your handling code here:
         imagenDeEleccion = "src/imagenes/lugarVotacion.png";
-        IniciarSesionCedula iniciarSesionCedula = new IniciarSesionCedula();
+        IniciarSesionCedula iniciarSesionCedula = new IniciarSesionCedula(this);
         iniciarSesionCedula.setVisible(true);
+        this.setEnabled(false);
     }//GEN-LAST:event_btnConsultaLugarVotacionActionPerformed
-    
+
+    private void btnResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultadosActionPerformed
+        imagenDeEleccion = "src/imagenes/resultados.png";
+        Resultados resultados = new Resultados();
+        resultados.setVisible(true);
+    }//GEN-LAST:event_btnResultadosActionPerformed
+
     /**
      * @param args the command line arguments
      */

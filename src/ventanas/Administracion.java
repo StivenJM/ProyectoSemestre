@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ventanas;
 
 import herramientas.ComponentesDeVentana;
@@ -9,17 +5,10 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-/**
- *
- * @author stive
- */
 public class Administracion extends javax.swing.JFrame {
     
     public static String imagenDeEleccion;
     
-    /**
-     * Creates new form Administracion
-     */
     public Administracion() {
         initComponents();
         setSize(1100,700);
@@ -88,6 +77,11 @@ public class Administracion extends javax.swing.JFrame {
                 btnGestionCivilMouseExited(evt);
             }
         });
+        btnGestionCivil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGestionCivilActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnGestionCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 310, 150, 150));
 
         btnGestionBinomios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -99,6 +93,11 @@ public class Administracion extends javax.swing.JFrame {
                 btnGestionBinomiosMouseExited(evt);
             }
         });
+        btnGestionBinomios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGestionBinomiosActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnGestionBinomios, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 310, 150, 150));
 
         btnGestionAdministradores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -108,6 +107,11 @@ public class Administracion extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnGestionAdministradoresMouseExited(evt);
+            }
+        });
+        btnGestionAdministradores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGestionAdministradoresActionPerformed(evt);
             }
         });
         getContentPane().add(btnGestionAdministradores, new org.netbeans.lib.awtextra.AbsoluteConstraints(725, 310, 150, 150));
@@ -188,6 +192,21 @@ public class Administracion extends javax.swing.JFrame {
         btnGestionAdministradores.setSize(btnGestionAdministradores.getWidth() - 10, 
                 btnGestionAdministradores.getHeight() - 10);
     }//GEN-LAST:event_btnGestionAdministradoresMouseExited
+
+    private void btnGestionCivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionCivilActionPerformed
+        
+    }//GEN-LAST:event_btnGestionCivilActionPerformed
+
+    private void btnGestionBinomiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionBinomiosActionPerformed
+        GestionBinomios gestionBinomios = new GestionBinomios();
+        gestionBinomios.setVisible(true);
+    }//GEN-LAST:event_btnGestionBinomiosActionPerformed
+
+    private void btnGestionAdministradoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionAdministradoresActionPerformed
+        GestionAdministradores gestionAdministradores = 
+                new GestionAdministradores();
+        gestionAdministradores.setVisible(true);
+    }//GEN-LAST:event_btnGestionAdministradoresActionPerformed
 
     /**
      * @param args the command line arguments

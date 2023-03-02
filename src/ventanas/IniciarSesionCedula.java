@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ventanas;
 
 import herramientas.ComponentesDeVentana;
@@ -9,23 +5,19 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
-/**
- *
- * @author stive
- */
 public class IniciarSesionCedula extends javax.swing.JFrame {
 
-    /**
-     * Creates new form IniciarSesionCedula
-     */
-    public IniciarSesionCedula() {
+    private FrmPrincipal ventanaPrincipal;
+
+    public IniciarSesionCedula(FrmPrincipal ventanaPrincipal) {
         initComponents();
         setSize(400, 550);
         setResizable(false);
         setTitle("Iniciar sesión");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        
+        this.ventanaPrincipal = ventanaPrincipal;
+
         ComponentesDeVentana.ajustarImagenAJLabel(lblFondo,
                 "src/imagenes/fondoBlanco2.jpg");
         ComponentesDeVentana.ajustarImagenAJLabel(lblLogoPrincipal,
@@ -33,14 +25,14 @@ public class IniciarSesionCedula extends javax.swing.JFrame {
         ComponentesDeVentana.ajustarImagenAJLabel(lblImagenOpcion,
                 FrmPrincipal.imagenDeEleccion);
     }
-    
+
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(
                 ClassLoader.getSystemResource("imagenes/logoCNEConFondo.png"));
         return retValue;
     }
-    
+
     private void ponerCamposEnfocables() {
         txtNumeroCedula.setFocusable(true);
     }
@@ -64,6 +56,11 @@ public class IniciarSesionCedula extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtNumeroCedula.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -99,6 +96,11 @@ public class IniciarSesionCedula extends javax.swing.JFrame {
         btnAcceder.setText("ACCEDER");
         btnAcceder.setBorder(null);
         btnAcceder.setBorderPainted(false);
+        btnAcceder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAccederActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnAcceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 160, 30));
 
         lblCedula.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
@@ -124,9 +126,24 @@ public class IniciarSesionCedula extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumeroCedulaFocusLost
 
     private void txtNumeroCedulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNumeroCedulaMouseClicked
-        // TODO add your handling code here:
         ponerCamposEnfocables();
     }//GEN-LAST:event_txtNumeroCedulaMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.ventanaPrincipal.setEnabled(true);
+    }//GEN-LAST:event_formWindowClosing
+
+    private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
+
+        this.dispose();
+        this.ventanaPrincipal.setEnabled(false);
+        if (FrmPrincipal.imagenDeEleccion.equals("src/imagenes/lugarVotacion.png")) {
+            
+        } else if (FrmPrincipal.imagenDeEleccion.equals("src/imagenes/votoTelematico.png")) {
+            new Papeleta().setVisible(true);
+        }
+
+    }//GEN-LAST:event_btnAccederActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,7 +175,7 @@ public class IniciarSesionCedula extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IniciarSesionCedula().setVisible(true);
+                new IniciarSesionCedula(FrmPrincipal.ventanaPrincipal).setVisible(true);
             }
         });
     }
