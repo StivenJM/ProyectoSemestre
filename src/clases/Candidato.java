@@ -1,19 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package clases;
 
-/**
- *
- * @author stive
- */
 public class Candidato extends Persona{
     
+    private static final long serialVersionUID = 1L;
     private String cargoPublicoPostulado;
 
-    public Candidato(String cargoPublicoPostulado,
-            MovimientoPolitico movimientoPolitico, String nombres, 
+    public Candidato(String cargoPublicoPostulado, String nombres, 
             String apellidos) {
         super(nombres, apellidos);
         this.cargoPublicoPostulado = cargoPublicoPostulado;

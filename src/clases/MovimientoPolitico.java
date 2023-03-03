@@ -1,25 +1,16 @@
 package clases;
 
-public class MovimientoPolitico {
+import java.io.Serializable;
+
+public class MovimientoPolitico implements Serializable {
     
+    private static final long serialVersionUID = 1L;
     private String nombre;
     private int numeroDeLista;
-    private Candidato presidente;
-    private Candidato vicepresidente;
 
-    public MovimientoPolitico(String nombre, int numeroDeLista, Candidato presidente, Candidato vicepresidente) {
+    public MovimientoPolitico(String nombre, int numeroDeLista) {
         this.nombre = nombre;
         this.numeroDeLista = numeroDeLista;
-        this.presidente = presidente;
-        this.vicepresidente = vicepresidente;
-    }
-
-    public Candidato getPresidente() {
-        return presidente;
-    }
-
-    public Candidato getVicepresidente() {
-        return vicepresidente;
     }
 
     public String getNombre() {

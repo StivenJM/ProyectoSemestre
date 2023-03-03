@@ -1,15 +1,22 @@
 package clases;
 
-public class Binomio {
+import java.io.Serializable;
+
+public class Binomio implements Serializable {
     
+    private static final long serialVersionUID = 1L;
     private final MovimientoPolitico movimientoPolitico;
     private int numeroDeVotosAFavor;
+    private Candidato presidente;
+    private Candidato vicepresidente;
 
-    public Binomio(MovimientoPolitico movimientoPolitico) {
+    public Binomio(MovimientoPolitico movimientoPolitico, Candidato presidente, Candidato vicepresidente) {
         this.movimientoPolitico = movimientoPolitico;
+        this.presidente = presidente;
+        this.vicepresidente = vicepresidente;
         this.numeroDeVotosAFavor = 0;
     }
-
+    
     public MovimientoPolitico getMovimientoPolitico() {
         return movimientoPolitico;
     }
@@ -19,6 +26,14 @@ public class Binomio {
 
     public void setNumeroDeVotosAFavor() {
         this.numeroDeVotosAFavor++;
+    }
+
+    public Candidato getPresidente() {
+        return presidente;
+    }
+
+    public Candidato getVicepresidente() {
+        return vicepresidente;
     }
     
 }
