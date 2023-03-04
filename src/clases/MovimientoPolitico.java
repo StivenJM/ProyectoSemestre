@@ -2,7 +2,8 @@ package clases;
 
 import java.io.Serializable;
 
-public class MovimientoPolitico implements Serializable {
+public class MovimientoPolitico implements Serializable, 
+        Comparable<MovimientoPolitico> {
     
     private static final long serialVersionUID = 1L;
     private String nombre;
@@ -19,6 +20,11 @@ public class MovimientoPolitico implements Serializable {
 
     public int getNumeroDeLista() {
         return numeroDeLista;
+    }
+
+    @Override
+    public int compareTo(MovimientoPolitico o) {
+        return this.nombre.compareTo(o.nombre);
     }
     
 }

@@ -143,6 +143,8 @@ public class IniciarSesionAdministrador extends javax.swing.JFrame {
         this.dispose();
         new Administracion().setVisible(true);
         
+        
+        
     }//GEN-LAST:event_btnAccederActionPerformed
 
     private void txtNombreUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreUsuarioMouseClicked

@@ -1,6 +1,6 @@
 package clases;
 
-public class Votante extends Persona{
+public class Votante extends Persona {
     
     private static final long serialVersionUID = 1L;
     

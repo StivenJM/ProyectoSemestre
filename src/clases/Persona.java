@@ -2,7 +2,7 @@ package clases;
 
 import java.io.Serializable;
 
-public class Persona implements Serializable {
+public class Persona implements Serializable, Comparable<Persona> {
     
     private static final long serialVersionUID = 1L;
     protected String nombres;
@@ -17,12 +17,15 @@ public class Persona implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
         this.numeroCedula = numeroCedula;
     }
-
+    
     public Persona(String nombres, String apellidos) {
         this.nombres = nombres;
         this.apellidos = apellidos;
     }
 
+    public Persona() {
+    }
+    
     public String getNombres() {
         return nombres;
     }
@@ -49,6 +52,11 @@ public class Persona implements Serializable {
 
     public void setProvincia(String provincia) {
         this.provincia = provincia;
+    }
+
+    @Override
+    public int compareTo(Persona o) {
+        return (this.apellidos + this.nombres).compareTo(o.apellidos + o.nombres);
     }
     
 }

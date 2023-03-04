@@ -9,11 +9,21 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import clases.*;
 import herramientas.*;
+import java.util.ArrayList;
 
 public class FrmPrincipal extends javax.swing.JFrame {
 
     public static String imagenDeEleccion;
     public static FrmPrincipal ventanaPrincipal;
+    
+    /* Este administrador es el principal con el cual se pueden empezar a 
+       registrar a los demás administradores*/
+    public static final Administrador administradorPrincipal = 
+            new Administrador("PRINCIPAL", "contrasenia");
+    
+    public static ArrayList<Binomio> listaBinomios;
+    public static ArrayList<Votante> listaVotantes;
+    public static ArrayList<Administrador> listaAdministradores;
 
     public FrmPrincipal() {
         initComponents();
@@ -22,6 +32,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setTitle("CONSEJO NACIONAL ELECTORAL");
         setLocationRelativeTo(null);
         ventanaPrincipal = this;
+        
+        // Aqui se extraen los datos de los archivos
+        obtenerDatosDeArchivos();
 
         ComponentesDeVentana.ajustarImagenAJLabel(lblFondo,
                 "src/imagenes/fondoBlanco2.jpg");
@@ -247,7 +260,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
         Resultados resultados = new Resultados();
         resultados.setVisible(true);
     }//GEN-LAST:event_btnResultadosActionPerformed
-
+    
+    private void obtenerDatosDeArchivos() {
+        if (ManejoArchivos.archivoBinomiosExiste()) {
+            listaBinomios = ManejoArchivos.obtenerListaBinomios();
+        }
+        
+        if (ManejoArchivos.archivoVotantesExiste()) {
+            listaVotantes = ManejoArchivos.obtenerListaVotantes();
+        }
+        
+        if (ManejoArchivos.archivoAdministradoresExiste()) {
+            listaAdministradores = ManejoArchivos.obtenerListaAdministradores();
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */

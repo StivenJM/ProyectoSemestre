@@ -2,7 +2,7 @@ package clases;
 
 import java.io.Serializable;
 
-public class Binomio implements Serializable {
+public class Binomio implements Serializable, Comparable<Binomio> {
     
     private static final long serialVersionUID = 1L;
     private final MovimientoPolitico movimientoPolitico;
@@ -10,7 +10,8 @@ public class Binomio implements Serializable {
     private Candidato presidente;
     private Candidato vicepresidente;
 
-    public Binomio(MovimientoPolitico movimientoPolitico, Candidato presidente, Candidato vicepresidente) {
+    public Binomio(MovimientoPolitico movimientoPolitico, Candidato presidente,
+            Candidato vicepresidente) {
         this.movimientoPolitico = movimientoPolitico;
         this.presidente = presidente;
         this.vicepresidente = vicepresidente;
@@ -34,6 +35,11 @@ public class Binomio implements Serializable {
 
     public Candidato getVicepresidente() {
         return vicepresidente;
+    }
+
+    @Override
+    public int compareTo(Binomio o) {
+        return this.movimientoPolitico.compareTo(o.movimientoPolitico);
     }
     
 }
