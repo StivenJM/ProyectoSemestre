@@ -45,7 +45,7 @@ public class ManejoDeListas {
         return FrmPrincipal.listaBinomios.get(posicionBinomio);
     }
 
-    public static Votante buscarEnListaDeVotantes(String numeroCedula) {
+    public static int buscarEnListaDeVotantes(String numeroCedula) {
         boolean votanteEncontrado;
         int posicionVotante = -1;
         for (int i = 0; i < FrmPrincipal.listaVotantes.size(); i++) {
@@ -55,10 +55,14 @@ public class ManejoDeListas {
                 break;
             }
         }
-        return FrmPrincipal.listaVotantes.get(posicionVotante);
+        return posicionVotante;
     }
 
-    public static Administrador buscarEnListaDeAdministradores(String nombreDeUsuario) {
+    
+    /*El metodo retorna -1 cuando no encuentra coincidencias y retorna otro valor
+    positivi cuando si lo encuentra, este valor corresponde con la posicion de 
+    la lista*/
+    public static int buscarEnListaDeAdministradores(String nombreDeUsuario) {
         boolean adminEncontrado;
         int posicionAdmin = -1;
         for (int i = 0; i < FrmPrincipal.listaAdministradores.size(); i++) {
@@ -68,6 +72,6 @@ public class ManejoDeListas {
                 break;
             }
         }
-        return FrmPrincipal.listaAdministradores.get(posicionAdmin);
+        return posicionAdmin;
     }
 }

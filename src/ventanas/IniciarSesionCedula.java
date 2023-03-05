@@ -1,8 +1,11 @@
 package ventanas;
 
+import clases.Votante;
 import herramientas.ComponentesDeVentana;
+import herramientas.ManejoDeListas;
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 public class IniciarSesionCedula extends javax.swing.JFrame {
@@ -132,12 +135,22 @@ public class IniciarSesionCedula extends javax.swing.JFrame {
 
     private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
 
-        this.dispose();
-        FrmPrincipal.ventanaPrincipal.setEnabled(false);
-        if (FrmPrincipal.imagenDeEleccion.equals("src/imagenes/lugarVotacion.png")) {
-            
-        } else if (FrmPrincipal.imagenDeEleccion.equals("src/imagenes/votoTelematico.png")) {
-            new Papeleta().setVisible(true);
+        String cedula = txtNumeroCedula.getText();
+        int posicionDeVotanteEnLista = ManejoDeListas.buscarEnListaDeVotantes(cedula);
+
+        if (posicionDeVotanteEnLista != -1) {
+            this.dispose();
+            Votante votante = FrmPrincipal.listaVotantes.get(posicionDeVotanteEnLista);
+
+            if (FrmPrincipal.imagenDeEleccion.equals("src/imagenes/lugarVotacion.png")) {
+
+            } else if (FrmPrincipal.imagenDeEleccion.equals("src/imagenes/votoTelematico.png")) {
+                new Papeleta().setVisible(true);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Cedula Incorrecta.");
+            txtNumeroCedula.setText("Ingresa tu número de cédula");
         }
 
     }//GEN-LAST:event_btnAccederActionPerformed

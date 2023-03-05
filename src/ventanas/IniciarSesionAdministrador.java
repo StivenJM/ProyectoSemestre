@@ -1,13 +1,20 @@
 package ventanas;
 
+import clases.Administrador;
 import herramientas.ComponentesDeVentana;
+import herramientas.ManejoDeListas;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 
 public class IniciarSesionAdministrador extends javax.swing.JFrame {
-    
+
+    /* Este administrador es el principal con el cual se pueden empezar a 
+       registrar a los demás administradores*/
+    public static final Administrador administradorPrincipal
+            = new Administrador("PRINCIPAL", "contrasenia");
 
     public IniciarSesionAdministrador() {
         initComponents();
@@ -16,10 +23,10 @@ public class IniciarSesionAdministrador extends javax.swing.JFrame {
         setTitle("Acceso al sistema");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        
+
         txtContraseniaOculta.setVisible(false);
         txtContraseniaOculta.setEchoChar('\u25CF');
-        
+
         ComponentesDeVentana.ajustarImagenAJLabel(lblFondo,
                 "src/imagenes/fondoBlanco2.jpg");
         ComponentesDeVentana.ajustarImagenAJLabel(lblLogoPrincipal,
@@ -27,7 +34,7 @@ public class IniciarSesionAdministrador extends javax.swing.JFrame {
         ComponentesDeVentana.ajustarImagenAJLabel(lblImagenOpcion,
                 "src/imagenes/administracion.png");
     }
-    
+
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(
@@ -136,10 +143,51 @@ public class IniciarSesionAdministrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
-        
-        this.dispose();
-        new Administracion().setVisible(true);
-        
+
+        String usuario = txtNombreUsuario.getText();
+        String contrasena = txtContraseniaOculta.getText();
+
+        if (usuario.equals(administradorPrincipal.getUsuario())) {
+            if (contrasena.equals(administradorPrincipal.getContrasenia())) {
+
+                Administracion.administrador = administradorPrincipal;
+                Administracion.administrador.setNombres("ADMINISTRADOR");
+                Administracion.administrador.setApellidos("PRINCIPAL");
+                this.dispose();
+                new Administracion().setVisible(true);
+
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta.");
+                txtContraseniaOculta.setText("");
+            }
+        } else if (ManejoDeListas.buscarEnListaDeAdministradores(usuario) != -1) {
+            int posicionLista = ManejoDeListas.buscarEnListaDeAdministradores(usuario);
+            if (contrasena.equals(FrmPrincipal.listaAdministradores.
+                    get(posicionLista).getContrasenia())) {
+                Administracion.administrador
+                        = FrmPrincipal.listaAdministradores.get(posicionLista);
+                this.dispose();
+                new Administracion().setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta.");
+                txtContraseniaOculta.setText("");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane,
+                    "El nombre de usuario no está registrado.");
+            txtNombreUsuario.setText("");
+            txtContraseniaOculta.setText("");
+        }
+
+        if (txtNombreUsuario.getText().isEmpty()) {
+            txtNombreUsuario.setText("Nombre de usuario");
+        }
+
+        if (txtContraseniaOculta.getPassword().length == 0) {
+            txtContrasenia.setVisible(true);
+            txtContraseniaOculta.setVisible(false);
+        }
+
     }//GEN-LAST:event_btnAccederActionPerformed
 
     private void txtNombreUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreUsuarioMouseClicked
@@ -163,15 +211,15 @@ public class IniciarSesionAdministrador extends javax.swing.JFrame {
 
     private void txtContraseniaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContraseniaFocusGained
         // TODO add your handling code here
-        
+
         if (txtContrasenia.getText().equals("Contraseña")) {
             txtContrasenia.setVisible(false);
             txtContraseniaOculta.setVisible(true);
             txtContraseniaOculta.requestFocus();
         }
-        
+
     }//GEN-LAST:event_txtContraseniaFocusGained
-    
+
     private void txtContraseniaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContraseniaMouseClicked
         // TODO add your handling code here:
         ponerCamposEnfocables();
@@ -179,26 +227,26 @@ public class IniciarSesionAdministrador extends javax.swing.JFrame {
 
     private void txtContraseniaOcultaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContraseniaOcultaFocusLost
         // TODO add your handling code here:
-        
+
         if (txtContraseniaOculta.getPassword().length == 0) {
             txtContrasenia.setVisible(true);
             txtContraseniaOculta.setVisible(false);
         }
-        
+
     }//GEN-LAST:event_txtContraseniaOcultaFocusLost
-    
+
     /*Este metodo hace que se vuelva a habilitar la interaccion entre la ventana
       principal cuando se cierre la ventana de Inicio de Sesion*/
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         FrmPrincipal.ventanaPrincipal.setEnabled(true);
     }//GEN-LAST:event_formWindowClosing
-    
+
     private void ponerCamposEnfocables() {
         txtNombreUsuario.setFocusable(true);
         txtContrasenia.setFocusable(true);
         txtContraseniaOculta.setFocusable(true);
     }
-    
+
     /**
      * @param args the command line arguments
      */

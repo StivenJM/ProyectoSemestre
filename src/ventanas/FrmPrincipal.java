@@ -15,12 +15,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     public static String imagenDeEleccion;
     public static FrmPrincipal ventanaPrincipal;
-    
-    /* Este administrador es el principal con el cual se pueden empezar a 
-       registrar a los demás administradores*/
-    public static final Administrador administradorPrincipal = 
-            new Administrador("PRINCIPAL", "contrasenia");
-    
+
     public static ArrayList<Binomio> listaBinomios;
     public static ArrayList<Votante> listaVotantes;
     public static ArrayList<Administrador> listaAdministradores;

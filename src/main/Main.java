@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import herramientas.ManejoArchivos;
 import herramientas.Validador;
 import java.util.Collections;
+import ventanas.FrmPrincipal;
 
 public class Main {
 
@@ -140,7 +141,7 @@ public class Main {
         
         
         
-        System.out.println(Validador.esNumeroDeCedulaCorrecto("Hola"));
+        
         
     }
     

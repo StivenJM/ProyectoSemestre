@@ -1,5 +1,6 @@
 package ventanas;
 
+import clases.Administrador;
 import herramientas.ComponentesDeVentana;
 import java.awt.Color;
 import java.awt.Image;
@@ -9,6 +10,7 @@ public class Administracion extends javax.swing.JFrame {
     
     public static String imagenDeEleccion;
     public static Administracion ventanaAdministracion;
+    public static Administrador administrador;
     
     public Administracion() {
         initComponents();
@@ -18,6 +20,9 @@ public class Administracion extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         ventanaAdministracion = this;
+        
+        lblNombreApellido.setText((administrador.getNombres() + " " + 
+                administrador.getApellidos()).toUpperCase());
         
         ComponentesDeVentana.ajustarImagenAJLabel(lblFondo,
                 "src/imagenes/fondoBlanco2.jpg");
