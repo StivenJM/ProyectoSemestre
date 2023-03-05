@@ -32,17 +32,19 @@ public class ManejoDeListas {
         return listaBinomios;
     }
 
-    public static Binomio buscarEnListaDeBinomios(String nombreDeLista) {
-        boolean listaEncontrada;
+    public static int buscarEnListaDeBinomios(String nombreDeLista) {
+        boolean existeNombreDeMovimiento;
+        boolean existeNumeroDeLista;
         int posicionBinomio = -1;
         for (int i = 0; i < FrmPrincipal.listaBinomios.size(); i++) {
-            listaEncontrada = FrmPrincipal.listaBinomios.get(i).getMovimientoPolitico().getNombre().equals(nombreDeLista);
-            if (listaEncontrada) {
+            existeNombreDeMovimiento = FrmPrincipal.listaBinomios.get(i).getMovimientoPolitico().getNombre().equals(nombreDeLista);
+            existeNumeroDeLista = FrmPrincipal.listaBinomios.get(i).getMovimientoPolitico().getNumeroDeLista() == FrmPrincipal.listaBinomios.get(i).getMovimientoPolitico().getNumeroDeLista();
+            if (existeNombreDeMovimiento && existeNumeroDeLista) {
                 posicionBinomio = i;
                 break;
             }
         }
-        return FrmPrincipal.listaBinomios.get(posicionBinomio);
+        return posicionBinomio;
     }
 
     public static int buscarEnListaDeVotantes(String numeroCedula) {
