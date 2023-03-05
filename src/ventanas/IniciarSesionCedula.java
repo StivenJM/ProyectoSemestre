@@ -7,16 +7,13 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 public class IniciarSesionCedula extends javax.swing.JFrame {
 
-    private FrmPrincipal ventanaPrincipal;
-
-    public IniciarSesionCedula(FrmPrincipal ventanaPrincipal) {
+    public IniciarSesionCedula() {
         initComponents();
         setSize(400, 550);
         setResizable(false);
         setTitle("Iniciar sesión");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.ventanaPrincipal = ventanaPrincipal;
 
         ComponentesDeVentana.ajustarImagenAJLabel(lblFondo,
                 "src/imagenes/fondoBlanco2.jpg");
@@ -130,13 +127,13 @@ public class IniciarSesionCedula extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumeroCedulaMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        this.ventanaPrincipal.setEnabled(true);
+        FrmPrincipal.ventanaPrincipal.setEnabled(true);
     }//GEN-LAST:event_formWindowClosing
 
     private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
 
         this.dispose();
-        this.ventanaPrincipal.setEnabled(false);
+        FrmPrincipal.ventanaPrincipal.setEnabled(false);
         if (FrmPrincipal.imagenDeEleccion.equals("src/imagenes/lugarVotacion.png")) {
             
         } else if (FrmPrincipal.imagenDeEleccion.equals("src/imagenes/votoTelematico.png")) {
@@ -175,7 +172,7 @@ public class IniciarSesionCedula extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IniciarSesionCedula(FrmPrincipal.ventanaPrincipal).setVisible(true);
+                new IniciarSesionCedula().setVisible(true);
             }
         });
     }

@@ -100,6 +100,11 @@ public class GestionAdministradores extends javax.swing.JFrame {
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         pnlFondo.setPreferredSize(new java.awt.Dimension(1100, 700));
         pnlFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -133,7 +138,7 @@ public class GestionAdministradores extends javax.swing.JFrame {
         pnlDatosAdministradoresLayout.setHorizontalGroup(
             pnlDatosAdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDatosAdministradoresLayout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlDatosAdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDatosAdministrador)
                     .addComponent(lblNombresAdministrador)
@@ -147,7 +152,7 @@ public class GestionAdministradores extends javax.swing.JFrame {
                     .addGroup(pnlDatosAdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtNombresAdministrador, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                         .addComponent(txtApellidosAdministrador)))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlDatosAdministradoresLayout.createSequentialGroup()
                 .addGap(178, 178, 178)
                 .addComponent(btnGuardar)
@@ -286,6 +291,10 @@ public class GestionAdministradores extends javax.swing.JFrame {
         limpiarTablaDeAdministradores();
         mostrarDatosDeAdministradores();
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        Administracion.ventanaAdministracion.setEnabled(true);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

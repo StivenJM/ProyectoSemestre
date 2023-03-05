@@ -111,6 +111,11 @@ public class GestionBinomios extends javax.swing.JFrame {
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         pnlFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         pnlFondo.add(lblLogoPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, -40, 340, 190));
@@ -314,6 +319,10 @@ public class GestionBinomios extends javax.swing.JFrame {
         limpiarTablaDeBinomios();
         mostrarDatosDeBinomios();
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        Administracion.ventanaAdministracion.setEnabled(true);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

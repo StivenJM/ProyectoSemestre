@@ -8,16 +8,14 @@ import javax.swing.border.EmptyBorder;
 
 public class IniciarSesionAdministrador extends javax.swing.JFrame {
     
-    private FrmPrincipal ventanaPrincipal;
 
-    public IniciarSesionAdministrador(FrmPrincipal ventanaPrincipal) {
+    public IniciarSesionAdministrador() {
         initComponents();
         setSize(400, 550);
         setResizable(false);
         setTitle("Acceso al sistema");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.ventanaPrincipal = ventanaPrincipal;
         
         txtContraseniaOculta.setVisible(false);
         txtContraseniaOculta.setEchoChar('\u25CF');
@@ -139,11 +137,8 @@ public class IniciarSesionAdministrador extends javax.swing.JFrame {
 
     private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
         
-        ventanaPrincipal.dispose();
         this.dispose();
         new Administracion().setVisible(true);
-        
-        
         
     }//GEN-LAST:event_btnAccederActionPerformed
 
@@ -195,7 +190,7 @@ public class IniciarSesionAdministrador extends javax.swing.JFrame {
     /*Este metodo hace que se vuelva a habilitar la interaccion entre la ventana
       principal cuando se cierre la ventana de Inicio de Sesion*/
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        ventanaPrincipal.setEnabled(true);
+        FrmPrincipal.ventanaPrincipal.setEnabled(true);
     }//GEN-LAST:event_formWindowClosing
     
     private void ponerCamposEnfocables() {
@@ -234,8 +229,7 @@ public class IniciarSesionAdministrador extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IniciarSesionAdministrador(
-                        FrmPrincipal.ventanaPrincipal).setVisible(true);
+                new IniciarSesionAdministrador().setVisible(true);
             }
         });
     }

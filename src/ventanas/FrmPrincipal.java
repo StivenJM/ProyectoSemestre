@@ -100,6 +100,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnAdministracion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -247,7 +252,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnAdministracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministracionActionPerformed
         IniciarSesionAdministrador iniciarSesionAdministrador
-                = new IniciarSesionAdministrador(this);
+                = new IniciarSesionAdministrador();
         iniciarSesionAdministrador.setVisible(true);
         this.setEnabled(false);
     }//GEN-LAST:event_btnAdministracionActionPerformed
@@ -255,7 +260,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnVotoTelematicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVotoTelematicoActionPerformed
         // TODO add your handling code here:
         imagenDeEleccion = "src/imagenes/votoTelematico.png";
-        IniciarSesionCedula iniciarSesionCedula = new IniciarSesionCedula(this);
+        IniciarSesionCedula iniciarSesionCedula = new IniciarSesionCedula();
         iniciarSesionCedula.setVisible(true);
         this.setEnabled(false);
     }//GEN-LAST:event_btnVotoTelematicoActionPerformed
@@ -263,7 +268,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnConsultaLugarVotacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaLugarVotacionActionPerformed
         // TODO add your handling code here:
         imagenDeEleccion = "src/imagenes/lugarVotacion.png";
-        IniciarSesionCedula iniciarSesionCedula = new IniciarSesionCedula(this);
+        IniciarSesionCedula iniciarSesionCedula = new IniciarSesionCedula();
         iniciarSesionCedula.setVisible(true);
         this.setEnabled(false);
     }//GEN-LAST:event_btnConsultaLugarVotacionActionPerformed
@@ -273,6 +278,28 @@ public class FrmPrincipal extends javax.swing.JFrame {
         Resultados resultados = new Resultados();
         resultados.setVisible(true);
     }//GEN-LAST:event_btnResultadosActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        ManejoDeListas.ordenarListaDeBinomios();
+        ManejoDeListas.ordenarListaDeVotantes();
+        ManejoDeListas.ordenarListaDeAdministradores();
+        
+        if (ManejoArchivos.archivoBinomiosExiste()) {
+            ManejoArchivos.eliminarArchivoBinomios();
+        }
+        
+        if (ManejoArchivos.archivoVotantesExiste()) {
+            ManejoArchivos.eliminarArchivoVotantes();
+        }
+        
+        if (ManejoArchivos.archivoAdministradoresExiste()) {
+            ManejoArchivos.eliminarArchivoAdministradores();
+        }
+        
+        ManejoArchivos.guardarListaBinomios(listaBinomios);
+        ManejoArchivos.guardarListaVotantes(listaVotantes);
+        ManejoArchivos.guardarListaAdministradores(listaAdministradores);
+    }//GEN-LAST:event_formWindowClosing
     
     private void obtenerDatosDeArchivos() {
         if (ManejoArchivos.archivoBinomiosExiste()) {

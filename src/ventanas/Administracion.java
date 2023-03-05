@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 public class Administracion extends javax.swing.JFrame {
     
     public static String imagenDeEleccion;
+    public static Administracion ventanaAdministracion;
     
     public Administracion() {
         initComponents();
@@ -16,6 +17,7 @@ public class Administracion extends javax.swing.JFrame {
         setTitle("ADMINISTRACIÓN");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        ventanaAdministracion = this;
         
         ComponentesDeVentana.ajustarImagenAJLabel(lblFondo,
                 "src/imagenes/fondoBlanco2.jpg");
@@ -66,6 +68,14 @@ public class Administracion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnGestionCivil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -198,15 +208,25 @@ public class Administracion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGestionCivilActionPerformed
 
     private void btnGestionBinomiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionBinomiosActionPerformed
+        this.ventanaAdministracion.setEnabled(false);
         GestionBinomios gestionBinomios = new GestionBinomios();
         gestionBinomios.setVisible(true);
     }//GEN-LAST:event_btnGestionBinomiosActionPerformed
 
     private void btnGestionAdministradoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionAdministradoresActionPerformed
+        this.ventanaAdministracion.setEnabled(false);
         GestionAdministradores gestionAdministradores = 
                 new GestionAdministradores();
         gestionAdministradores.setVisible(true);
     }//GEN-LAST:event_btnGestionAdministradoresActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        FrmPrincipal.ventanaPrincipal.setEnabled(true);
+    }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        this.ventanaAdministracion = null;
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
