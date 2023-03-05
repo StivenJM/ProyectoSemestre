@@ -33,6 +33,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         ventanaPrincipal = this;
         
+        listaBinomios = new ArrayList<>();
+        listaAdministradores = new ArrayList<>();
+        listaVotantes = new ArrayList<>();
         // Aqui se extraen los datos de los archivos
         obtenerDatosDeArchivos();
 
@@ -54,6 +57,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ComponentesDeVentana.redondearBordesJButton(btnResultados, 20, 2, Color.GRAY);
         ComponentesDeVentana.redondearBordesJButton(btnVotoTelematico, 20, 2, Color.GRAY);
         ComponentesDeVentana.redondearBordesJButton(btnConsultaLugarVotacion, 20, 2, Color.GRAY);
+        
+        MovimientoPolitico movimientoPrueba = new MovimientoPolitico("listaPrueba", 1);
+        Candidato presiPrueba = new Candidato("presidente", "Juan Juan", "Lopez Lopez");
+        Candidato vicePrueba = new Candidato("vicepresidente", "Pedro Pedro", "Torres Torres");
+        Binomio binomioPrueba = new Binomio(movimientoPrueba, presiPrueba, vicePrueba);
+        listaBinomios.add(binomioPrueba);
+        
+        Administrador adminPrueba = new Administrador("erickc", "adadsadds", "Erick Eduardo", "Carcelen Piedra");
+        
+        listaAdministradores.add(adminPrueba);
     }
 
     @Override

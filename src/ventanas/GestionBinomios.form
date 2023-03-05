@@ -73,6 +73,34 @@
                 </Property>
                 <Property name="alignmentX" type="float" value="0.0"/>
                 <Property name="alignmentY" type="float" value="0.0"/>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                  </TableColumnModel>
+                </Property>
+                <Property name="opaque" type="boolean" value="false"/>
+                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>
@@ -83,6 +111,9 @@
               <Color id="Default Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="20" y="110" width="65" height="65"/>
@@ -90,9 +121,22 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnEliminar">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="190" y="110" width="65" height="65"/>
+              <AbsoluteConstraints x="140" y="110" width="65" height="65"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnBuscar">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="370" y="110" width="65" height="65"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -102,14 +146,14 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="370" y="110" width="65" height="65"/>
+              <AbsoluteConstraints x="260" y="110" width="65" height="65"/>
             </Constraint>
           </Constraints>
         </Component>
         <Container class="javax.swing.JPanel" name="pnlDatosBinomio">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="480" y="60" width="610" height="570"/>
+              <AbsoluteConstraints x="480" y="200" width="610" height="360"/>
             </Constraint>
           </Constraints>
 
@@ -119,43 +163,24 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblApellidosVicepresidente" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDatosVicepresidente" min="-2" max="-2" attributes="0"/>
                           <Component id="lblDatosPresidente" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblNombreMovimientoPolitico" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblPrimerNombrePresidente" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblSegundoNombrePresidente" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblPrimerApellidoPresidente" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblSegundoApellidoPresidente" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtMovimientoPolitico" max="32767" attributes="0"/>
-                                      <Component id="txtPrimerNombrePresidente" max="32767" attributes="0"/>
-                                      <Component id="txtSegundoNombrePresidente" max="32767" attributes="0"/>
-                                      <Component id="txtPrimerApellidoPresidente" max="32767" attributes="0"/>
-                                      <Component id="txtSegundoApellidoPresidente" pref="250" max="32767" attributes="0"/>
-                                  </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblNombreMovimientoPolitico" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbNombresPresidente" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblApellidosPresidente" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblNombresVicepresidente" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblPrimerNombreVicepresidente" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblDatosVicepresidente" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblSegundoNombreVicepresidente" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblPrimerApellidoVicepresidente" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblSegundoApellidoVicepresidente" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="txtPrimerNombreVicepresidente" max="32767" attributes="0"/>
-                                          <Component id="txtSegundoNombreVicepresidente" max="32767" attributes="0"/>
-                                          <Component id="txtPrimerApellidoVicepresidente" max="32767" attributes="0"/>
-                                          <Component id="txtSegundoApellidoVicepresidente" pref="250" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtNombresVicepresidente" min="-2" pref="250" max="-2" attributes="0"/>
+                                  <Component id="txtMovimientoPolitico" min="-2" pref="250" max="-2" attributes="0"/>
+                                  <Component id="txtNombresPresidente" min="-2" pref="250" max="-2" attributes="0"/>
+                                  <Component id="txtApellidosPresidente" min="-2" pref="250" max="-2" attributes="0"/>
+                                  <Component id="txtApellidosVicepresidente" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
+                                  <Component id="btnGuardar" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -175,49 +200,29 @@
                       <Component id="lblDatosPresidente" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblPrimerNombrePresidente" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPrimerNombrePresidente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbNombresPresidente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNombresPresidente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblSegundoNombrePresidente" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtSegundoNombrePresidente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblApellidosPresidente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtApellidosPresidente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblPrimerApellidoPresidente" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPrimerApellidoPresidente" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblSegundoApellidoPresidente" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtSegundoApellidoPresidente" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Component id="lblDatosVicepresidente" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lblPrimerNombreVicepresidente" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPrimerNombreVicepresidente" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblNombresVicepresidente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNombresVicepresidente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblSegundoNombreVicepresidente" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtSegundoNombreVicepresidente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblApellidosVicepresidente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtApellidosVicepresidente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblPrimerApellidoVicepresidente" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPrimerApellidoVicepresidente" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblSegundoApellidoVicepresidente" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtSegundoApellidoVicepresidente" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="68" max="32767" attributes="0"/>
+                      <EmptySpace pref="43" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -241,45 +246,25 @@
                 <Property name="text" type="java.lang.String" value="Datos del candidato a presidente"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtPrimerNombrePresidente">
+            <Component class="javax.swing.JTextField" name="txtNombresPresidente">
             </Component>
-            <Component class="javax.swing.JLabel" name="lblPrimerNombrePresidente">
+            <Component class="javax.swing.JLabel" name="lbNombresPresidente">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="12" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Primer Nombre"/>
+                <Property name="text" type="java.lang.String" value="Nombres"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblSegundoNombrePresidente">
+            <Component class="javax.swing.JLabel" name="lblApellidosPresidente">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="12" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Segundo Nombre"/>
+                <Property name="text" type="java.lang.String" value="Apellidos"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtSegundoNombrePresidente">
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblPrimerApellidoPresidente">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="12" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Primer Apellido"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtPrimerApellidoPresidente">
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblSegundoApellidoPresidente">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="12" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Segundo Apellido"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtSegundoApellidoPresidente">
+            <Component class="javax.swing.JTextField" name="txtApellidosPresidente">
             </Component>
             <Component class="javax.swing.JLabel" name="lblDatosVicepresidente">
               <Properties>
@@ -289,45 +274,25 @@
                 <Property name="text" type="java.lang.String" value="Datos del candidato a vicepresidente"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblPrimerNombreVicepresidente">
+            <Component class="javax.swing.JLabel" name="lblNombresVicepresidente">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="12" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Primer Nombre"/>
+                <Property name="text" type="java.lang.String" value="Nombres"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtPrimerNombreVicepresidente">
+            <Component class="javax.swing.JTextField" name="txtNombresVicepresidente">
             </Component>
-            <Component class="javax.swing.JLabel" name="lblSegundoNombreVicepresidente">
+            <Component class="javax.swing.JLabel" name="lblApellidosVicepresidente">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="12" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Segundo Nombre"/>
+                <Property name="text" type="java.lang.String" value="Apellidos"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtSegundoNombreVicepresidente">
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblPrimerApellidoVicepresidente">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="12" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Primer Apellido"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtPrimerApellidoVicepresidente">
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblSegundoApellidoVicepresidente">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="12" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Segundo Apellido"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtSegundoApellidoVicepresidente">
+            <Component class="javax.swing.JTextField" name="txtApellidosVicepresidente">
             </Component>
             <Component class="javax.swing.JButton" name="btnGuardar">
               <Properties>
@@ -336,6 +301,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

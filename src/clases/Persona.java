@@ -25,6 +25,18 @@ public class Persona implements Serializable, Comparable<Persona> {
 
     public Persona() {
     }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public void setNumeroCedula(String numeroCedula) {
+        this.numeroCedula = numeroCedula;
+    }
     
     public String getNombres() {
         return nombres;

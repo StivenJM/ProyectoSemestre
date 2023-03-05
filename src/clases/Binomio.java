@@ -38,8 +38,8 @@ public class Binomio implements Serializable, Comparable<Binomio> {
     }
 
     @Override
-    public int compareTo(Binomio o) {
-        return this.movimientoPolitico.compareTo(o.movimientoPolitico);
+    public int compareTo(Binomio b) {
+        return this.movimientoPolitico.compareTo(b.movimientoPolitico);
     }
     
 }

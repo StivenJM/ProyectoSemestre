@@ -4,12 +4,14 @@
  */
 package ventanas;
 
+import clases.*;
 import herramientas.ComponentesDeVentana;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import static ventanas.FrmPrincipal.listaBinomios;
 
 /**
  *
@@ -17,10 +19,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class GestionBinomios extends javax.swing.JFrame {
 
+    int filaSeleccionada;
+    Binomio binomioSeleccionado;
     /**
      * Creates new form GestionBinomios
      */
-    DefaultTableModel tablaBinomios;
+    DefaultTableModel dtmTablaBinomios;
     
     public GestionBinomios() {
         initComponents();
@@ -41,6 +45,7 @@ public class GestionBinomios extends javax.swing.JFrame {
         ComponentesDeVentana.ajustarImagenAJButton(btnNuevo, "src/imagenes/nuevo.png");
         ComponentesDeVentana.ajustarImagenAJButton(btnEliminar, "src/imagenes/eliminar.png");
         ComponentesDeVentana.ajustarImagenAJButton(btnEditar, "src/imagenes/editar.png");
+        ComponentesDeVentana.ajustarImagenAJButton(btnBuscar, "src/imagenes/buscar.png");
 
         btnNuevo.setOpaque(false);
         btnNuevo.setContentAreaFilled(false);
@@ -51,13 +56,18 @@ public class GestionBinomios extends javax.swing.JFrame {
         btnEditar.setOpaque(false);
         btnEditar.setContentAreaFilled(false);
         btnEditar.setBorderPainted(false);
+        btnBuscar.setOpaque(false);
+        btnBuscar.setContentAreaFilled(false);
+        btnBuscar.setBorderPainted(false);
         
-        tablaBinomios = new DefaultTableModel();
-        tablaBinomios.addColumn("Lista");
-        tablaBinomios.addColumn("Presidente/a");
-        tablaBinomios.addColumn("Vicepresidente/a");
-        tblBinomios.setModel(tablaBinomios);
+        dtmTablaBinomios = new DefaultTableModel();
+        dtmTablaBinomios.addColumn("Lista");
+        dtmTablaBinomios.addColumn("Presidente/a");
+        dtmTablaBinomios.addColumn("Vicepresidente/a");
+        tblBinomios.setModel(dtmTablaBinomios);
 
+        limpiarTablaDeBinomios();
+        mostrarDatosDeBinomios();
     }
 
     @Override
@@ -82,28 +92,21 @@ public class GestionBinomios extends javax.swing.JFrame {
         tblBinomios = new javax.swing.JTable();
         btnNuevo = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         pnlDatosBinomio = new javax.swing.JPanel();
         lblNombreMovimientoPolitico = new javax.swing.JLabel();
         txtMovimientoPolitico = new javax.swing.JTextField();
         lblDatosPresidente = new javax.swing.JLabel();
-        txtPrimerNombrePresidente = new javax.swing.JTextField();
-        lblPrimerNombrePresidente = new javax.swing.JLabel();
-        lblSegundoNombrePresidente = new javax.swing.JLabel();
-        txtSegundoNombrePresidente = new javax.swing.JTextField();
-        lblPrimerApellidoPresidente = new javax.swing.JLabel();
-        txtPrimerApellidoPresidente = new javax.swing.JTextField();
-        lblSegundoApellidoPresidente = new javax.swing.JLabel();
-        txtSegundoApellidoPresidente = new javax.swing.JTextField();
+        txtNombresPresidente = new javax.swing.JTextField();
+        lbNombresPresidente = new javax.swing.JLabel();
+        lblApellidosPresidente = new javax.swing.JLabel();
+        txtApellidosPresidente = new javax.swing.JTextField();
         lblDatosVicepresidente = new javax.swing.JLabel();
-        lblPrimerNombreVicepresidente = new javax.swing.JLabel();
-        txtPrimerNombreVicepresidente = new javax.swing.JTextField();
-        lblSegundoNombreVicepresidente = new javax.swing.JLabel();
-        txtSegundoNombreVicepresidente = new javax.swing.JTextField();
-        lblPrimerApellidoVicepresidente = new javax.swing.JLabel();
-        txtPrimerApellidoVicepresidente = new javax.swing.JTextField();
-        lblSegundoApellidoVicepresidente = new javax.swing.JLabel();
-        txtSegundoApellidoVicepresidente = new javax.swing.JTextField();
+        lblNombresVicepresidente = new javax.swing.JLabel();
+        txtNombresVicepresidente = new javax.swing.JTextField();
+        lblApellidosVicepresidente = new javax.swing.JLabel();
+        txtApellidosVicepresidente = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
@@ -126,20 +129,39 @@ public class GestionBinomios extends javax.swing.JFrame {
         ));
         tblBinomios.setAlignmentX(0.0F);
         tblBinomios.setAlignmentY(0.0F);
+        tblBinomios.setOpaque(false);
         jScrollPane2.setViewportView(tblBinomios);
 
         pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
         btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
         pnlFondo.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 65, 65));
-        pnlFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 65, 65));
+
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 65, 65));
+
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 65, 65));
 
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 65, 65));
+        pnlFondo.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 65, 65));
 
         lblNombreMovimientoPolitico.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblNombreMovimientoPolitico.setText("Nombre del movimiento político");
@@ -147,35 +169,28 @@ public class GestionBinomios extends javax.swing.JFrame {
         lblDatosPresidente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblDatosPresidente.setText("Datos del candidato a presidente");
 
-        lblPrimerNombrePresidente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblPrimerNombrePresidente.setText("Primer Nombre");
+        lbNombresPresidente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lbNombresPresidente.setText("Nombres");
 
-        lblSegundoNombrePresidente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblSegundoNombrePresidente.setText("Segundo Nombre");
-
-        lblPrimerApellidoPresidente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblPrimerApellidoPresidente.setText("Primer Apellido");
-
-        lblSegundoApellidoPresidente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblSegundoApellidoPresidente.setText("Segundo Apellido");
+        lblApellidosPresidente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblApellidosPresidente.setText("Apellidos");
 
         lblDatosVicepresidente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblDatosVicepresidente.setText("Datos del candidato a vicepresidente");
 
-        lblPrimerNombreVicepresidente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblPrimerNombreVicepresidente.setText("Primer Nombre");
+        lblNombresVicepresidente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNombresVicepresidente.setText("Nombres");
 
-        lblSegundoNombreVicepresidente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblSegundoNombreVicepresidente.setText("Segundo Nombre");
-
-        lblPrimerApellidoVicepresidente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblPrimerApellidoVicepresidente.setText("Primer Apellido");
-
-        lblSegundoApellidoVicepresidente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblSegundoApellidoVicepresidente.setText("Segundo Apellido");
+        lblApellidosVicepresidente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblApellidosVicepresidente.setText("Apellidos");
 
         btnGuardar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlDatosBinomioLayout = new javax.swing.GroupLayout(pnlDatosBinomio);
         pnlDatosBinomio.setLayout(pnlDatosBinomioLayout);
@@ -184,37 +199,23 @@ public class GestionBinomios extends javax.swing.JFrame {
             .addGroup(pnlDatosBinomioLayout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(pnlDatosBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblApellidosVicepresidente)
+                    .addComponent(lblDatosVicepresidente)
                     .addComponent(lblDatosPresidente)
-                    .addGroup(pnlDatosBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(pnlDatosBinomioLayout.createSequentialGroup()
-                            .addGroup(pnlDatosBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblNombreMovimientoPolitico)
-                                .addComponent(lblPrimerNombrePresidente)
-                                .addComponent(lblSegundoNombrePresidente)
-                                .addComponent(lblPrimerApellidoPresidente)
-                                .addComponent(lblSegundoApellidoPresidente))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(pnlDatosBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtMovimientoPolitico)
-                                .addComponent(txtPrimerNombrePresidente)
-                                .addComponent(txtSegundoNombrePresidente)
-                                .addComponent(txtPrimerApellidoPresidente)
-                                .addComponent(txtSegundoApellidoPresidente, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)))
-                        .addGroup(pnlDatosBinomioLayout.createSequentialGroup()
-                            .addGroup(pnlDatosBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblPrimerNombreVicepresidente)
-                                .addComponent(lblDatosVicepresidente)
-                                .addComponent(lblSegundoNombreVicepresidente)
-                                .addComponent(lblPrimerApellidoVicepresidente)
-                                .addComponent(lblSegundoApellidoVicepresidente))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(pnlDatosBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnGuardar)
-                                .addGroup(pnlDatosBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtPrimerNombreVicepresidente)
-                                    .addComponent(txtSegundoNombreVicepresidente)
-                                    .addComponent(txtPrimerApellidoVicepresidente)
-                                    .addComponent(txtSegundoApellidoVicepresidente, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))))))
+                    .addGroup(pnlDatosBinomioLayout.createSequentialGroup()
+                        .addGroup(pnlDatosBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNombreMovimientoPolitico)
+                            .addComponent(lbNombresPresidente)
+                            .addComponent(lblApellidosPresidente)
+                            .addComponent(lblNombresVicepresidente))
+                        .addGap(37, 37, 37)
+                        .addGroup(pnlDatosBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombresVicepresidente, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMovimientoPolitico, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombresPresidente, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtApellidosPresidente, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtApellidosVicepresidente, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGuardar))))
                 .addContainerGap(99, Short.MAX_VALUE))
         );
         pnlDatosBinomioLayout.setVerticalGroup(
@@ -228,44 +229,28 @@ public class GestionBinomios extends javax.swing.JFrame {
                 .addComponent(lblDatosPresidente)
                 .addGap(18, 18, 18)
                 .addGroup(pnlDatosBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPrimerNombrePresidente)
-                    .addComponent(txtPrimerNombrePresidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbNombresPresidente)
+                    .addComponent(txtNombresPresidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlDatosBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSegundoNombrePresidente)
-                    .addComponent(txtSegundoNombrePresidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblApellidosPresidente)
+                    .addComponent(txtApellidosPresidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(pnlDatosBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPrimerApellidoPresidente)
-                    .addComponent(txtPrimerApellidoPresidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnlDatosBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSegundoApellidoPresidente)
-                    .addComponent(txtSegundoApellidoPresidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
                 .addComponent(lblDatosVicepresidente)
                 .addGap(18, 18, 18)
-                .addGroup(pnlDatosBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblPrimerNombreVicepresidente)
-                    .addComponent(txtPrimerNombreVicepresidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlDatosBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombresVicepresidente)
+                    .addComponent(txtNombresVicepresidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlDatosBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSegundoNombreVicepresidente)
-                    .addComponent(txtSegundoNombreVicepresidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnlDatosBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPrimerApellidoVicepresidente)
-                    .addComponent(txtPrimerApellidoVicepresidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnlDatosBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSegundoApellidoVicepresidente)
-                    .addComponent(txtSegundoApellidoVicepresidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                    .addComponent(lblApellidosVicepresidente)
+                    .addComponent(txtApellidosVicepresidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addComponent(btnGuardar)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
-        pnlFondo.add(pnlDatosBinomio, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 610, 570));
+        pnlFondo.add(pnlDatosBinomio, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 200, 610, 360));
         pnlFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 700));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -282,10 +267,53 @@ public class GestionBinomios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        pnlDatosBinomio.setVisible(false);
+        
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
+        obtenerBinomioSeleccionado();
         pnlDatosBinomio.setVisible(true);
+        txtMovimientoPolitico.setText(binomioSeleccionado.getMovimientoPolitico().getNombre());
+        txtNombresPresidente.setText(binomioSeleccionado.getPresidente().getNombres());
+        txtApellidosPresidente.setText(binomioSeleccionado.getPresidente().getApellidos());
+        txtNombresVicepresidente.setText(binomioSeleccionado.getVicepresidente().getNombres());
+        txtApellidosVicepresidente.setText(binomioSeleccionado.getVicepresidente().getApellidos());
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+        pnlDatosBinomio.setVisible(true);
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        obtenerBinomioSeleccionado();
+        listaBinomios.remove(binomioSeleccionado);
+        limpiarTablaDeBinomios();
+        mostrarDatosDeBinomios();
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        String nuevoNombreMovimiento = txtMovimientoPolitico.getText();
+        String nuevosNombresPresidente = txtNombresPresidente.getText();
+        String nuevosApellidosPresidente = txtApellidosPresidente.getText();
+        String nuevosNombresVicepresidente = txtNombresVicepresidente.getText();
+        String nuevosApellidosVicepresidente = txtApellidosVicepresidente.getText();
+        
+        binomioSeleccionado.getMovimientoPolitico().setNombre(nuevoNombreMovimiento);
+        binomioSeleccionado.getPresidente().setNombres(nuevosNombresPresidente);
+        binomioSeleccionado.getPresidente().setApellidos(nuevosApellidosPresidente);
+        binomioSeleccionado.getVicepresidente().setNombres(nuevosNombresVicepresidente);
+        binomioSeleccionado.getVicepresidente().setApellidos(nuevosApellidosVicepresidente);
+        
+        limpiarTablaDeBinomios();
+        mostrarDatosDeBinomios();
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,37 +349,47 @@ public class GestionBinomios extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void mostrarDatosDeBinomios() {
+        for (Binomio b : FrmPrincipal.listaBinomios) {
+            dtmTablaBinomios.addRow(new Object[]{b.getMovimientoPolitico().getNombre(),b.getPresidente().getApellidos()+" " +b.getPresidente().getNombres(),b.getVicepresidente().getApellidos()+ " "+ b.getVicepresidente().getNombres()});
+        }
+    }
+    
+    private void limpiarTablaDeBinomios() {
+        for (int i = 0; i < tblBinomios.getRowCount(); i++) {
+            dtmTablaBinomios.removeRow(i);
+            i -= 1;
+        }
+    }
 
+    private void obtenerBinomioSeleccionado() {
+        filaSeleccionada = tblBinomios.getSelectedRow();
+        binomioSeleccionado = listaBinomios.get(filaSeleccionada);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lbNombresPresidente;
+    private javax.swing.JLabel lblApellidosPresidente;
+    private javax.swing.JLabel lblApellidosVicepresidente;
     private javax.swing.JLabel lblDatosPresidente;
     private javax.swing.JLabel lblDatosVicepresidente;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblLogoPrincipal;
     private javax.swing.JLabel lblNombreMovimientoPolitico;
-    private javax.swing.JLabel lblPrimerApellidoPresidente;
-    private javax.swing.JLabel lblPrimerApellidoVicepresidente;
-    private javax.swing.JLabel lblPrimerNombrePresidente;
-    private javax.swing.JLabel lblPrimerNombreVicepresidente;
-    private javax.swing.JLabel lblSegundoApellidoPresidente;
-    private javax.swing.JLabel lblSegundoApellidoVicepresidente;
-    private javax.swing.JLabel lblSegundoNombrePresidente;
-    private javax.swing.JLabel lblSegundoNombreVicepresidente;
+    private javax.swing.JLabel lblNombresVicepresidente;
     private javax.swing.JPanel pnlDatosBinomio;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JTable tblBinomios;
+    private javax.swing.JTextField txtApellidosPresidente;
+    private javax.swing.JTextField txtApellidosVicepresidente;
     private javax.swing.JTextField txtMovimientoPolitico;
-    private javax.swing.JTextField txtPrimerApellidoPresidente;
-    private javax.swing.JTextField txtPrimerApellidoVicepresidente;
-    private javax.swing.JTextField txtPrimerNombrePresidente;
-    private javax.swing.JTextField txtPrimerNombreVicepresidente;
-    private javax.swing.JTextField txtSegundoApellidoPresidente;
-    private javax.swing.JTextField txtSegundoApellidoVicepresidente;
-    private javax.swing.JTextField txtSegundoNombrePresidente;
-    private javax.swing.JTextField txtSegundoNombreVicepresidente;
+    private javax.swing.JTextField txtNombresPresidente;
+    private javax.swing.JTextField txtNombresVicepresidente;
     // End of variables declaration//GEN-END:variables
 }

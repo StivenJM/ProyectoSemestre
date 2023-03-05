@@ -4,8 +4,10 @@
  */
 package ventanas;
 
+import clases.*;
 import herramientas.ComponentesDeVentana;
 import javax.swing.table.DefaultTableModel;
+import static ventanas.FrmPrincipal.listaAdministradores;
 
 /**
  *
@@ -13,11 +15,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class GestionAdministradores extends javax.swing.JFrame {
 
+    int filaSeleccionada;
+    Administrador adminSeleccionado;
+    DefaultTableModel dtmTablaAdministradores;
+    
     /**
      * Creates new form GestionAdministradores
      */
     
-    DefaultTableModel tablaAdministradores;
+    
+    
     public GestionAdministradores() {
         initComponents();
         
@@ -37,6 +44,7 @@ public class GestionAdministradores extends javax.swing.JFrame {
         ComponentesDeVentana.ajustarImagenAJButton(btnNuevo, "src/imagenes/nuevo.png");
         ComponentesDeVentana.ajustarImagenAJButton(btnEliminar, "src/imagenes/eliminar.png");
         ComponentesDeVentana.ajustarImagenAJButton(btnEditar, "src/imagenes/editar.png");
+        ComponentesDeVentana.ajustarImagenAJButton(btnBuscar, "src/imagenes/buscar.png");
 
         btnNuevo.setOpaque(false);
         btnNuevo.setContentAreaFilled(false);
@@ -47,12 +55,18 @@ public class GestionAdministradores extends javax.swing.JFrame {
         btnEditar.setOpaque(false);
         btnEditar.setContentAreaFilled(false);
         btnEditar.setBorderPainted(false);
+        btnBuscar.setOpaque(false);
+        btnBuscar.setContentAreaFilled(false);
+        btnBuscar.setBorderPainted(false);
         
-        tablaAdministradores = new DefaultTableModel();
-        tablaAdministradores.addColumn("Nombres");
-        tablaAdministradores.addColumn("Apellidos");
-        tablaAdministradores.addColumn("Usuario");
-        tblAdministradores.setModel(tablaAdministradores);
+        dtmTablaAdministradores = new DefaultTableModel();
+        dtmTablaAdministradores.addColumn("Nombres");
+        dtmTablaAdministradores.addColumn("Apellidos");
+        dtmTablaAdministradores.addColumn("Usuario");
+        tblAdministradores.setModel(dtmTablaAdministradores);
+        
+        limpiarTablaDeAdministradores();
+        mostrarDatosDeAdministradores();
     }
 
     /**
@@ -68,24 +82,21 @@ public class GestionAdministradores extends javax.swing.JFrame {
         lblLogoPrincipal = new javax.swing.JLabel();
         pnlDatosAdministradores = new javax.swing.JPanel();
         lblDatosAdministrador = new javax.swing.JLabel();
-        txtPrimerNombrePresidente = new javax.swing.JTextField();
-        lblPrimerNombreAdministrador = new javax.swing.JLabel();
-        lblSegundoNombreAdministrador = new javax.swing.JLabel();
-        txtSegundoNombrePresidente = new javax.swing.JTextField();
-        lblPrimerApellidoAdministrador = new javax.swing.JLabel();
-        txtPrimerApellidoPresidente = new javax.swing.JTextField();
-        lblSegundoApellidoAdministrador = new javax.swing.JLabel();
-        txtSegundoApellidoPresidente = new javax.swing.JTextField();
+        txtNombresAdministrador = new javax.swing.JTextField();
+        lblNombresAdministrador = new javax.swing.JLabel();
+        lblApellidosAdministrador = new javax.swing.JLabel();
+        txtApellidosAdministrador = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         lblNombreUsuario = new javax.swing.JLabel();
         txtNombreDeUsuario = new javax.swing.JTextField();
         lblContrasenia = new javax.swing.JLabel();
         txtContrasenia = new javax.swing.JTextField();
-        btnNuevo = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAdministradores = new javax.swing.JTable();
+        btnNuevo = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -97,20 +108,19 @@ public class GestionAdministradores extends javax.swing.JFrame {
         lblDatosAdministrador.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblDatosAdministrador.setText("Datos del administrador");
 
-        lblPrimerNombreAdministrador.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblPrimerNombreAdministrador.setText("Primer Nombre");
+        lblNombresAdministrador.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNombresAdministrador.setText("Nombres");
 
-        lblSegundoNombreAdministrador.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblSegundoNombreAdministrador.setText("Segundo Nombre");
-
-        lblPrimerApellidoAdministrador.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblPrimerApellidoAdministrador.setText("Primer Apellido");
-
-        lblSegundoApellidoAdministrador.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblSegundoApellidoAdministrador.setText("Segundo Apellido");
+        lblApellidosAdministrador.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblApellidosAdministrador.setText("Apellidos");
 
         btnGuardar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         lblNombreUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblNombreUsuario.setText("Nombre de usuario");
@@ -123,28 +133,25 @@ public class GestionAdministradores extends javax.swing.JFrame {
         pnlDatosAdministradoresLayout.setHorizontalGroup(
             pnlDatosAdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDatosAdministradoresLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(10, Short.MAX_VALUE)
                 .addGroup(pnlDatosAdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDatosAdministrador)
-                    .addComponent(lblPrimerNombreAdministrador)
-                    .addComponent(lblSegundoNombreAdministrador)
-                    .addComponent(lblPrimerApellidoAdministrador)
-                    .addComponent(lblSegundoApellidoAdministrador)
+                    .addComponent(lblNombresAdministrador)
+                    .addComponent(lblApellidosAdministrador)
                     .addComponent(lblNombreUsuario)
                     .addComponent(lblContrasenia))
                 .addGap(24, 24, 24)
-                .addGroup(pnlDatosAdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtPrimerNombrePresidente)
-                    .addComponent(txtSegundoNombrePresidente)
-                    .addComponent(txtPrimerApellidoPresidente)
-                    .addComponent(txtSegundoApellidoPresidente, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addComponent(txtNombreDeUsuario)
-                    .addComponent(txtContrasenia))
-                .addContainerGap(14, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDatosAdministradoresLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlDatosAdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreDeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlDatosAdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtNombresAdministrador, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                        .addComponent(txtApellidosAdministrador)))
+                .addContainerGap(10, Short.MAX_VALUE))
+            .addGroup(pnlDatosAdministradoresLayout.createSequentialGroup()
+                .addGap(178, 178, 178)
                 .addComponent(btnGuardar)
-                .addGap(264, 264, 264))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlDatosAdministradoresLayout.setVerticalGroup(
             pnlDatosAdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,20 +160,12 @@ public class GestionAdministradores extends javax.swing.JFrame {
                 .addComponent(lblDatosAdministrador)
                 .addGap(18, 18, 18)
                 .addGroup(pnlDatosAdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPrimerNombreAdministrador)
-                    .addComponent(txtPrimerNombrePresidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNombresAdministrador)
+                    .addComponent(txtNombresAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlDatosAdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSegundoNombreAdministrador)
-                    .addComponent(txtSegundoNombrePresidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnlDatosAdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPrimerApellidoAdministrador)
-                    .addComponent(txtPrimerApellidoPresidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnlDatosAdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSegundoApellidoAdministrador)
-                    .addComponent(txtSegundoApellidoPresidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblApellidosAdministrador)
+                    .addComponent(txtApellidosAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlDatosAdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombreUsuario)
@@ -175,23 +174,12 @@ public class GestionAdministradores extends javax.swing.JFrame {
                 .addGroup(pnlDatosAdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblContrasenia)
                     .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(54, 54, 54)
                 .addComponent(btnGuardar)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
-        pnlFondo.add(pnlDatosAdministradores, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, 430, 420));
-
-        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        pnlFondo.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 65, 65));
-        pnlFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 65, 65));
-
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-        pnlFondo.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 65, 65));
+        pnlFondo.add(pnlDatosAdministradores, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 200, 430, 350));
 
         tblAdministradores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -207,6 +195,35 @@ public class GestionAdministradores extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblAdministradores);
 
         pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 65, 65));
+
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 65, 65));
+
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 65, 65));
+
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 65, 65));
 
         lblFondo.setPreferredSize(new java.awt.Dimension(1100, 700));
         pnlFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -229,10 +246,46 @@ public class GestionAdministradores extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // TODO add your handling code here:
         pnlDatosAdministradores.setVisible(true);
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        pnlDatosAdministradores.setVisible(false);
+
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        obtenerAdministradorSeleccionado();
+        pnlDatosAdministradores.setVisible(true);
+        txtNombresAdministrador.setText(adminSeleccionado.getNombres());
+        txtApellidosAdministrador.setText(adminSeleccionado.getApellidos());
+        txtNombreDeUsuario.setText(adminSeleccionado.getUsuario());
+        txtContrasenia.setText(adminSeleccionado.getContrasenia());
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        String nuevosNombres = txtNombresAdministrador.getText();
+        String nuevosApellidos = txtApellidosAdministrador.getText();
+        String nuevoUsuario = txtNombreDeUsuario.getText();
+        String nuevaContrasenia = txtContrasenia.getText();
+        
+        adminSeleccionado.setApellidos(nuevosApellidos);
+        adminSeleccionado.setNombres(nuevosNombres);
+        adminSeleccionado.setUsuario(nuevoUsuario);
+        adminSeleccionado.setContrasenia(nuevaContrasenia);
+        limpiarTablaDeAdministradores();
+        mostrarDatosDeAdministradores();
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,30 +321,45 @@ public class GestionAdministradores extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void mostrarDatosDeAdministradores() {
+        for (Administrador a : FrmPrincipal.listaAdministradores) {
+            dtmTablaAdministradores.addRow(new Object[]{a.getNombres(),a.getApellidos(),a.getUsuario()});
+        }
+    }
+    
+    private void limpiarTablaDeAdministradores() {
+        for (int i = 0; i < tblAdministradores.getRowCount(); i++) {
+            dtmTablaAdministradores.removeRow(i);
+            i -= 1;
+        }
+    }
+    
+    private void obtenerAdministradorSeleccionado() {
+        filaSeleccionada = tblAdministradores.getSelectedRow();
+        adminSeleccionado = listaAdministradores.get(filaSeleccionada);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblApellidosAdministrador;
     private javax.swing.JLabel lblContrasenia;
     private javax.swing.JLabel lblDatosAdministrador;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblLogoPrincipal;
     private javax.swing.JLabel lblNombreUsuario;
-    private javax.swing.JLabel lblPrimerApellidoAdministrador;
-    private javax.swing.JLabel lblPrimerNombreAdministrador;
-    private javax.swing.JLabel lblSegundoApellidoAdministrador;
-    private javax.swing.JLabel lblSegundoNombreAdministrador;
+    private javax.swing.JLabel lblNombresAdministrador;
     private javax.swing.JPanel pnlDatosAdministradores;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JTable tblAdministradores;
+    private javax.swing.JTextField txtApellidosAdministrador;
     private javax.swing.JTextField txtContrasenia;
     private javax.swing.JTextField txtNombreDeUsuario;
-    private javax.swing.JTextField txtPrimerApellidoPresidente;
-    private javax.swing.JTextField txtPrimerNombrePresidente;
-    private javax.swing.JTextField txtSegundoApellidoPresidente;
-    private javax.swing.JTextField txtSegundoNombrePresidente;
+    private javax.swing.JTextField txtNombresAdministrador;
     // End of variables declaration//GEN-END:variables
 }

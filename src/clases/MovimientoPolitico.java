@@ -14,6 +14,14 @@ public class MovimientoPolitico implements Serializable,
         this.numeroDeLista = numeroDeLista;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setNumeroDeLista(int numeroDeLista) {
+        this.numeroDeLista = numeroDeLista;
+    }
+
     public String getNombre() {
         return nombre;
     }
