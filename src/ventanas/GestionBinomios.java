@@ -20,7 +20,7 @@ import static ventanas.FrmPrincipal.listaBinomios;
  * @author Erick
  */
 public class GestionBinomios extends javax.swing.JFrame {
-
+    
     int filaSeleccionada;
     Binomio binomioSeleccionado;
 
@@ -34,7 +34,7 @@ public class GestionBinomios extends javax.swing.JFrame {
         
         quitarTextosDeErrores();
         
-        setSize(1100,700);
+        setSize(1100, 700);
         setResizable(false);
         setTitle("GESTIÓN DE BINOMIOS");
         setLocationRelativeTo(null);
@@ -42,19 +42,20 @@ public class GestionBinomios extends javax.swing.JFrame {
         
         ComponentesDeVentana.ajustarImagenAJLabel(lblFondo,
                 "src/imagenes/fondoBlanco2.jpg");
-        ComponentesDeVentana.ajustarImagenAJLabel(lblLogoPrincipal, 
+        ComponentesDeVentana.ajustarImagenAJLabel(lblLogoPrincipal,
                 "src/imagenes/logoPrincipal.png");
         
         pnlEditarBinomio.setOpaque(false);
         pnlEditarBinomio.setVisible(false);
         pnlNuevoBinomio.setOpaque(false);
         pnlNuevoBinomio.setVisible(false);
+        pnlBuscarBinomio.setOpaque(false);
         
         ComponentesDeVentana.ajustarImagenAJButton(btnNuevo, "src/imagenes/nuevo.png");
         ComponentesDeVentana.ajustarImagenAJButton(btnEliminar, "src/imagenes/eliminar.png");
         ComponentesDeVentana.ajustarImagenAJButton(btnEditar, "src/imagenes/editar.png");
         ComponentesDeVentana.ajustarImagenAJButton(btnBuscar, "src/imagenes/buscar.png");
-
+        
         btnNuevo.setOpaque(false);
         btnNuevo.setContentAreaFilled(false);
         btnNuevo.setBorderPainted(false);
@@ -73,18 +74,18 @@ public class GestionBinomios extends javax.swing.JFrame {
         dtmTablaBinomios.addColumn("Presidente/a");
         dtmTablaBinomios.addColumn("Vicepresidente/a");
         tblBinomios.setModel(dtmTablaBinomios);
-
+        
         limpiarTablaDeBinomios();
         mostrarDatosDeBinomios();
     }
-
+    
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(
                 ClassLoader.getSystemResource("imagenes/logoCNEConFondo.png"));
         return retValue;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -146,6 +147,11 @@ public class GestionBinomios extends javax.swing.JFrame {
         lblErrorApellidosVicepresidente2 = new javax.swing.JLabel();
         lblErrorNombreMovimiento2 = new javax.swing.JLabel();
         btnAnadir = new javax.swing.JButton();
+        pnlBuscarBinomio = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtNombreMovimientoBusqueda = new javax.swing.JTextField();
+        lblNumeroListaBusqueda = new javax.swing.JLabel();
+        txtNumeroListaBusqueda = new javax.swing.JTextField();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -197,7 +203,7 @@ public class GestionBinomios extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 65, 65));
+        pnlFondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 70, 65, 65));
 
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,7 +213,7 @@ public class GestionBinomios extends javax.swing.JFrame {
         pnlFondo.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 65, 65));
 
         lblNombreMovimientoPolitico.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblNombreMovimientoPolitico.setText("Nombre del movimiento político");
+        lblNombreMovimientoPolitico.setText("Nombre del movimiento");
 
         txtMovimientoPolitico.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -579,6 +585,45 @@ public class GestionBinomios extends javax.swing.JFrame {
         );
 
         pnlFondo.add(pnlNuevoBinomio, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, 640, 380));
+
+        pnlBuscarBinomio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar Binomio", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel1.setText("Nombre del Movimiento");
+
+        lblNumeroListaBusqueda.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNumeroListaBusqueda.setText("Número de lista");
+
+        javax.swing.GroupLayout pnlBuscarBinomioLayout = new javax.swing.GroupLayout(pnlBuscarBinomio);
+        pnlBuscarBinomio.setLayout(pnlBuscarBinomioLayout);
+        pnlBuscarBinomioLayout.setHorizontalGroup(
+            pnlBuscarBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBuscarBinomioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlBuscarBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(lblNumeroListaBusqueda))
+                .addGap(18, 18, 18)
+                .addGroup(pnlBuscarBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNombreMovimientoBusqueda)
+                    .addComponent(txtNumeroListaBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
+        );
+        pnlBuscarBinomioLayout.setVerticalGroup(
+            pnlBuscarBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBuscarBinomioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlBuscarBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNombreMovimientoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlBuscarBinomioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNumeroListaBusqueda)
+                    .addComponent(txtNumeroListaBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        pnlFondo.add(pnlBuscarBinomio, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 40, 440, 120));
         pnlFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 700));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -597,23 +642,57 @@ public class GestionBinomios extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        pnlEditarBinomio.setVisible(false);
-        
+        try{
+            if (txtNombreMovimientoBusqueda.getText().isBlank() && txtNumeroListaBusqueda.getText().isBlank()) {
+                JOptionPane.showMessageDialog(rootPane, "Ingrese el nombre del movimiento"
+                        + " o el número de lista para realizar la búsqueda", "Error", JOptionPane.ERROR_MESSAGE);
+                limpiarFormulario1();
+                pnlEditarBinomio.setVisible(false);
+            } else if (txtNombreMovimientoBusqueda.getText().isBlank() && !txtNumeroListaBusqueda.getText().isBlank()) {
+                int numeroDeLista = Integer.parseInt(txtNumeroListaBusqueda.getText());
+                int posicionDeLaLista = ManejoDeListas.buscarEnListaDeBinomios(numeroDeLista);
+                tblBinomios.setRowSelectionInterval(posicionDeLaLista, posicionDeLaLista);
+                llenarDatosAEditar();
+                pnlEditarBinomio.setVisible(true);
+                txtNumeroListaBusqueda.setText("");
+            } else if(!txtNombreMovimientoBusqueda.getText().isBlank() && txtNumeroListaBusqueda.getText().isBlank()) {
+                String nombreMovimiento = txtNombreMovimientoBusqueda.getText();
+                int posicionDeLaLista = ManejoDeListas.buscarEnListaDeBinomios(nombreMovimiento);
+                tblBinomios.setRowSelectionInterval(posicionDeLaLista, posicionDeLaLista);
+                llenarDatosAEditar();
+                pnlEditarBinomio.setVisible(true);
+                txtNombreMovimientoBusqueda.setText("");
+            } else if(!txtNombreMovimientoBusqueda.getText().isBlank() && !txtNumeroListaBusqueda.getText().isBlank()) {
+                int numeroDeLista = Integer.parseInt(txtNumeroListaBusqueda.getText());
+                String nombreMovimiento = txtNombreMovimientoBusqueda.getText();
+                int posicionDeLaListaConNumero = ManejoDeListas.buscarEnListaDeBinomios(numeroDeLista);
+                int posicionDeLaListaConNombre = ManejoDeListas.buscarEnListaDeBinomios(nombreMovimiento);
+                int posicionDeLaListaFinal;
+
+                if(posicionDeLaListaConNombre == posicionDeLaListaConNumero) {
+                    posicionDeLaListaFinal = posicionDeLaListaConNombre;
+                    tblBinomios.setRowSelectionInterval(posicionDeLaListaFinal, posicionDeLaListaFinal);
+                    llenarDatosAEditar();
+                    pnlEditarBinomio.setVisible(true);
+                    txtNombreMovimientoBusqueda.setText("");
+                    txtNumeroListaBusqueda.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "El nombre del Movimiento no coincide con el número de la Lista. \nCompruebe los datos ingresados e inténtelo de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch(IllegalArgumentException iae) {
+            JOptionPane.showMessageDialog(rootPane, "No se encontró el binomio","Error",JOptionPane.ERROR_MESSAGE);
+            limpiarFormulario1();
+            pnlEditarBinomio.setVisible(false);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        try{
-            obtenerBinomioSeleccionado();
+        try {
             pnlEditarBinomio.setVisible(true);
             pnlNuevoBinomio.setVisible(false);
-            lblErrorApellidosVicepresidente.setVisible(false);
-            txtMovimientoPolitico.setText(binomioSeleccionado.getMovimientoPolitico().getNombre());
-            txtNumeroDeLista.setText(binomioSeleccionado.getMovimientoPolitico().getNumeroDeLista()+"");
-            txtNombresPresidente.setText(binomioSeleccionado.getPresidente().getNombres());
-            txtApellidosPresidente.setText(binomioSeleccionado.getPresidente().getApellidos());
-            txtNombresVicepresidente.setText(binomioSeleccionado.getVicepresidente().getNombres());
-            txtApellidosVicepresidente.setText(binomioSeleccionado.getVicepresidente().getApellidos());
+            llenarDatosAEditar();
         } catch (IndexOutOfBoundsException iobe) {
             JOptionPane.showMessageDialog(rootPane, "No se seleccionó ningún binomio para editar", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -630,15 +709,14 @@ public class GestionBinomios extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             obtenerBinomioSeleccionado();
             listaBinomios.remove(binomioSeleccionado);
             limpiarTablaDeBinomios();
             mostrarDatosDeBinomios();
         } catch (IndexOutOfBoundsException iobe) {
-            JOptionPane.showMessageDialog(rootPane,"No se seleccionó ningún binomio para eliminar", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "No se seleccionó ningún binomio para eliminar", "Error", JOptionPane.ERROR_MESSAGE);
         }
-            
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
@@ -656,7 +734,7 @@ public class GestionBinomios extends javax.swing.JFrame {
         binomioSeleccionado.getPresidente().setApellidos(nuevosApellidosPresidente);
         binomioSeleccionado.getVicepresidente().setNombres(nuevosNombresVicepresidente);
         binomioSeleccionado.getVicepresidente().setApellidos(nuevosApellidosVicepresidente);
-  
+        
         pnlEditarBinomio.setVisible(false);
         limpiarFormulario1();
         limpiarTablaDeBinomios();
@@ -670,9 +748,9 @@ public class GestionBinomios extends javax.swing.JFrame {
     private void txtNumeroDeListaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroDeListaKeyReleased
         // TODO add your handling code here:
         int nuevoNumeroDeLista;
-        if(Validador.esNumeroNaturalCorrecto(txtNumeroDeLista.getText())){
+        if (Validador.esNumeroNaturalCorrecto(txtNumeroDeLista.getText())) {
             nuevoNumeroDeLista = Integer.parseInt(txtNumeroDeLista.getText());
-            if(ManejoDeListas.buscarEnListaDeBinomios(nuevoNumeroDeLista) == -1 || nuevoNumeroDeLista == binomioSeleccionado.getMovimientoPolitico().getNumeroDeLista()){
+            if (ManejoDeListas.buscarEnListaDeBinomios(nuevoNumeroDeLista) == -1 || nuevoNumeroDeLista == binomioSeleccionado.getMovimientoPolitico().getNumeroDeLista()) {
                 lblErrorNumeroLista.setVisible(false);
                 btnActualizar.setEnabled(true);
             } else {
@@ -690,7 +768,7 @@ public class GestionBinomios extends javax.swing.JFrame {
     private void txtMovimientoPoliticoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMovimientoPoliticoKeyReleased
         // TODO add your handling code here:
         String nuevoNombreDelMovimiento = txtMovimientoPolitico.getText();
-        if(ManejoDeListas.buscarEnListaDeBinomios(nuevoNombreDelMovimiento) == -1 || nuevoNombreDelMovimiento.equals(binomioSeleccionado.getMovimientoPolitico().getNombre())){
+        if (ManejoDeListas.buscarEnListaDeBinomios(nuevoNombreDelMovimiento) == -1 || nuevoNombreDelMovimiento.equals(binomioSeleccionado.getMovimientoPolitico().getNombre())) {
             lblErrorNombreMovimiento.setVisible(false);
             btnActualizar.setEnabled(true);
         } else {
@@ -703,7 +781,7 @@ public class GestionBinomios extends javax.swing.JFrame {
     private void txtMovimientoPolitico2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMovimientoPolitico2KeyReleased
         // TODO add your handling code here:
         String nombreDelMovimiento = txtMovimientoPolitico2.getText();
-        if(ManejoDeListas.buscarEnListaDeBinomios(nombreDelMovimiento) == -1){
+        if (ManejoDeListas.buscarEnListaDeBinomios(nombreDelMovimiento) == -1) {
             lblErrorNombreMovimiento2.setVisible(false);
             habilitarBotonAnadir();
         } else {
@@ -716,9 +794,9 @@ public class GestionBinomios extends javax.swing.JFrame {
     private void txtNumeroDeLista2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroDeLista2KeyReleased
         // TODO add your handling code here:
         int numeroDeLista;
-        if(Validador.esNumeroNaturalCorrecto(txtNumeroDeLista2.getText())){
+        if (Validador.esNumeroNaturalCorrecto(txtNumeroDeLista2.getText())) {
             numeroDeLista = Integer.parseInt(txtNumeroDeLista2.getText());
-            if(ManejoDeListas.buscarEnListaDeBinomios(numeroDeLista) == -1){
+            if (ManejoDeListas.buscarEnListaDeBinomios(numeroDeLista) == -1) {
                 lblErrorNumeroLista2.setVisible(false);
                 habilitarBotonAnadir();
             } else {
@@ -739,7 +817,7 @@ public class GestionBinomios extends javax.swing.JFrame {
 
     private void txtNombresPresidenteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresPresidenteKeyReleased
         // TODO add your handling code here:
-        if(!Validador.esNombreCorrecto(txtNombresPresidente.getText())){
+        if (!Validador.esNombreCorrecto(txtNombresPresidente.getText())) {
             lblErrorNombresPresidente.setVisible(true);
             btnActualizar.setEnabled(false);
         } else {
@@ -750,7 +828,7 @@ public class GestionBinomios extends javax.swing.JFrame {
 
     private void txtApellidosPresidenteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosPresidenteKeyReleased
         // TODO add your handling code here:
-        if(!Validador.esApellidoCorrecto(txtApellidosPresidente.getText())){
+        if (!Validador.esApellidoCorrecto(txtApellidosPresidente.getText())) {
             lblErrorApellidosPresidente.setVisible(true);
             btnActualizar.setEnabled(false);
         } else {
@@ -761,7 +839,7 @@ public class GestionBinomios extends javax.swing.JFrame {
 
     private void txtNombresVicepresidenteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresVicepresidenteKeyReleased
         // TODO add your handling code here:
-        if(!Validador.esNombreCorrecto(txtNombresVicepresidente.getText())){
+        if (!Validador.esNombreCorrecto(txtNombresVicepresidente.getText())) {
             lblErrorNombresVicepresidente.setVisible(true);
             btnActualizar.setEnabled(false);
         } else {
@@ -772,7 +850,7 @@ public class GestionBinomios extends javax.swing.JFrame {
 
     private void txtApellidosVicepresidenteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosVicepresidenteKeyReleased
         // TODO add your handling code here:
-        if(!Validador.esApellidoCorrecto(txtApellidosVicepresidente.getText())){
+        if (!Validador.esApellidoCorrecto(txtApellidosVicepresidente.getText())) {
             lblErrorApellidosVicepresidente.setVisible(true);
             btnActualizar.setEnabled(false);
         } else {
@@ -783,7 +861,7 @@ public class GestionBinomios extends javax.swing.JFrame {
 
     private void txtNombresPresidente2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresPresidente2KeyReleased
         // TODO add your handling code here:
-        if(!Validador.esNombreCorrecto(txtNombresPresidente2.getText())){
+        if (!Validador.esNombreCorrecto(txtNombresPresidente2.getText())) {
             lblErrorNombresPresidente2.setVisible(true);
             btnAnadir.setEnabled(false);
         } else {
@@ -794,7 +872,7 @@ public class GestionBinomios extends javax.swing.JFrame {
 
     private void txtApellidosPresidente2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosPresidente2KeyReleased
         // TODO add your handling code here:
-        if(!Validador.esApellidoCorrecto(txtApellidosPresidente2.getText())){
+        if (!Validador.esApellidoCorrecto(txtApellidosPresidente2.getText())) {
             lblErrorApellidosPresidente2.setVisible(true);
             btnAnadir.setEnabled(false);
         } else {
@@ -805,7 +883,7 @@ public class GestionBinomios extends javax.swing.JFrame {
 
     private void txtNombresVicepresidente2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresVicepresidente2KeyReleased
         // TODO add your handling code here:
-        if(!Validador.esNombreCorrecto(txtNombresVicepresidente2.getText())){
+        if (!Validador.esNombreCorrecto(txtNombresVicepresidente2.getText())) {
             lblErrorNombresVicepresidente2.setVisible(true);
             btnAnadir.setEnabled(false);
         } else {
@@ -816,7 +894,7 @@ public class GestionBinomios extends javax.swing.JFrame {
 
     private void txtApellidosVicepresidente2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosVicepresidente2KeyReleased
         // TODO add your handling code here:
-        if(!Validador.esApellidoCorrecto(txtApellidosVicepresidente2.getText())){
+        if (!Validador.esApellidoCorrecto(txtApellidosVicepresidente2.getText())) {
             lblErrorApellidosVicepresidente2.setVisible(true);
             btnAnadir.setEnabled(false);
         } else {
@@ -838,26 +916,27 @@ public class GestionBinomios extends javax.swing.JFrame {
         Candidato nuevoPresidente = new Candidato("Presidente", nombresPresidente, apellidosPresidente);
         Candidato nuevoVicePresidente = new Candidato("Vicepresidente", nombresVicepresidente, apellidosVicepresidente);
         Binomio nuevoBinomio = new Binomio(nuevoMovimiento, nuevoPresidente, nuevoVicePresidente);
+        
         listaBinomios.add(nuevoBinomio);
+        
         limpiarTablaDeBinomios();
         mostrarDatosDeBinomios();
+        
         pnlNuevoBinomio.setVisible(false);
     }//GEN-LAST:event_btnAnadirActionPerformed
 
     private void txtNumeroDeListaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroDeListaKeyTyped
         // TODO add your handling code here:
-        if(txtNumeroDeLista.getText().length() >= 8)
-    {
-        evt.consume();
-    }
+        if (txtNumeroDeLista.getText().length() > 8) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtNumeroDeListaKeyTyped
 
     private void txtNumeroDeLista2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroDeLista2KeyTyped
         // TODO add your handling code here:
-        if(txtNumeroDeLista2.getText().length() > 8)
-    {
-        evt.consume();
-    }
+        if (txtNumeroDeLista2.getText().length() > 8) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtNumeroDeLista2KeyTyped
 
     /**
@@ -895,6 +974,16 @@ public class GestionBinomios extends javax.swing.JFrame {
         });
     }
     
+    private void llenarDatosAEditar() {
+        obtenerBinomioSeleccionado();
+        txtMovimientoPolitico.setText(binomioSeleccionado.getMovimientoPolitico().getNombre());
+        txtNumeroDeLista.setText(binomioSeleccionado.getMovimientoPolitico().getNumeroDeLista() + "");
+        txtNombresPresidente.setText(binomioSeleccionado.getPresidente().getNombres());
+        txtApellidosPresidente.setText(binomioSeleccionado.getPresidente().getApellidos());
+        txtNombresVicepresidente.setText(binomioSeleccionado.getVicepresidente().getNombres());
+        txtApellidosVicepresidente.setText(binomioSeleccionado.getVicepresidente().getApellidos());
+    }
+    
     private void limpiarFormulario1() {
         txtApellidosPresidente.setText("");
         txtApellidosVicepresidente.setText("");
@@ -915,7 +1004,7 @@ public class GestionBinomios extends javax.swing.JFrame {
     
     private void mostrarDatosDeBinomios() {
         for (Binomio b : FrmPrincipal.listaBinomios) {
-            dtmTablaBinomios.addRow(new Object[]{b.getMovimientoPolitico().getNombre(),b.getPresidente().getApellidos()+" " +b.getPresidente().getNombres(),b.getVicepresidente().getApellidos()+ " "+ b.getVicepresidente().getNombres()});
+            dtmTablaBinomios.addRow(new Object[]{b.getMovimientoPolitico().getNombre(), b.getPresidente().getApellidos() + " " + b.getPresidente().getNombres(), b.getVicepresidente().getApellidos() + " " + b.getVicepresidente().getNombres()});
         }
     }
     
@@ -925,7 +1014,7 @@ public class GestionBinomios extends javax.swing.JFrame {
             i -= 1;
         }
     }
-
+    
     private void obtenerBinomioSeleccionado() {
         filaSeleccionada = tblBinomios.getSelectedRow();
         binomioSeleccionado = listaBinomios.get(filaSeleccionada);
@@ -957,15 +1046,15 @@ public class GestionBinomios extends javax.swing.JFrame {
     }
     
     private void habilitarBotonAnadir() {
-        if(!txtApellidosPresidente2.getText().isBlank() && !txtApellidosVicepresidente2.getText().isBlank() &&
-                !txtMovimientoPolitico2.getText().isBlank() && !txtNombresPresidente2.getText().isBlank() &&
-                !txtNombresVicepresidente2.getText().isBlank() && !txtNumeroDeLista2.getText().isBlank()){
+        if (!txtApellidosPresidente2.getText().isBlank() && !txtApellidosVicepresidente2.getText().isBlank()
+                && !txtMovimientoPolitico2.getText().isBlank() && !txtNombresPresidente2.getText().isBlank()
+                && !txtNombresVicepresidente2.getText().isBlank() && !txtNumeroDeLista2.getText().isBlank()) {
             btnAnadir.setEnabled(true);
         } else {
             btnAnadir.setEnabled(false);
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAnadir;
@@ -973,6 +1062,7 @@ public class GestionBinomios extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbNombresPresidente;
     private javax.swing.JLabel lbNombresPresidente2;
@@ -1004,6 +1094,8 @@ public class GestionBinomios extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombresVicepresidente2;
     private javax.swing.JLabel lblNumeroDeLista;
     private javax.swing.JLabel lblNumeroDeLista2;
+    private javax.swing.JLabel lblNumeroListaBusqueda;
+    private javax.swing.JPanel pnlBuscarBinomio;
     private javax.swing.JPanel pnlEditarBinomio;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JPanel pnlNuevoBinomio;
@@ -1014,11 +1106,13 @@ public class GestionBinomios extends javax.swing.JFrame {
     private javax.swing.JTextField txtApellidosVicepresidente2;
     private javax.swing.JTextField txtMovimientoPolitico;
     private javax.swing.JTextField txtMovimientoPolitico2;
+    private javax.swing.JTextField txtNombreMovimientoBusqueda;
     private javax.swing.JTextField txtNombresPresidente;
     private javax.swing.JTextField txtNombresPresidente2;
     private javax.swing.JTextField txtNombresVicepresidente;
     private javax.swing.JTextField txtNombresVicepresidente2;
     private javax.swing.JTextField txtNumeroDeLista;
     private javax.swing.JTextField txtNumeroDeLista2;
+    private javax.swing.JTextField txtNumeroListaBusqueda;
     // End of variables declaration//GEN-END:variables
 }
