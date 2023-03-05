@@ -3,11 +3,11 @@ package herramientas;
 public class Validador {
 
     public static boolean esNombreCorrecto(String nombre) {
-        return nombre.matches("^[A-Z][a-z]+$");
+        return nombre.matches("^[A-Z][a-z]+\\ [A-Z][a-z]+$");
     }
 
     public static boolean esApellidoCorrecto(String apellido) {
-        return apellido.matches("^[A-Z][a-z]+$");
+        return apellido.matches("^[A-Z][a-z]+\\ [A-Z][a-z]+$");
     }
 
     //Este metodo es unicamente necesario para el metodo de validacion de cedula
@@ -33,12 +33,8 @@ public class Validador {
     public static boolean esNumeroDeCedulaCorrecto (String cedula) {
         boolean retorno;
         
-        if (cedula.matches("^(0[1-9]|1\\d|2[0-4]|30)\\d{7}[0-9]$") &&
-                validarUltimoDigitoCedula(cedula)) {
-            retorno = true;
-        } else {
-            retorno = false;
-        }
+        retorno = cedula.matches("^(0[1-9]|1\\d|2[0-4]|30)\\d{7}[0-9]$") &&
+                validarUltimoDigitoCedula(cedula);
         
         return retorno;
     }
@@ -58,7 +54,7 @@ public class Validador {
     }
     
     public static boolean esNumeroNaturalCorrecto (String numero) {
-        return numero.matches("^[0-9]+$ ");
+        return numero.matches("[0-9]+");
     }
 
 }

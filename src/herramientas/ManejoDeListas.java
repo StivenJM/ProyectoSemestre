@@ -34,12 +34,23 @@ public class ManejoDeListas {
 
     public static int buscarEnListaDeBinomios(String nombreDeLista) {
         boolean existeNombreDeMovimiento;
-        boolean existeNumeroDeLista;
         int posicionBinomio = -1;
         for (int i = 0; i < FrmPrincipal.listaBinomios.size(); i++) {
             existeNombreDeMovimiento = FrmPrincipal.listaBinomios.get(i).getMovimientoPolitico().getNombre().equals(nombreDeLista);
-            existeNumeroDeLista = FrmPrincipal.listaBinomios.get(i).getMovimientoPolitico().getNumeroDeLista() == FrmPrincipal.listaBinomios.get(i).getMovimientoPolitico().getNumeroDeLista();
-            if (existeNombreDeMovimiento && existeNumeroDeLista) {
+            if (existeNombreDeMovimiento) {
+                posicionBinomio = i;
+                break;
+            }
+        }
+        return posicionBinomio;
+    }
+    
+    public static int buscarEnListaDeBinomios(int numeroDeLista) {
+        boolean existeNumeroDeLista;
+        int posicionBinomio = -1;
+        for (int i = 0; i < FrmPrincipal.listaBinomios.size(); i++) {
+            existeNumeroDeLista = FrmPrincipal.listaBinomios.get(i).getMovimientoPolitico().getNumeroDeLista() == numeroDeLista;
+            if ( existeNumeroDeLista) {
                 posicionBinomio = i;
                 break;
             }
