@@ -7,6 +7,7 @@ import clases.MovimientoPolitico;
 import clases.Votante;
 import java.util.ArrayList;
 import herramientas.ManejoArchivos;
+import herramientas.Validador;
 import java.util.Collections;
 
 public class Main {
@@ -107,7 +108,7 @@ public class Main {
         
         
         
-        
+        /*
         ArrayList<Administrador> lista = new ArrayList<>();
         lista.add(new Administrador("STIVENJM", "hola", "Stiven Joel", 
                 "Moposita Mugmal"));
@@ -128,7 +129,19 @@ public class Main {
         for (Administrador administrador : lista) {
             System.out.println(administrador.getApellidos() + " " +
                     administrador.getNombres());
-        }
+        }*/
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        System.out.println(Validador.esNumeroDeCedulaCorrecto("Hola"));
+        
     }
     
 }
