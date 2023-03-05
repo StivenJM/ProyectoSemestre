@@ -6,6 +6,7 @@ package ventanas;
 
 import clases.*;
 import herramientas.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static ventanas.FrmPrincipal.listaAdministradores;
 
@@ -94,7 +95,6 @@ public class GestionAdministradores extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        lblFondo = new javax.swing.JLabel();
         pnlEditarAdministrador = new javax.swing.JPanel();
         lblDatosAdministrador = new javax.swing.JLabel();
         txtNombresAdministrador = new javax.swing.JTextField();
@@ -112,6 +112,7 @@ public class GestionAdministradores extends javax.swing.JFrame {
         lblErrorContrasenia = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblAdministradores = new javax.swing.JTable();
+        lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -152,9 +153,6 @@ public class GestionAdministradores extends javax.swing.JFrame {
             }
         });
         pnlFondo.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 65, 65));
-
-        lblFondo.setPreferredSize(new java.awt.Dimension(1100, 700));
-        pnlFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         lblDatosAdministrador.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblDatosAdministrador.setText("Datos del administrador");
@@ -299,6 +297,9 @@ public class GestionAdministradores extends javax.swing.JFrame {
 
         pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
+        lblFondo.setPreferredSize(new java.awt.Dimension(1100, 700));
+        pnlFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -324,10 +325,14 @@ public class GestionAdministradores extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        obtenerAdministradorSeleccionado();
-        listaAdministradores.remove(adminSeleccionado);
-        limpiarTablaDeAdministradores();
-        mostrarDatosDeAdministradores();
+        try{
+            obtenerAdministradorSeleccionado();
+            listaAdministradores.remove(adminSeleccionado);
+            limpiarTablaDeAdministradores();
+            mostrarDatosDeAdministradores();
+        } catch(IndexOutOfBoundsException iobe) {
+            JOptionPane.showMessageDialog(rootPane,"No se seleccionó ningun administrador para eliminar", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -338,12 +343,16 @@ public class GestionAdministradores extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        obtenerAdministradorSeleccionado();
-        agregarPanelDeDatos();
-        txtNombresAdministrador.setText(adminSeleccionado.getNombres());
-        txtApellidosAdministrador.setText(adminSeleccionado.getApellidos());
-        txtNombreDeUsuario.setText(adminSeleccionado.getUsuario());
-        txtContrasenia.setText(adminSeleccionado.getContrasenia());
+        try{
+            obtenerAdministradorSeleccionado();
+            agregarPanelDeDatos();
+            txtNombresAdministrador.setText(adminSeleccionado.getNombres());
+            txtApellidosAdministrador.setText(adminSeleccionado.getApellidos());
+            txtNombreDeUsuario.setText(adminSeleccionado.getUsuario());
+            txtContrasenia.setText(adminSeleccionado.getContrasenia());
+        } catch(IndexOutOfBoundsException iobe) {
+            JOptionPane.showMessageDialog(rootPane,"No se seleccionó ningun administrador para editar", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
