@@ -8,6 +8,7 @@ public class MovimientoPolitico implements Serializable,
     private static final long serialVersionUID = 1L;
     private String nombre;
     private int numeroDeLista;
+    private String rutaImagen;
 
     public MovimientoPolitico(String nombre, int numeroDeLista) {
         this.nombre = nombre;
@@ -28,6 +29,14 @@ public class MovimientoPolitico implements Serializable,
 
     public int getNumeroDeLista() {
         return numeroDeLista;
+    }
+
+    public String getRutaImagen() {
+        return rutaImagen;
+    }
+
+    public void setRutaImagen(String rutaImagen) {
+        this.rutaImagen = rutaImagen;
     }
 
     @Override

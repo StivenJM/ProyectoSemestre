@@ -56,5 +56,9 @@ public class Validador {
     public static boolean esNumeroNaturalCorrecto (String numero) {
         return numero.matches("[0-9]+");
     }
+    
+    public static boolean esRutaDeArchivoImagenCorrecto (String ruta) {
+        return ruta.matches("^.+\\.(png|jpe?g)$");
+    }
 
 }

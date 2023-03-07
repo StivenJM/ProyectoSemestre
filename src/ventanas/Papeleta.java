@@ -1,46 +1,78 @@
 package ventanas;
 
 import herramientas.ComponentesDeVentana;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 public class Papeleta extends javax.swing.JFrame {
 
+    private JLabel[] listaDeLabelsMovimiento;
+    private JLabel[] listaDeLabelsNumeroLista;
+    private JLabel[] listaDeLabelsVotoBlanco;
+    private JLabel[] listaDeLabelsImagenLista;
+    private JLabel[] listaDeLabelsVotar;
+    private JButton[] listaDeBotonesInformacion;
+
     public Papeleta() {
         initComponents();
-        setSize(1130,650);
-        setResizable(false);
+        setSize(1130, 700);
+        //setResizable(false);
         setTitle("ELECCIONES GENERALES 2023");
         setLocationRelativeTo(null);
-        
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
         ComponentesDeVentana.ajustarImagenAJLabel(lblFondo,
                 "src/imagenes/fondoPapeleta.png");
-        ComponentesDeVentana.ajustarImagenAJLabel(lblEscudoEcudor, 
+        ComponentesDeVentana.ajustarImagenAJLabel(lblEscudoEcudor,
                 "src/imagenes/escudoEcuador.png");
-        ComponentesDeVentana.ajustarImagenAJLabel(lblLogoCNE, 
+        ComponentesDeVentana.ajustarImagenAJLabel(lblLogoCNE,
                 "src/imagenes/logoPrincipal2.png");
-        
+
         lblSubtitulo.setBackground(Color.WHITE);
         lblSubtitulo.setOpaque(true);
         ComponentesDeVentana.redondearBordesJLabel(lblSubtitulo, 10, 1);
-        
-        //Aqui se modifica el cuadro de eleccion de la lista
-        lblLista1.setBackground(Color.WHITE);
-        lblLista1.setOpaque(true);
-        
-        ComponentesDeVentana.ajustarImagenAJLabel(lblImagenLista, "src/imagenes/listas/alianzaUnionPorLaEsperanza.png");
-        ComponentesDeVentana.ajustarImagenAJLabel(lblCuadroDeVoto, "src\\imagenes\\votoBlanco.png");
-        ComponentesDeVentana.ajustarImagenAJLabel(lblImagenPresidente, "src/imagenes/candidatos/andresArauz.jpg");
-        ComponentesDeVentana.ajustarImagenAJLabel(lblImagenVicepresidente, "src/imagenes/candidatos/carlosRabascall.jpg");
-        
+
+        listaDeLabelsMovimiento = new JLabel[16];
+        listaDeLabelsNumeroLista = new JLabel[16];
+        listaDeLabelsVotoBlanco = new JLabel[16];
+        listaDeLabelsImagenLista = new JLabel[16];
+        listaDeLabelsVotar = new JLabel[16];
+        listaDeBotonesInformacion = new JButton[16];
+
+        ComponentesDeVentana.redondearBordesJLabel(lblVotar1, 5, 1);
+        ComponentesDeVentana.redondearBordesJLabel(lblVotar2, 5, 1);
+        ComponentesDeVentana.redondearBordesJLabel(lblVotar3, 5, 1);
+        ComponentesDeVentana.redondearBordesJLabel(lblVotar4, 5, 1);
+        ComponentesDeVentana.redondearBordesJLabel(lblVotar5, 5, 1);
+        ComponentesDeVentana.redondearBordesJLabel(lblVotar6, 5, 1);
+        ComponentesDeVentana.redondearBordesJLabel(lblVotar7, 5, 1);
+        ComponentesDeVentana.redondearBordesJLabel(lblVotar8, 5, 1);
+        ComponentesDeVentana.redondearBordesJLabel(lblVotar9, 5, 1);
+        ComponentesDeVentana.redondearBordesJLabel(lblVotar10, 5, 1);
+        ComponentesDeVentana.redondearBordesJLabel(lblVotar11, 5, 1);
+        ComponentesDeVentana.redondearBordesJLabel(lblVotar12, 5, 1);
+        ComponentesDeVentana.redondearBordesJLabel(lblVotar13, 5, 1);
+        ComponentesDeVentana.redondearBordesJLabel(lblVotar14, 5, 1);
+        ComponentesDeVentana.redondearBordesJLabel(lblVotar15, 5, 1);
+        ComponentesDeVentana.redondearBordesJLabel(lblVotar16, 5, 1);
+
     }
-    
+
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(
                 ClassLoader.getSystemResource("imagenes/logoCNEConFondo.png"));
         return retValue;
+    }
+    
+    private void llenarListaLabelsMovimiento () {
+        
     }
 
     /**
@@ -54,37 +86,125 @@ public class Papeleta extends javax.swing.JFrame {
 
         lblLogoCNE = new javax.swing.JLabel();
         lblEscudoEcudor = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblEleccionesGenerales = new javax.swing.JLabel();
         lblFecha = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
         lblSubtitulo = new javax.swing.JLabel();
-        lblAlianza = new javax.swing.JLabel();
-        lblUnion = new javax.swing.JLabel();
-        lblEsperanza = new javax.swing.JLabel();
-        lblNumeroLista = new javax.swing.JLabel();
-        lblImagenLista = new javax.swing.JLabel();
-        lblImagenPresidente = new javax.swing.JLabel();
-        lblAndres = new javax.swing.JLabel();
-        lblArauz = new javax.swing.JLabel();
-        lblPresidente = new javax.swing.JLabel();
-        lblVicepresidente = new javax.swing.JLabel();
-        lblRabascall = new javax.swing.JLabel();
-        lblCarlos = new javax.swing.JLabel();
-        lblImagenVicepresidente = new javax.swing.JLabel();
-        lblCuadroDeVoto = new javax.swing.JLabel();
-        lblLista1 = new javax.swing.JLabel();
+        panelBinomiosPares = new javax.swing.JPanel();
+        lblVotoBlanco1 = new javax.swing.JLabel();
+        lblImagenLista1 = new javax.swing.JLabel();
+        btnInformacionCandidatos1 = new javax.swing.JButton();
+        lblVotar1 = new javax.swing.JLabel();
+        lblNombreMovimiento1 = new javax.swing.JLabel();
+        lblNumeroLIsta1 = new javax.swing.JLabel();
+        lblNumeroLIsta2 = new javax.swing.JLabel();
+        lblNombreMovimiento2 = new javax.swing.JLabel();
+        btnInformacionCandidatos2 = new javax.swing.JButton();
+        lblImagenLista2 = new javax.swing.JLabel();
+        lblVotoBlanco2 = new javax.swing.JLabel();
+        lblVotar2 = new javax.swing.JLabel();
+        btnInformacionCandidatos3 = new javax.swing.JButton();
+        lblImagenLista3 = new javax.swing.JLabel();
+        lblVotoBlanco3 = new javax.swing.JLabel();
+        lblVotar3 = new javax.swing.JLabel();
+        lblNombreMovimiento3 = new javax.swing.JLabel();
+        lblNumeroLIsta3 = new javax.swing.JLabel();
+        lblNumeroLIsta4 = new javax.swing.JLabel();
+        lblNombreMovimiento4 = new javax.swing.JLabel();
+        btnInformacionCandidatos4 = new javax.swing.JButton();
+        lblImagenLista4 = new javax.swing.JLabel();
+        lblVotoBlanco4 = new javax.swing.JLabel();
+        lblVotar4 = new javax.swing.JLabel();
+        btnInformacionCandidatos5 = new javax.swing.JButton();
+        lblImagenLista5 = new javax.swing.JLabel();
+        lblVotoBlanco5 = new javax.swing.JLabel();
+        lblVotar5 = new javax.swing.JLabel();
+        lblNombreMovimiento5 = new javax.swing.JLabel();
+        lblNumeroLIsta5 = new javax.swing.JLabel();
+        lblNumeroLIsta6 = new javax.swing.JLabel();
+        lblNombreMovimiento6 = new javax.swing.JLabel();
+        btnInformacionCandidatos6 = new javax.swing.JButton();
+        lblImagenLista6 = new javax.swing.JLabel();
+        lblVotoBlanco6 = new javax.swing.JLabel();
+        lblVotar6 = new javax.swing.JLabel();
+        btnInformacionCandidatos7 = new javax.swing.JButton();
+        lblVotoBlanco7 = new javax.swing.JLabel();
+        lblImagenLista7 = new javax.swing.JLabel();
+        lblNumeroLIsta7 = new javax.swing.JLabel();
+        lblNombreMovimiento7 = new javax.swing.JLabel();
+        lblVotar7 = new javax.swing.JLabel();
+        lblNombreMovimiento8 = new javax.swing.JLabel();
+        lblNumeroLIsta8 = new javax.swing.JLabel();
+        btnInformacionCandidatos8 = new javax.swing.JButton();
+        lblImagenLista8 = new javax.swing.JLabel();
+        lblVotoBlanco8 = new javax.swing.JLabel();
+        lblVotar8 = new javax.swing.JLabel();
+        btnInformacionCandidatos9 = new javax.swing.JButton();
+        lblNombreMovimiento9 = new javax.swing.JLabel();
+        lblImagenLista9 = new javax.swing.JLabel();
+        lblNumeroLIsta9 = new javax.swing.JLabel();
+        lblVotoBlanco9 = new javax.swing.JLabel();
+        lblVotar9 = new javax.swing.JLabel();
+        lblNumeroLIsta10 = new javax.swing.JLabel();
+        lblVotoBlanco10 = new javax.swing.JLabel();
+        lblImagenLista10 = new javax.swing.JLabel();
+        lblNombreMovimiento10 = new javax.swing.JLabel();
+        btnInformacionCandidatos10 = new javax.swing.JButton();
+        lblVotar10 = new javax.swing.JLabel();
+        lblImagenLista11 = new javax.swing.JLabel();
+        lblVotoBlanco11 = new javax.swing.JLabel();
+        lblNombreMovimiento11 = new javax.swing.JLabel();
+        btnInformacionCandidatos11 = new javax.swing.JButton();
+        lblNumeroLIsta11 = new javax.swing.JLabel();
+        lblVotar11 = new javax.swing.JLabel();
+        lblVotoBlanco12 = new javax.swing.JLabel();
+        lblNumeroLIsta12 = new javax.swing.JLabel();
+        lblNombreMovimiento12 = new javax.swing.JLabel();
+        lblImagenLista12 = new javax.swing.JLabel();
+        btnInformacionCandidatos12 = new javax.swing.JButton();
+        lblVotar12 = new javax.swing.JLabel();
+        lblNombreMovimiento13 = new javax.swing.JLabel();
+        btnInformacionCandidatos13 = new javax.swing.JButton();
+        lblImagenLista13 = new javax.swing.JLabel();
+        lblNumeroLIsta13 = new javax.swing.JLabel();
+        lblVotoBlanco13 = new javax.swing.JLabel();
+        lblVotar13 = new javax.swing.JLabel();
+        lblNumeroLIsta14 = new javax.swing.JLabel();
+        lblImagenLista14 = new javax.swing.JLabel();
+        lblVotoBlanco14 = new javax.swing.JLabel();
+        lblNombreMovimiento14 = new javax.swing.JLabel();
+        btnInformacionCandidatos14 = new javax.swing.JButton();
+        lblVotar14 = new javax.swing.JLabel();
+        lblImagenLista15 = new javax.swing.JLabel();
+        lblNumeroLIsta15 = new javax.swing.JLabel();
+        lblVotoBlanco15 = new javax.swing.JLabel();
+        btnInformacionCandidatos15 = new javax.swing.JButton();
+        lblNombreMovimiento15 = new javax.swing.JLabel();
+        lblVotar15 = new javax.swing.JLabel();
+        btnInformacionCandidatos16 = new javax.swing.JButton();
+        lblNombreMovimiento16 = new javax.swing.JLabel();
+        lblImagenLista16 = new javax.swing.JLabel();
+        lblNumeroLIsta16 = new javax.swing.JLabel();
+        lblVotoBlanco16 = new javax.swing.JLabel();
+        lblVotar16 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(lblLogoCNE, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 50, 100, 35));
         getContentPane().add(lblEscudoEcudor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 29, 35));
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ELECCIONES GENERALES");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1130, -1));
+        lblEleccionesGenerales.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        lblEleccionesGenerales.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEleccionesGenerales.setText("ELECCIONES GENERALES");
+        getContentPane().add(lblEleccionesGenerales, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1130, -1));
 
         lblFecha.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblFecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -104,82 +224,310 @@ public class Papeleta extends javax.swing.JFrame {
         lblSubtitulo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         getContentPane().add(lblSubtitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 120, 800, 20));
 
-        lblAlianza.setFont(new java.awt.Font("Arial", 0, 8)); // NOI18N
-        lblAlianza.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAlianza.setText("ALIANZA");
-        getContentPane().add(lblAlianza, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 60, 10));
+        panelBinomiosPares.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblUnion.setFont(new java.awt.Font("Arial", 0, 8)); // NOI18N
-        lblUnion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblUnion.setText("UNION");
-        getContentPane().add(lblUnion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 60, 10));
+        lblVotoBlanco1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotoBlanco1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 60, 50, 50));
 
-        lblEsperanza.setFont(new java.awt.Font("Arial", 0, 8)); // NOI18N
-        lblEsperanza.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblEsperanza.setText("ESPERANZA");
-        getContentPane().add(lblEsperanza, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 60, 10));
+        lblImagenLista1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblImagenLista1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 110, 75, 75));
+        panelBinomiosPares.add(btnInformacionCandidatos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 190, 30, 30));
 
-        lblNumeroLista.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblNumeroLista.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNumeroLista.setText("1-5");
-        getContentPane().add(lblNumeroLista, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 60, 20));
+        lblVotar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 60, 100, 170));
 
-        lblImagenLista.setFont(new java.awt.Font("Arial", 0, 8)); // NOI18N
-        lblImagenLista.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(lblImagenLista, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 60, 70));
+        lblNombreMovimiento1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombreMovimiento1.setText("Movimiento");
+        panelBinomiosPares.add(lblNombreMovimiento1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 10, 100, 35));
 
-        lblImagenPresidente.setFont(new java.awt.Font("Arial", 0, 8)); // NOI18N
-        lblImagenPresidente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(lblImagenPresidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 60, 40));
+        lblNumeroLIsta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNumeroLIsta1.setText("Numero Lista");
+        panelBinomiosPares.add(lblNumeroLIsta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 45, 100, 15));
 
-        lblAndres.setFont(new java.awt.Font("Arial", 0, 8)); // NOI18N
-        lblAndres.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAndres.setText("ANDRES");
-        getContentPane().add(lblAndres, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 60, 10));
+        lblNumeroLIsta2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNumeroLIsta2.setText("Numero Lista");
+        panelBinomiosPares.add(lblNumeroLIsta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 285, 100, 15));
 
-        lblArauz.setFont(new java.awt.Font("Arial", 0, 8)); // NOI18N
-        lblArauz.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblArauz.setText("ARAUZ");
-        getContentPane().add(lblArauz, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 60, 10));
+        lblNombreMovimiento2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombreMovimiento2.setText("Movimiento");
+        panelBinomiosPares.add(lblNombreMovimiento2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 250, 100, 35));
+        panelBinomiosPares.add(btnInformacionCandidatos2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 30, 30));
 
-        lblPresidente.setFont(new java.awt.Font("Arial", 1, 7)); // NOI18N
-        lblPresidente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblPresidente.setText("PRESIDENTE");
-        getContentPane().add(lblPresidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 60, 10));
+        lblImagenLista2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblImagenLista2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 75, 75));
 
-        lblVicepresidente.setFont(new java.awt.Font("Arial", 1, 6)); // NOI18N
-        lblVicepresidente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblVicepresidente.setText("VICEPRESIDENTE");
-        getContentPane().add(lblVicepresidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 60, 10));
+        lblVotoBlanco2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotoBlanco2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 50, 50));
 
-        lblRabascall.setFont(new java.awt.Font("Arial", 0, 8)); // NOI18N
-        lblRabascall.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRabascall.setText("RABASCALL");
-        getContentPane().add(lblRabascall, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, 60, 10));
+        lblVotar2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 300, 100, 170));
+        panelBinomiosPares.add(btnInformacionCandidatos3, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 190, 30, 30));
 
-        lblCarlos.setFont(new java.awt.Font("Arial", 0, 8)); // NOI18N
-        lblCarlos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCarlos.setText("CARLOS");
-        getContentPane().add(lblCarlos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 60, 10));
+        lblImagenLista3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblImagenLista3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 75, 75));
 
-        lblImagenVicepresidente.setFont(new java.awt.Font("Arial", 0, 8)); // NOI18N
-        lblImagenVicepresidente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblImagenVicepresidente.setText("jLabel3");
-        getContentPane().add(lblImagenVicepresidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 60, 40));
+        lblVotoBlanco3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotoBlanco3, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 60, 50, 50));
 
-        lblCuadroDeVoto.setFont(new java.awt.Font("Arial", 0, 8)); // NOI18N
-        lblCuadroDeVoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(lblCuadroDeVoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 40, 30));
+        lblVotar3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 60, 100, 170));
 
-        lblLista1.setFont(new java.awt.Font("Arial", 0, 8)); // NOI18N
-        lblLista1.setBorder(new javax.swing.border.MatteBorder(null));
-        getContentPane().add(lblLista1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 60, 440));
+        lblNombreMovimiento3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombreMovimiento3.setText("Movimiento");
+        panelBinomiosPares.add(lblNombreMovimiento3, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 10, 100, 35));
+
+        lblNumeroLIsta3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNumeroLIsta3.setText("Numero Lista");
+        panelBinomiosPares.add(lblNumeroLIsta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 45, 100, 15));
+
+        lblNumeroLIsta4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNumeroLIsta4.setText("Numero Lista");
+        panelBinomiosPares.add(lblNumeroLIsta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 285, 100, 15));
+
+        lblNombreMovimiento4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombreMovimiento4.setText("Movimiento");
+        panelBinomiosPares.add(lblNombreMovimiento4, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 250, 100, 35));
+        panelBinomiosPares.add(btnInformacionCandidatos4, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 430, 30, 30));
+
+        lblImagenLista4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblImagenLista4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 75, 75));
+
+        lblVotoBlanco4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotoBlanco4, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 300, 50, 50));
+
+        lblVotar4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 300, 100, 170));
+        panelBinomiosPares.add(btnInformacionCandidatos5, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 190, 30, 30));
+
+        lblImagenLista5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblImagenLista5, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 110, 75, 75));
+
+        lblVotoBlanco5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotoBlanco5, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 60, 50, 50));
+
+        lblVotar5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 100, 170));
+
+        lblNombreMovimiento5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombreMovimiento5.setText("Movimiento");
+        panelBinomiosPares.add(lblNombreMovimiento5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 100, 35));
+
+        lblNumeroLIsta5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNumeroLIsta5.setText("Numero Lista");
+        panelBinomiosPares.add(lblNumeroLIsta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 45, 100, 15));
+
+        lblNumeroLIsta6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNumeroLIsta6.setText("Numero Lista");
+        panelBinomiosPares.add(lblNumeroLIsta6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 285, 100, 15));
+
+        lblNombreMovimiento6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombreMovimiento6.setText("Movimiento");
+        panelBinomiosPares.add(lblNombreMovimiento6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 100, 35));
+        panelBinomiosPares.add(btnInformacionCandidatos6, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 430, 30, 30));
+
+        lblImagenLista6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblImagenLista6, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 350, 75, 75));
+
+        lblVotoBlanco6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotoBlanco6, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 300, 50, 50));
+
+        lblVotar6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotar6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 100, 170));
+        panelBinomiosPares.add(btnInformacionCandidatos7, new org.netbeans.lib.awtextra.AbsoluteConstraints(377, 190, 30, 30));
+
+        lblVotoBlanco7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotoBlanco7, new org.netbeans.lib.awtextra.AbsoluteConstraints(367, 60, 50, 50));
+
+        lblImagenLista7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblImagenLista7, new org.netbeans.lib.awtextra.AbsoluteConstraints(354, 110, 75, 75));
+
+        lblNumeroLIsta7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNumeroLIsta7.setText("Numero Lista");
+        panelBinomiosPares.add(lblNumeroLIsta7, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 45, 100, 15));
+
+        lblNombreMovimiento7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombreMovimiento7.setText("Movimiento");
+        panelBinomiosPares.add(lblNombreMovimiento7, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 10, 100, 35));
+
+        lblVotar7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotar7, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 60, 100, 170));
+
+        lblNombreMovimiento8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombreMovimiento8.setText("Movimiento");
+        panelBinomiosPares.add(lblNombreMovimiento8, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 250, 100, 35));
+
+        lblNumeroLIsta8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNumeroLIsta8.setText("Numero Lista");
+        panelBinomiosPares.add(lblNumeroLIsta8, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 285, 100, 15));
+        panelBinomiosPares.add(btnInformacionCandidatos8, new org.netbeans.lib.awtextra.AbsoluteConstraints(377, 430, 30, 30));
+
+        lblImagenLista8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblImagenLista8, new org.netbeans.lib.awtextra.AbsoluteConstraints(354, 350, 75, 75));
+
+        lblVotoBlanco8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotoBlanco8, new org.netbeans.lib.awtextra.AbsoluteConstraints(367, 300, 50, 50));
+
+        lblVotar8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotar8, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 300, 100, 170));
+        panelBinomiosPares.add(btnInformacionCandidatos9, new org.netbeans.lib.awtextra.AbsoluteConstraints(489, 190, 30, 30));
+
+        lblNombreMovimiento9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombreMovimiento9.setText("Movimiento");
+        panelBinomiosPares.add(lblNombreMovimiento9, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 10, 100, 35));
+
+        lblImagenLista9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblImagenLista9, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 110, 75, 75));
+
+        lblNumeroLIsta9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNumeroLIsta9.setText("Numero Lista");
+        panelBinomiosPares.add(lblNumeroLIsta9, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 45, 100, 15));
+
+        lblVotoBlanco9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotoBlanco9, new org.netbeans.lib.awtextra.AbsoluteConstraints(479, 60, 50, 50));
+
+        lblVotar9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotar9, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 60, 100, 170));
+
+        lblNumeroLIsta10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNumeroLIsta10.setText("Numero Lista");
+        panelBinomiosPares.add(lblNumeroLIsta10, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 285, 100, 15));
+
+        lblVotoBlanco10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotoBlanco10, new org.netbeans.lib.awtextra.AbsoluteConstraints(479, 300, 50, 50));
+
+        lblImagenLista10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblImagenLista10, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 350, 75, 75));
+
+        lblNombreMovimiento10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombreMovimiento10.setText("Movimiento");
+        panelBinomiosPares.add(lblNombreMovimiento10, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 250, 100, 35));
+        panelBinomiosPares.add(btnInformacionCandidatos10, new org.netbeans.lib.awtextra.AbsoluteConstraints(489, 430, 30, 30));
+
+        lblVotar10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotar10, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 300, 100, 170));
+
+        lblImagenLista11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblImagenLista11, new org.netbeans.lib.awtextra.AbsoluteConstraints(578, 110, 75, 75));
+
+        lblVotoBlanco11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotoBlanco11, new org.netbeans.lib.awtextra.AbsoluteConstraints(591, 60, 50, 50));
+
+        lblNombreMovimiento11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombreMovimiento11.setText("Movimiento");
+        panelBinomiosPares.add(lblNombreMovimiento11, new org.netbeans.lib.awtextra.AbsoluteConstraints(566, 10, 100, 35));
+        panelBinomiosPares.add(btnInformacionCandidatos11, new org.netbeans.lib.awtextra.AbsoluteConstraints(601, 190, 30, 30));
+
+        lblNumeroLIsta11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNumeroLIsta11.setText("Numero Lista");
+        panelBinomiosPares.add(lblNumeroLIsta11, new org.netbeans.lib.awtextra.AbsoluteConstraints(566, 45, 100, 15));
+
+        lblVotar11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotar11, new org.netbeans.lib.awtextra.AbsoluteConstraints(566, 60, 100, 170));
+
+        lblVotoBlanco12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotoBlanco12, new org.netbeans.lib.awtextra.AbsoluteConstraints(591, 300, 50, 50));
+
+        lblNumeroLIsta12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNumeroLIsta12.setText("Numero Lista");
+        panelBinomiosPares.add(lblNumeroLIsta12, new org.netbeans.lib.awtextra.AbsoluteConstraints(566, 285, 100, 15));
+
+        lblNombreMovimiento12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombreMovimiento12.setText("Movimiento");
+        panelBinomiosPares.add(lblNombreMovimiento12, new org.netbeans.lib.awtextra.AbsoluteConstraints(566, 250, 100, 35));
+
+        lblImagenLista12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblImagenLista12, new org.netbeans.lib.awtextra.AbsoluteConstraints(578, 350, 75, 75));
+        panelBinomiosPares.add(btnInformacionCandidatos12, new org.netbeans.lib.awtextra.AbsoluteConstraints(601, 430, 30, 30));
+
+        lblVotar12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotar12, new org.netbeans.lib.awtextra.AbsoluteConstraints(566, 300, 100, 170));
+
+        lblNombreMovimiento13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombreMovimiento13.setText("Movimiento");
+        panelBinomiosPares.add(lblNombreMovimiento13, new org.netbeans.lib.awtextra.AbsoluteConstraints(678, 10, 100, 35));
+        panelBinomiosPares.add(btnInformacionCandidatos13, new org.netbeans.lib.awtextra.AbsoluteConstraints(713, 190, 30, 30));
+
+        lblImagenLista13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblImagenLista13, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 110, 75, 75));
+
+        lblNumeroLIsta13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNumeroLIsta13.setText("Numero Lista");
+        panelBinomiosPares.add(lblNumeroLIsta13, new org.netbeans.lib.awtextra.AbsoluteConstraints(678, 45, 100, 15));
+
+        lblVotoBlanco13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotoBlanco13, new org.netbeans.lib.awtextra.AbsoluteConstraints(703, 60, 50, 50));
+
+        lblVotar13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotar13, new org.netbeans.lib.awtextra.AbsoluteConstraints(678, 60, 100, 170));
+
+        lblNumeroLIsta14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNumeroLIsta14.setText("Numero Lista");
+        panelBinomiosPares.add(lblNumeroLIsta14, new org.netbeans.lib.awtextra.AbsoluteConstraints(678, 285, 100, 15));
+
+        lblImagenLista14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblImagenLista14, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 350, 75, 75));
+
+        lblVotoBlanco14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotoBlanco14, new org.netbeans.lib.awtextra.AbsoluteConstraints(703, 300, 50, 50));
+
+        lblNombreMovimiento14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombreMovimiento14.setText("Movimiento");
+        panelBinomiosPares.add(lblNombreMovimiento14, new org.netbeans.lib.awtextra.AbsoluteConstraints(678, 250, 100, 35));
+        panelBinomiosPares.add(btnInformacionCandidatos14, new org.netbeans.lib.awtextra.AbsoluteConstraints(713, 430, 30, 30));
+
+        lblVotar14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotar14, new org.netbeans.lib.awtextra.AbsoluteConstraints(678, 300, 100, 170));
+
+        lblImagenLista15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblImagenLista15, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 110, 75, 75));
+
+        lblNumeroLIsta15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNumeroLIsta15.setText("Numero Lista");
+        panelBinomiosPares.add(lblNumeroLIsta15, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 45, 100, 15));
+
+        lblVotoBlanco15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotoBlanco15, new org.netbeans.lib.awtextra.AbsoluteConstraints(815, 60, 50, 50));
+        panelBinomiosPares.add(btnInformacionCandidatos15, new org.netbeans.lib.awtextra.AbsoluteConstraints(825, 190, 30, 30));
+
+        lblNombreMovimiento15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombreMovimiento15.setText("Movimiento");
+        panelBinomiosPares.add(lblNombreMovimiento15, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 100, 35));
+
+        lblVotar15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotar15, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 60, 100, 170));
+        panelBinomiosPares.add(btnInformacionCandidatos16, new org.netbeans.lib.awtextra.AbsoluteConstraints(825, 430, 30, 30));
+
+        lblNombreMovimiento16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombreMovimiento16.setText("Movimiento");
+        panelBinomiosPares.add(lblNombreMovimiento16, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 250, 100, 35));
+
+        lblImagenLista16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblImagenLista16, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 350, 75, 75));
+
+        lblNumeroLIsta16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNumeroLIsta16.setText("Numero Lista");
+        panelBinomiosPares.add(lblNumeroLIsta16, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 285, 100, 15));
+
+        lblVotoBlanco16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotoBlanco16, new org.netbeans.lib.awtextra.AbsoluteConstraints(815, 300, 50, 50));
+
+        lblVotar16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelBinomiosPares.add(lblVotar16, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 300, 100, 170));
+
+        getContentPane().add(panelBinomiosPares, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 900, 480));
+
+        jButton1.setText("jButton1");
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 200, -1, -1));
 
         lblFondo.setFont(new java.awt.Font("Arial", 0, 8)); // NOI18N
-        getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1130, 650));
+        getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1130, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        FrmPrincipal.ventanaPrincipal.setEnabled(true);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -217,27 +565,110 @@ public class Papeleta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lblAlianza;
-    private javax.swing.JLabel lblAndres;
-    private javax.swing.JLabel lblArauz;
-    private javax.swing.JLabel lblCarlos;
-    private javax.swing.JLabel lblCuadroDeVoto;
+    private javax.swing.JButton btnInformacionCandidatos1;
+    private javax.swing.JButton btnInformacionCandidatos10;
+    private javax.swing.JButton btnInformacionCandidatos11;
+    private javax.swing.JButton btnInformacionCandidatos12;
+    private javax.swing.JButton btnInformacionCandidatos13;
+    private javax.swing.JButton btnInformacionCandidatos14;
+    private javax.swing.JButton btnInformacionCandidatos15;
+    private javax.swing.JButton btnInformacionCandidatos16;
+    private javax.swing.JButton btnInformacionCandidatos2;
+    private javax.swing.JButton btnInformacionCandidatos3;
+    private javax.swing.JButton btnInformacionCandidatos4;
+    private javax.swing.JButton btnInformacionCandidatos5;
+    private javax.swing.JButton btnInformacionCandidatos6;
+    private javax.swing.JButton btnInformacionCandidatos7;
+    private javax.swing.JButton btnInformacionCandidatos8;
+    private javax.swing.JButton btnInformacionCandidatos9;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel lblEleccionesGenerales;
     private javax.swing.JLabel lblEscudoEcudor;
-    private javax.swing.JLabel lblEsperanza;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblFondo;
-    private javax.swing.JLabel lblImagenLista;
-    private javax.swing.JLabel lblImagenPresidente;
-    private javax.swing.JLabel lblImagenVicepresidente;
-    private javax.swing.JLabel lblLista1;
+    private javax.swing.JLabel lblImagenLista1;
+    private javax.swing.JLabel lblImagenLista10;
+    private javax.swing.JLabel lblImagenLista11;
+    private javax.swing.JLabel lblImagenLista12;
+    private javax.swing.JLabel lblImagenLista13;
+    private javax.swing.JLabel lblImagenLista14;
+    private javax.swing.JLabel lblImagenLista15;
+    private javax.swing.JLabel lblImagenLista16;
+    private javax.swing.JLabel lblImagenLista2;
+    private javax.swing.JLabel lblImagenLista3;
+    private javax.swing.JLabel lblImagenLista4;
+    private javax.swing.JLabel lblImagenLista5;
+    private javax.swing.JLabel lblImagenLista6;
+    private javax.swing.JLabel lblImagenLista7;
+    private javax.swing.JLabel lblImagenLista8;
+    private javax.swing.JLabel lblImagenLista9;
     private javax.swing.JLabel lblLogoCNE;
-    private javax.swing.JLabel lblNumeroLista;
-    private javax.swing.JLabel lblPresidente;
-    private javax.swing.JLabel lblRabascall;
+    private javax.swing.JLabel lblNombreMovimiento1;
+    private javax.swing.JLabel lblNombreMovimiento10;
+    private javax.swing.JLabel lblNombreMovimiento11;
+    private javax.swing.JLabel lblNombreMovimiento12;
+    private javax.swing.JLabel lblNombreMovimiento13;
+    private javax.swing.JLabel lblNombreMovimiento14;
+    private javax.swing.JLabel lblNombreMovimiento15;
+    private javax.swing.JLabel lblNombreMovimiento16;
+    private javax.swing.JLabel lblNombreMovimiento2;
+    private javax.swing.JLabel lblNombreMovimiento3;
+    private javax.swing.JLabel lblNombreMovimiento4;
+    private javax.swing.JLabel lblNombreMovimiento5;
+    private javax.swing.JLabel lblNombreMovimiento6;
+    private javax.swing.JLabel lblNombreMovimiento7;
+    private javax.swing.JLabel lblNombreMovimiento8;
+    private javax.swing.JLabel lblNombreMovimiento9;
+    private javax.swing.JLabel lblNumeroLIsta1;
+    private javax.swing.JLabel lblNumeroLIsta10;
+    private javax.swing.JLabel lblNumeroLIsta11;
+    private javax.swing.JLabel lblNumeroLIsta12;
+    private javax.swing.JLabel lblNumeroLIsta13;
+    private javax.swing.JLabel lblNumeroLIsta14;
+    private javax.swing.JLabel lblNumeroLIsta15;
+    private javax.swing.JLabel lblNumeroLIsta16;
+    private javax.swing.JLabel lblNumeroLIsta2;
+    private javax.swing.JLabel lblNumeroLIsta3;
+    private javax.swing.JLabel lblNumeroLIsta4;
+    private javax.swing.JLabel lblNumeroLIsta5;
+    private javax.swing.JLabel lblNumeroLIsta6;
+    private javax.swing.JLabel lblNumeroLIsta7;
+    private javax.swing.JLabel lblNumeroLIsta8;
+    private javax.swing.JLabel lblNumeroLIsta9;
     private javax.swing.JLabel lblSubtitulo;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JLabel lblUnion;
-    private javax.swing.JLabel lblVicepresidente;
+    private javax.swing.JLabel lblVotar1;
+    private javax.swing.JLabel lblVotar10;
+    private javax.swing.JLabel lblVotar11;
+    private javax.swing.JLabel lblVotar12;
+    private javax.swing.JLabel lblVotar13;
+    private javax.swing.JLabel lblVotar14;
+    private javax.swing.JLabel lblVotar15;
+    private javax.swing.JLabel lblVotar16;
+    private javax.swing.JLabel lblVotar2;
+    private javax.swing.JLabel lblVotar3;
+    private javax.swing.JLabel lblVotar4;
+    private javax.swing.JLabel lblVotar5;
+    private javax.swing.JLabel lblVotar6;
+    private javax.swing.JLabel lblVotar7;
+    private javax.swing.JLabel lblVotar8;
+    private javax.swing.JLabel lblVotar9;
+    private javax.swing.JLabel lblVotoBlanco1;
+    private javax.swing.JLabel lblVotoBlanco10;
+    private javax.swing.JLabel lblVotoBlanco11;
+    private javax.swing.JLabel lblVotoBlanco12;
+    private javax.swing.JLabel lblVotoBlanco13;
+    private javax.swing.JLabel lblVotoBlanco14;
+    private javax.swing.JLabel lblVotoBlanco15;
+    private javax.swing.JLabel lblVotoBlanco16;
+    private javax.swing.JLabel lblVotoBlanco2;
+    private javax.swing.JLabel lblVotoBlanco3;
+    private javax.swing.JLabel lblVotoBlanco4;
+    private javax.swing.JLabel lblVotoBlanco5;
+    private javax.swing.JLabel lblVotoBlanco6;
+    private javax.swing.JLabel lblVotoBlanco7;
+    private javax.swing.JLabel lblVotoBlanco8;
+    private javax.swing.JLabel lblVotoBlanco9;
+    private javax.swing.JPanel panelBinomiosPares;
     // End of variables declaration//GEN-END:variables
 }
