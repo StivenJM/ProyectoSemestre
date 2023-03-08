@@ -1,23 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ventanas;
+import clases.Administrador;
 import herramientas.ComponentesDeVentana;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
-/**
- *
- * @author Windows
- */
+
 public class GestionCivil extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GestionCivil
-     */
     DefaultTableModel tablaGestionCivil;
     public GestionCivil() {
         initComponents();
@@ -108,6 +99,11 @@ public class GestionCivil extends javax.swing.JFrame {
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1100, 700));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -303,6 +299,10 @@ public class GestionCivil extends javax.swing.JFrame {
         // TODO add your handling code here:
         pnlGestionCivil.setVisible(true);
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        Administracion.ventanaAdministracion.setEnabled(true);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

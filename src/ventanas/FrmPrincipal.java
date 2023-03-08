@@ -244,7 +244,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdministracionActionPerformed
 
     private void btnVotoTelematicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVotoTelematicoActionPerformed
-        // TODO add your handling code here:
         imagenDeEleccion = "src/imagenes/votoTelematico.png";
         IniciarSesionCedula iniciarSesionCedula = new IniciarSesionCedula();
         iniciarSesionCedula.setVisible(true);

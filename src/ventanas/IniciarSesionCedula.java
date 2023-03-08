@@ -143,7 +143,7 @@ public class IniciarSesionCedula extends javax.swing.JFrame {
             Votante votante = FrmPrincipal.listaVotantes.get(posicionDeVotanteEnLista);
 
             if (FrmPrincipal.imagenDeEleccion.equals("src/imagenes/lugarVotacion.png")) {
-
+                new LugarDeVotacion().setVisible(true);
             } else if (FrmPrincipal.imagenDeEleccion.equals("src/imagenes/votoTelematico.png")) {
                 new Papeleta().setVisible(true);
             }

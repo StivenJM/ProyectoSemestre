@@ -47,6 +47,11 @@ public class LugarDeVotacion extends javax.swing.JFrame {
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel2.add(lblLogoPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 0, 360, 126));
@@ -91,8 +96,13 @@ public class LugarDeVotacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRealizadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizadoActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        FrmPrincipal.ventanaPrincipal.setEnabled(true);
     }//GEN-LAST:event_btnRealizadoActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        FrmPrincipal.ventanaPrincipal.setEnabled(true);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

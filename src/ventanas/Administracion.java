@@ -209,7 +209,9 @@ public class Administracion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGestionAdministradoresMouseExited
 
     private void btnGestionCivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionCivilActionPerformed
-        
+        this.ventanaAdministracion.setEnabled(false);
+        GestionCivil gestionCivil = new GestionCivil();
+        gestionCivil.setVisible(true);
     }//GEN-LAST:event_btnGestionCivilActionPerformed
 
     private void btnGestionBinomiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionBinomiosActionPerformed
