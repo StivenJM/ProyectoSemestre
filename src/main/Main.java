@@ -12,6 +12,26 @@ import java.util.Collections;
 import ventanas.FrmPrincipal;
 
 public class Main {
+    /*
+    public void llenarListaLabelsXunico() {
+        listaDeLabelsXunico[0] = lblXunico1;
+        listaDeLabelsXunico[1] = lblXunico2;
+        listaDeLabelsXunico[2] = lblXunico3;
+        listaDeLabelsXunico[3] = lblXunico4;
+        listaDeLabelsXunico[4] = lblXunico5;
+        listaDeLabelsXunico[5] = lblXunico6;
+        listaDeLabelsXunico[6] = lblXunico7;
+        listaDeLabelsXunico[7] = lblXunico8;
+        listaDeLabelsXunico[8] = lblXunico9;
+        listaDeLabelsXunico[9] = lblXunico10;
+        listaDeLabelsXunico[10] = lblXunico11;
+        listaDeLabelsXunico[11] = lblXunico12;
+        listaDeLabelsXunico[12] = lblXunico13;
+        listaDeLabelsXunico[13] = lblXunico14;
+        listaDeLabelsXunico[14] = lblXunico15;
+        listaDeLabelsXunico[15] = lblXunico16;
+    }
+    */
 
     public static void main(String[] args) {
         

@@ -10,6 +10,8 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 public class IniciarSesionCedula extends javax.swing.JFrame {
 
+    public static Votante votante;
+
     public IniciarSesionCedula() {
         initComponents();
         setSize(400, 550);
@@ -139,13 +141,20 @@ public class IniciarSesionCedula extends javax.swing.JFrame {
         int posicionDeVotanteEnLista = ManejoDeListas.buscarEnListaDeVotantes(cedula);
 
         if (posicionDeVotanteEnLista != -1) {
-            this.dispose();
-            Votante votante = FrmPrincipal.listaVotantes.get(posicionDeVotanteEnLista);
+
+            votante = FrmPrincipal.listaVotantes.get(posicionDeVotanteEnLista);
 
             if (FrmPrincipal.imagenDeEleccion.equals("src/imagenes/lugarVotacion.png")) {
+                this.dispose();
                 new LugarDeVotacion().setVisible(true);
             } else if (FrmPrincipal.imagenDeEleccion.equals("src/imagenes/votoTelematico.png")) {
-                new Papeleta().setVisible(true);
+                if (votante.getTieneVotoRegistrado()) {
+                    JOptionPane.showMessageDialog(rootPane, "Su voto ya ha sido registrado.");
+                    txtNumeroCedula.setText("Ingresa tu número de cédula");
+                } else {
+                    this.dispose();
+                    new Papeleta().setVisible(true);
+                }
             }
 
         } else {

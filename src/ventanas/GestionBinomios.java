@@ -29,12 +29,13 @@ import static ventanas.FrmPrincipal.listaBinomios;
  * @author Erick
  */
 public class GestionBinomios extends javax.swing.JFrame {
-
+    
     int filaSeleccionada;
     Binomio binomioSeleccionado;
     private final int IMAGEN_MOVIMIENTO = 1;
     private final int IMAGEN_PRESIDENTE = 2;
     private final int IMAGEN_VICEPRESIDENTE = 3;
+    private final int NUMERO_MAXIMO_BINOMIOS_PERMITIDOS = 16;
     private int tipoDeUltimaImagenSeleccionada;
     private String rutaImagenMovimientoSeleccionada;
     private String rutaImagenPresidenteSeleccionada;
@@ -44,29 +45,29 @@ public class GestionBinomios extends javax.swing.JFrame {
      * Creates new form GestionBinomios
      */
     DefaultTableModel dtmTablaBinomios;
-
+    
     public GestionBinomios() {
         initComponents();
-
+        
         quitarTextosDeErrores();
-
+        
         setSize(1100, 700);
         setResizable(false);
         setTitle("GESTIÓN DE BINOMIOS");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
+        
         ComponentesDeVentana.ajustarImagenAJLabel(lblFondo,
                 "src/imagenes/fondoBlanco2.jpg");
         ComponentesDeVentana.ajustarImagenAJLabel(lblLogoPrincipal,
                 "src/imagenes/logoPrincipal.png");
-
+        
         pnlEditarBinomio.setOpaque(false);
         pnlEditarBinomio.setVisible(false);
         pnlNuevoBinomio.setOpaque(false);
         pnlNuevoBinomio.setVisible(false);
         pnlBuscarBinomio.setOpaque(false);
-
+        
         ComponentesDeVentana.ajustarImagenAJButton(btnNuevo, "src/imagenes/nuevo.png");
         ComponentesDeVentana.ajustarImagenAJButton(btnEliminar, "src/imagenes/eliminar.png");
         ComponentesDeVentana.ajustarImagenAJButton(btnEditar, "src/imagenes/editar.png");
@@ -85,7 +86,7 @@ public class GestionBinomios extends javax.swing.JFrame {
         btnAdjuntarImagenMovimiento1.setToolTipText("Presiona para cambiar imagen de movimiento");
         btnAdjuntarImagenPresidente1.setToolTipText("Presiona para cambiar imagen de candidato");
         btnAdjuntarImagenVicepresidente1.setToolTipText("Presiona para cambiar imagen de candidato");
-
+        
         btnNuevo.setOpaque(false);
         btnNuevo.setContentAreaFilled(false);
         btnNuevo.setBorderPainted(false);
@@ -98,17 +99,17 @@ public class GestionBinomios extends javax.swing.JFrame {
         btnBuscar.setOpaque(false);
         btnBuscar.setContentAreaFilled(false);
         btnBuscar.setBorderPainted(false);
-
+        
         dtmTablaBinomios = new DefaultTableModel();
         dtmTablaBinomios.addColumn("Lista");
         dtmTablaBinomios.addColumn("Presidente/a");
         dtmTablaBinomios.addColumn("Vicepresidente/a");
         tblBinomios.setModel(dtmTablaBinomios);
-
+        
         limpiarTablaDeBinomios();
         mostrarDatosDeBinomios();
     }
-
+    
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(
@@ -661,7 +662,7 @@ public class GestionBinomios extends javax.swing.JFrame {
                 int posicionDeLaListaConNumero = ManejoDeListas.buscarEnListaDeBinomios(numeroDeLista);
                 int posicionDeLaListaConNombre = ManejoDeListas.buscarEnListaDeBinomios(nombreMovimiento);
                 int posicionDeLaListaFinal;
-
+                
                 if (posicionDeLaListaConNombre == posicionDeLaListaConNumero) {
                     posicionDeLaListaFinal = posicionDeLaListaConNombre;
                     tblBinomios.setRowSelectionInterval(posicionDeLaListaFinal, posicionDeLaListaFinal);
@@ -696,14 +697,18 @@ public class GestionBinomios extends javax.swing.JFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // TODO add your handling code here:
-        limpiarFormulario1();
-        limpiarFormulario2();
-        rutaImagenMovimientoSeleccionada = null;
-        rutaImagenPresidenteSeleccionada = null;
-        rutaImagenVicepresidenteSeleccionada = null;
-        pnlNuevoBinomio.setVisible(true);
-        pnlEditarBinomio.setVisible(false);
-        btnAnadir.setEnabled(false);
+        if (FrmPrincipal.listaBinomios.size() < NUMERO_MAXIMO_BINOMIOS_PERMITIDOS) {
+            limpiarFormulario1();
+            limpiarFormulario2();
+            rutaImagenMovimientoSeleccionada = null;
+            rutaImagenPresidenteSeleccionada = null;
+            rutaImagenVicepresidenteSeleccionada = null;
+            pnlNuevoBinomio.setVisible(true);
+            pnlEditarBinomio.setVisible(false);
+            btnAnadir.setEnabled(false);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Ya alcanzó el numero maximo\nde binomios permitidos");
+        }
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -727,29 +732,29 @@ public class GestionBinomios extends javax.swing.JFrame {
         String nuevosApellidosPresidente = txtApellidosPresidente.getText();
         String nuevosNombresVicepresidente = txtNombresVicepresidente.getText();
         String nuevosApellidosVicepresidente = txtApellidosVicepresidente.getText();
-
+        
         binomioSeleccionado.getMovimientoPolitico().setNombre(nuevoNombreMovimiento);
         binomioSeleccionado.getMovimientoPolitico().setNumeroDeLista(nuevoNumeroDeLista);
         binomioSeleccionado.getPresidente().setNombres(nuevosNombresPresidente);
         binomioSeleccionado.getPresidente().setApellidos(nuevosApellidosPresidente);
         binomioSeleccionado.getVicepresidente().setNombres(nuevosNombresVicepresidente);
         binomioSeleccionado.getVicepresidente().setApellidos(nuevosApellidosVicepresidente);
-
+        
         if (rutaImagenMovimientoSeleccionada != null) {
             eliminarImagenesRelacionadasConBinomio(binomioSeleccionado, true, false, false);
             binomioSeleccionado.getMovimientoPolitico().setRutaImagen(rutaImagenMovimientoSeleccionada);
         }
-
+        
         if (rutaImagenPresidenteSeleccionada != null) {
             eliminarImagenesRelacionadasConBinomio(binomioSeleccionado, false, true, false);
             binomioSeleccionado.getPresidente().setRutaImagen(rutaImagenPresidenteSeleccionada);
         }
-
+        
         if (rutaImagenVicepresidenteSeleccionada != null) {
             eliminarImagenesRelacionadasConBinomio(binomioSeleccionado, false, false, true);
             binomioSeleccionado.getVicepresidente().setRutaImagen(rutaImagenVicepresidenteSeleccionada);
         }
-
+        
         pnlEditarBinomio.setVisible(false);
         limpiarFormulario1();
         limpiarTablaDeBinomios();
@@ -926,29 +931,29 @@ public class GestionBinomios extends javax.swing.JFrame {
         String apellidosPresidente = txtApellidosPresidente2.getText();
         String nombresVicepresidente = txtNombresVicepresidente2.getText();
         String apellidosVicepresidente = txtApellidosVicepresidente2.getText();
-
+        
         MovimientoPolitico nuevoMovimiento = new MovimientoPolitico(nombreMovimiento, numeroDeLista);
         Candidato nuevoPresidente = new Candidato("Presidente", nombresPresidente, apellidosPresidente);
         Candidato nuevoVicePresidente = new Candidato("Vicepresidente", nombresVicepresidente, apellidosVicepresidente);
         Binomio nuevoBinomio = new Binomio(nuevoMovimiento, nuevoPresidente, nuevoVicePresidente);
-
+        
         if (rutaImagenMovimientoSeleccionada != null) {
             nuevoBinomio.getMovimientoPolitico().setRutaImagen(rutaImagenMovimientoSeleccionada);
         }
-
+        
         if (rutaImagenPresidenteSeleccionada != null) {
             nuevoBinomio.getPresidente().setRutaImagen(rutaImagenPresidenteSeleccionada);
         }
-
+        
         if (rutaImagenVicepresidenteSeleccionada != null) {
             nuevoBinomio.getVicepresidente().setRutaImagen(rutaImagenVicepresidenteSeleccionada);
         }
-
+        
         listaBinomios.add(nuevoBinomio);
-
+        
         limpiarTablaDeBinomios();
         mostrarDatosDeBinomios();
-
+        
         pnlNuevoBinomio.setVisible(false);
     }//GEN-LAST:event_btnAnadirActionPerformed
 
@@ -969,19 +974,19 @@ public class GestionBinomios extends javax.swing.JFrame {
     private void btnAdjuntarImagenMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdjuntarImagenMovimientoActionPerformed
         String ruta = obtenerRutaArchivoImagenSeleccionado();
         this.tipoDeUltimaImagenSeleccionada = this.IMAGEN_MOVIMIENTO;
-
+        
         if (!ruta.equals("")) {
             guardarArchivoImagenEnProyecto(ruta, "src" + File.separator
                     + "imagenes" + File.separator + "listas");
         }
-
+        
         habilitarBotonAnadir();
     }//GEN-LAST:event_btnAdjuntarImagenMovimientoActionPerformed
 
     private void btnAdjuntarImagenPresidenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdjuntarImagenPresidenteActionPerformed
         String ruta = obtenerRutaArchivoImagenSeleccionado();
         this.tipoDeUltimaImagenSeleccionada = this.IMAGEN_PRESIDENTE;
-
+        
         if (!ruta.equals("")) {
             guardarArchivoImagenEnProyecto(ruta, "src" + File.separator
                     + "imagenes" + File.separator + "candidatos");
@@ -991,7 +996,7 @@ public class GestionBinomios extends javax.swing.JFrame {
     private void btnAdjuntarImagenVicepresidenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdjuntarImagenVicepresidenteActionPerformed
         String ruta = obtenerRutaArchivoImagenSeleccionado();
         this.tipoDeUltimaImagenSeleccionada = this.IMAGEN_VICEPRESIDENTE;
-
+        
         if (!ruta.equals("")) {
             guardarArchivoImagenEnProyecto(ruta, "src" + File.separator
                     + "imagenes" + File.separator + "candidatos");
@@ -1001,7 +1006,7 @@ public class GestionBinomios extends javax.swing.JFrame {
     private void btnAdjuntarImagenMovimiento1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdjuntarImagenMovimiento1ActionPerformed
         String ruta = obtenerRutaArchivoImagenSeleccionado();
         this.tipoDeUltimaImagenSeleccionada = this.IMAGEN_MOVIMIENTO;
-
+        
         if (!ruta.equals("")) {
             guardarArchivoImagenEnProyecto(ruta, "src" + File.separator
                     + "imagenes" + File.separator + "listas");
@@ -1011,7 +1016,7 @@ public class GestionBinomios extends javax.swing.JFrame {
     private void btnAdjuntarImagenPresidente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdjuntarImagenPresidente1ActionPerformed
         String ruta = obtenerRutaArchivoImagenSeleccionado();
         this.tipoDeUltimaImagenSeleccionada = this.IMAGEN_PRESIDENTE;
-
+        
         if (!ruta.equals("")) {
             guardarArchivoImagenEnProyecto(ruta, "src" + File.separator
                     + "imagenes" + File.separator + "candidatos");
@@ -1021,7 +1026,7 @@ public class GestionBinomios extends javax.swing.JFrame {
     private void btnAdjuntarImagenVicepresidente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdjuntarImagenVicepresidente1ActionPerformed
         String ruta = obtenerRutaArchivoImagenSeleccionado();
         this.tipoDeUltimaImagenSeleccionada = this.IMAGEN_VICEPRESIDENTE;
-
+        
         if (!ruta.equals("")) {
             guardarArchivoImagenEnProyecto(ruta, "src" + File.separator
                     + "imagenes" + File.separator + "candidatos");
@@ -1062,7 +1067,7 @@ public class GestionBinomios extends javax.swing.JFrame {
             }
         });
     }
-
+    
     private void llenarDatosAEditar() {
         obtenerBinomioSeleccionado();
         txtMovimientoPolitico.setText(binomioSeleccionado.getMovimientoPolitico().getNombre());
@@ -1072,7 +1077,7 @@ public class GestionBinomios extends javax.swing.JFrame {
         txtNombresVicepresidente.setText(binomioSeleccionado.getVicepresidente().getNombres());
         txtApellidosVicepresidente.setText(binomioSeleccionado.getVicepresidente().getApellidos());
     }
-
+    
     private void limpiarFormulario1() {
         txtApellidosPresidente.setText("");
         txtApellidosVicepresidente.setText("");
@@ -1081,7 +1086,7 @@ public class GestionBinomios extends javax.swing.JFrame {
         txtNombresVicepresidente.setText("");
         txtNumeroDeLista.setText("");
     }
-
+    
     private void limpiarFormulario2() {
         txtApellidosPresidente2.setText("");
         txtApellidosVicepresidente2.setText("");
@@ -1090,25 +1095,25 @@ public class GestionBinomios extends javax.swing.JFrame {
         txtNombresVicepresidente2.setText("");
         txtNumeroDeLista2.setText("");
     }
-
+    
     private void mostrarDatosDeBinomios() {
         for (Binomio b : FrmPrincipal.listaBinomios) {
             dtmTablaBinomios.addRow(new Object[]{b.getMovimientoPolitico().getNombre(), b.getPresidente().getApellidos() + " " + b.getPresidente().getNombres(), b.getVicepresidente().getApellidos() + " " + b.getVicepresidente().getNombres()});
         }
     }
-
+    
     private void limpiarTablaDeBinomios() {
         for (int i = 0; i < tblBinomios.getRowCount(); i++) {
             dtmTablaBinomios.removeRow(i);
             i -= 1;
         }
     }
-
+    
     private void obtenerBinomioSeleccionado() {
         filaSeleccionada = tblBinomios.getSelectedRow();
         binomioSeleccionado = listaBinomios.get(filaSeleccionada);
     }
-
+    
     private void quitarTextosDeErrores() {
         lblErrorApellidosPresidente.setText("Apellidos Incorrectos");
         lblErrorApellidosVicepresidente.setText("Apellidos Incorrectos");
@@ -1133,7 +1138,7 @@ public class GestionBinomios extends javax.swing.JFrame {
         lblErrorNombresVicepresidente2.setVisible(false);
         lblErrorNumeroLista2.setVisible(false);
     }
-
+    
     private void habilitarBotonAnadir() {
         if (!txtApellidosPresidente2.getText().isBlank() && !txtApellidosVicepresidente2.getText().isBlank()
                 && !txtMovimientoPolitico2.getText().isBlank() && !txtNombresPresidente2.getText().isBlank()
@@ -1144,7 +1149,7 @@ public class GestionBinomios extends javax.swing.JFrame {
             btnAnadir.setEnabled(false);
         }
     }
-
+    
     private String obtenerRutaArchivoImagenSeleccionado() {
         /*En este metodo si no se escoje ningun archivo, el retorno serà ""*/
         String ruta = "";
@@ -1152,23 +1157,23 @@ public class GestionBinomios extends javax.swing.JFrame {
         FileNameExtensionFilter filtrado = new FileNameExtensionFilter(
                 "Imágenes (*.jpg, *.jpeg, *.png)", "jpg", "png", "jpeg");
         jFileChooser.setFileFilter(filtrado);
-
+        
         int respuesta = jFileChooser.showOpenDialog(this);
-
+        
         if (respuesta == JFileChooser.APPROVE_OPTION) {
             ruta = jFileChooser.getSelectedFile().getPath();
         }
-
+        
         return ruta;
     }
-
+    
     private void guardarArchivoImagenEnProyecto(String rutaArchivo,
             String rutaDestino) {
 
         /*El argumento ruta Destino debe ser solo la ruta de un directorio de una
         carpeta, incluso puede ser ""*/
         if (Validador.esRutaDeArchivoImagenCorrecto(rutaArchivo)) {
-
+            
             try {
                 File archivo = new File(rutaArchivo);
                 //Se obtienen los bytes del archivo imagen
@@ -1195,29 +1200,29 @@ public class GestionBinomios extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error al guardar la imagen.");
             }
-
+            
         } else {
             JOptionPane.showMessageDialog(rootPane,
                     "Debe seleccionar un archivo de imagen válido.");
         }
-
+        
     }
-
+    
     private void eliminarImagenesRelacionadasConBinomio(Binomio binomio,
             boolean eliminarImagenMovimiento,
             boolean eliminarImagenPresidente,
             boolean eliminarImagenVicepresidente) {
-
+        
         String rutaLogoCandidato = "src" + File.separator
                 + "imagenes" + File.separator + "candidatos" + File.separator
                 + "logoCandidato.png";
-
+        
         if (eliminarImagenMovimiento) {
             String rutaMovimiento = binomio.getMovimientoPolitico().getRutaImagen();
             File archivoMovimiento = new File(rutaMovimiento);
             archivoMovimiento.delete();
         }
-
+        
         if (eliminarImagenPresidente) {
             String rutaPresidente = binomio.getPresidente().getRutaImagen();
             if (!rutaPresidente.equals(rutaLogoCandidato)) {
@@ -1225,16 +1230,16 @@ public class GestionBinomios extends javax.swing.JFrame {
                 archivoPresidente.delete();
             }
         }
-
+        
         if (eliminarImagenVicepresidente) {
             String rutaVicepresidente = binomio.getVicepresidente().getRutaImagen();
-
+            
             if (!rutaVicepresidente.equals(rutaLogoCandidato)) {
                 File archivoVicepresidente = new File(rutaVicepresidente);
                 archivoVicepresidente.delete();
             }
         }
-
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

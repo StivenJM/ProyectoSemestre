@@ -22,6 +22,48 @@ public class ComponentesDeVentana {
         label.setIcon(icono);
     }
     
+    public static void ajustarImagenAJLabelDinamico (JLabel label, String directorioImagen) {
+        /*Este metodo hace lo mismo que el metodo ajustarImagenALabel, la 
+        diferencia aqui es que la imagen se ajusta al label y tembien el label
+        se ajusta a la imagen*/
+        
+        /*IMPORTANTE el metodo funciona de manera adecuada con un parametro de 
+        Jlabel label con dimensiones cuadradas*/
+        
+        ImageIcon imagen = new ImageIcon(directorioImagen);
+        
+        int alturaImagen = imagen.getIconHeight();
+        int anchoImagen = imagen.getIconWidth();
+        int alturaLabel = label.getHeight();
+        int anchoLabel = label.getWidth();
+        
+        int posicionXLabel = label.getX();
+        int posicionYLabel = label.getY();
+        
+        if (alturaImagen > anchoImagen) {
+            int anchoLabelModificado = (int)
+                    ((float)(alturaLabel * anchoImagen) / (float) alturaImagen);
+            label.setSize(anchoLabelModificado, alturaLabel);
+            
+            //Se cambia la posicion del label para que siga apareciendo centrada
+            label.setLocation(posicionXLabel + (int)((anchoLabel-anchoLabelModificado)/2), 
+                    posicionYLabel);
+        } else {
+            int alturaLabelModificado = (int)
+                    ((float)(anchoLabel * alturaImagen) / (float) anchoImagen);
+            label.setSize(anchoLabel, alturaLabelModificado);
+            
+            //Se cambia la posicion del label para que siga apareciendo centrada
+            label.setLocation(posicionXLabel, 
+                    posicionYLabel + (int)((alturaLabel-alturaLabelModificado)/2));
+        }
+        
+        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(
+                label.getWidth(), label.getHeight(),
+                Image.SCALE_DEFAULT));
+        label.setIcon(icono);
+    }
+    
     public static void ajustarImagenAJButton(JButton button, String directorioImagen) {
         ImageIcon icono = new ImageIcon(directorioImagen);
         Image imagen = icono.getImage();
@@ -52,7 +94,7 @@ public class ComponentesDeVentana {
         int saltosDeLineaPermitidos = (int) label.getHeight() / fontMetrics.getHeight();
 
         String[] listaPalabras = texto.split("\\s+");
-        String textoLabel = "<html>";
+        String textoLabel = "<html><div style='text-align: center;'>";
         String textoAlternativo = "";
 
         int bandera = 0;
@@ -72,7 +114,7 @@ public class ComponentesDeVentana {
             textoLabel += textoAlternativo;
         }
 
-        textoLabel += "</html>";
+        textoLabel += "</div></html>";
 
         label.setText(textoLabel);
         label.setHorizontalAlignment(JLabel.CENTER);
@@ -83,7 +125,7 @@ public class ComponentesDeVentana {
         return retorno;
     }
     
-    private static void ajustarTextoEnLabel (String texto, JLabel label, Font fuenteInicial) {
+    public static void ajustarTextoEnLabel (String texto, JLabel label, Font fuenteInicial) {
         /*Este metodo ajusta un texto en un label,  en caso de que 
         el texto no alcance en el label, tonces se reducirá el tamaño del texto*/
         label.setFont(fuenteInicial);

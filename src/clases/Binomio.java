@@ -9,7 +9,7 @@ public class Binomio implements Serializable, Comparable<Binomio> {
     private int numeroDeVotosAFavor;
     private Candidato presidente;
     private Candidato vicepresidente;
-
+    
     public Binomio(MovimientoPolitico movimientoPolitico, Candidato presidente,
             Candidato vicepresidente) {
         this.movimientoPolitico = movimientoPolitico;
