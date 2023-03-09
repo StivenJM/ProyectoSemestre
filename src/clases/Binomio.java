@@ -10,6 +10,12 @@ public class Binomio implements Serializable, Comparable<Binomio> {
     private Candidato presidente;
     private Candidato vicepresidente;
     
+    /**
+     * Constructor para crear un binomio presidencial
+     * @param movimientoPolitico objeto que es el movimiento que tiene el binomio
+     * @param presidente objeto del presidente que pertenece al binomio
+     * @param vicepresidente objeto del vicepresidente que pertenece al binomio 
+     */
     public Binomio(MovimientoPolitico movimientoPolitico, Candidato presidente,
             Candidato vicepresidente) {
         this.movimientoPolitico = movimientoPolitico;
@@ -21,6 +27,7 @@ public class Binomio implements Serializable, Comparable<Binomio> {
     public MovimientoPolitico getMovimientoPolitico() {
         return movimientoPolitico;
     }
+    
     public int getNumeroDeVotosAFavor() {
         return numeroDeVotosAFavor;
     }
@@ -28,7 +35,7 @@ public class Binomio implements Serializable, Comparable<Binomio> {
     public void setNumeroDeVotosAFavor() {
         this.numeroDeVotosAFavor++;
     }
-
+    
     public Candidato getPresidente() {
         return presidente;
     }
@@ -37,6 +44,12 @@ public class Binomio implements Serializable, Comparable<Binomio> {
         return vicepresidente;
     }
 
+    /**
+     * Sobreescritura del método compareTo para comparar los binomios por
+     * movimientos
+     * @param b objeto de tipo binomio para comparar
+     * @return 
+     */
     @Override
     public int compareTo(Binomio b) {
         return this.movimientoPolitico.compareTo(b.movimientoPolitico);

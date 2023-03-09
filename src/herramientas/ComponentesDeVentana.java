@@ -14,6 +14,11 @@ import javax.swing.JLabel;
 
 public class ComponentesDeVentana {
     
+    /**
+     * Método para redimensionar una imagen y encajarla en un label
+     * @param label el componente gráfico en el que se inserta la imagen
+     * @param directorioImagen la ruta de la imagen a seleccionar
+     */
     public static void ajustarImagenAJLabel(JLabel label, String directorioImagen) {
         ImageIcon imagen = new ImageIcon(directorioImagen);
         Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(
@@ -22,14 +27,16 @@ public class ComponentesDeVentana {
         label.setIcon(icono);
     }
     
+    /**
+     * Método para redimensionar una imagen y encajarla en un label de
+     * preferencia de dimensiones cuadradas para un mejor acoplamiento, en
+     * este método el label se ajusta a la imagen y la imagen al label de manera
+     * dinámica
+     * @param label componente en el que se inserta la imagen
+     * @param directorioImagen ruta en la que se encuentra la imagen a seleccionar
+     */
     public static void ajustarImagenAJLabelDinamico (JLabel label, String directorioImagen) {
-        /*Este metodo hace lo mismo que el metodo ajustarImagenALabel, la 
-        diferencia aqui es que la imagen se ajusta al label y tembien el label
-        se ajusta a la imagen*/
-        
-        /*IMPORTANTE el metodo funciona de manera adecuada con un parametro de 
-        Jlabel label con dimensiones cuadradas*/
-        
+
         ImageIcon imagen = new ImageIcon(directorioImagen);
         
         int alturaImagen = imagen.getIconHeight();
@@ -63,7 +70,11 @@ public class ComponentesDeVentana {
                 Image.SCALE_DEFAULT));
         label.setIcon(icono);
     }
-    
+    /**
+     * Método para redimensionar una imagen y encajarla en un botón
+     * @param button componente donde se insertará la imagen
+     * @param directorioImagen ruta en la que se encuentra la imagen a seleccionar
+     */
     public static void ajustarImagenAJButton(JButton button, String directorioImagen) {
         ImageIcon icono = new ImageIcon(directorioImagen);
         Image imagen = icono.getImage();
@@ -73,21 +84,45 @@ public class ComponentesDeVentana {
         button.setIcon(icono);
     }
     
+    /**
+     * Método para redondear los bordes de un botón
+     * @param button componente para redondear
+     * @param radio la esfericidad que tendrá el botón
+     * @param espesor grosor del borde del botón
+     */
     public static void redondearBordesJButton(JButton button, int radio, int espesor) {
         RoundBorder.roundButton(button, radio, espesor);
     }
     
+    /**
+     * Método para redondear los bordes de un botón
+     * @param button componente para redondear
+     * @param radio la esfericidad que tendrá el botón
+     * @param espesor grosor del borde del botón
+     * @param color colorear el borde de un color específico
+     */
     public static void redondearBordesJButton(JButton button, int radio, int espesor, Color color) {
         RoundBorder.roundButton(button, radio, espesor, color);
     }
     
+    /**
+     * Método para redondear los bordes de un label
+     * @param label componente para redondear
+     * @param radio la esfericidad que tendrá el label
+     * @param espesor grosor del borde dellabel
+     */
     public static void redondearBordesJLabel(JLabel label, int radio, int espesor) {
         RoundBorder.roundLabel(label, radio, espesor);
     }
     
+    /**
+     * Método para comprobar si el texto excede los límites del label
+     * @param texto la cadena de texto a comprobar
+     * @param label componente en el que se encuentra el texto
+     * @return true si el texto no excede los límites del label
+     */
     private static boolean ajustarHorizontalmenteTextoALabel(String texto, JLabel label) {
-        /*Retorna true si el texto no excede los limites del label y retorna 
-        false si pasa lo contrario*/
+        
         boolean retorno = true;
         FontMetrics fontMetrics = label.getFontMetrics(label.getFont());
         int saltosDeLineaDados = 0;
@@ -125,6 +160,12 @@ public class ComponentesDeVentana {
         return retorno;
     }
     
+    /**
+     * Método para ajustar el texto en un label en caso de que exceda del mismo
+     * @param texto cadena de texto a ajustar
+     * @param label componente en el que se ajustará el texto
+     * @param fuenteInicial tipo de letra inicial del texto
+     */
     public static void ajustarTextoEnLabel (String texto, JLabel label, Font fuenteInicial) {
         /*Este metodo ajusta un texto en un label,  en caso de que 
         el texto no alcance en el label, tonces se reducirá el tamaño del texto*/

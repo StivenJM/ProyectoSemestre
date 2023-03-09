@@ -53,12 +53,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ComponentesDeVentana.redondearBordesJButton(btnVotoTelematico, 20, 2, Color.GRAY);
         ComponentesDeVentana.redondearBordesJButton(btnConsultaLugarVotacion, 20, 2, Color.GRAY);
         
-        /*
-        int[] fecha = {1, 2, 3};
-        listaVotantes.add(new Votante("Stiven Joel", "Moposita Mugmal", fecha, "1754650487"));
-        listaVotantes.add(new Votante("Alex Javier", "Pinzon Lozano", fecha, "1002499679"));
-        listaVotantes.add(new Votante("Luis Fernando", "Quezada Campos", fecha, "1754650786"));
-        */
+        
     }
 
     @Override

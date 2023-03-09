@@ -10,6 +10,11 @@ public class MovimientoPolitico implements Serializable,
     private int numeroDeLista;
     private String rutaImagen;
 
+    /**
+     * Constructor para crear un movimiento
+     * @param nombre nombre del movimiento
+     * @param numeroDeLista número único del movimiento
+     */
     public MovimientoPolitico(String nombre, int numeroDeLista) {
         this.nombre = nombre;
         this.numeroDeLista = numeroDeLista;
@@ -39,6 +44,11 @@ public class MovimientoPolitico implements Serializable,
         this.rutaImagen = rutaImagen;
     }
 
+    /**
+     * Comparador de los movimientos por medio del nombre
+     * @param o objeto de tipo MovimientoPolitico para la comparación
+     * @return 
+     */
     @Override
     public int compareTo(MovimientoPolitico o) {
         return this.nombre.compareTo(o.nombre);

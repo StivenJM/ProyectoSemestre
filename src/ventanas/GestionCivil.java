@@ -1,15 +1,22 @@
 package ventanas;
 import clases.Administrador;
+import clases.Votante;
 import herramientas.ComponentesDeVentana;
+import herramientas.ManejoDeListas;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 
 public class GestionCivil extends javax.swing.JFrame {
 
-    DefaultTableModel tablaGestionCivil;
+    DefaultTableModel dtmTablaGestionCivil;
+    int filaSeleccionada;
+    Votante votanteSeleccionado;
+    
     public GestionCivil() {
         initComponents();
                 setSize(1100,700);
@@ -23,12 +30,15 @@ public class GestionCivil extends javax.swing.JFrame {
         ComponentesDeVentana.ajustarImagenAJLabel(lblLogoPrincipal, 
                 "src/imagenes/logoPrincipal.png");
         
-                pnlGestionCivil.setOpaque(false);
-        pnlGestionCivil.setVisible(false);
+        pnlEditarCivil.setOpaque(false);
+        pnlEditarCivil.setVisible(false);
+        pnlNuevoCivil.setOpaque(false);
+        pnlNuevoCivil.setVisible(false);
         
         ComponentesDeVentana.ajustarImagenAJButton(btnNuevo, "src/imagenes/nuevo.png");
         ComponentesDeVentana.ajustarImagenAJButton(btnEliminar, "src/imagenes/eliminar.png");
         ComponentesDeVentana.ajustarImagenAJButton(btnEditar, "src/imagenes/editar.png");
+        ComponentesDeVentana.ajustarImagenAJButton(btnBuscar, "src/imagenes/buscar.png");
 
         btnNuevo.setOpaque(false);
         btnNuevo.setContentAreaFilled(false);
@@ -39,15 +49,19 @@ public class GestionCivil extends javax.swing.JFrame {
         btnEditar.setOpaque(false);
         btnEditar.setContentAreaFilled(false);
         btnEditar.setBorderPainted(false);
+        btnBuscar.setOpaque(false);
+        btnBuscar.setContentAreaFilled(false);
+        btnBuscar.setBorderPainted(false);
         
-        tablaGestionCivil = new DefaultTableModel();
-        tablaGestionCivil.addColumn(" ");
-        tablaGestionCivil.addColumn("Nombres");
-        tablaGestionCivil.addColumn("Apellidos");
-        tablaGestionCivil.addColumn("Cédula");
-        tablaGestionCivil.addColumn("Fecha de Nacimiento");
-        tblGestionCivil.setModel(tablaGestionCivil);
+        dtmTablaGestionCivil = new DefaultTableModel();
+        dtmTablaGestionCivil.addColumn("Nombres");
+        dtmTablaGestionCivil.addColumn("Apellidos");
+        dtmTablaGestionCivil.addColumn("Cédula");
+        dtmTablaGestionCivil.addColumn("Fecha de Nacimiento");
+        tblGestionCivil.setModel(dtmTablaGestionCivil);
 
+        limpiarTablaDVotantes();
+        mostrarDatosDeVotantes();
     }
 
     @Override
@@ -67,7 +81,7 @@ public class GestionCivil extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnlFondo = new javax.swing.JPanel();
         lblLogoPrincipal = new javax.swing.JLabel();
         lblDerechosReservados = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -75,27 +89,30 @@ public class GestionCivil extends javax.swing.JFrame {
         btnNuevo = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        pnlGestionCivil = new javax.swing.JPanel();
-        lblDatosDelCiudadano = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
+        pnlEditarCivil = new javax.swing.JPanel();
         txtPrimerNombre = new javax.swing.JTextField();
-        lblPrimerNombre = new javax.swing.JLabel();
-        lblSegundoNombre = new javax.swing.JLabel();
-        txtSegundoNombre = new javax.swing.JTextField();
-        lblPrimerApellido = new javax.swing.JLabel();
+        lblNombres = new javax.swing.JLabel();
+        lblApellidos = new javax.swing.JLabel();
         txtPrimerApellido = new javax.swing.JTextField();
-        lblSegundoApellido = new javax.swing.JLabel();
-        txtSegundoApellido = new javax.swing.JTextField();
         lblCedula = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
         lblFechaDeNacimiento = new javax.swing.JLabel();
-        txtNumeroDeContacto = new javax.swing.JTextField();
-        lblNumeroDeContacto = new javax.swing.JLabel();
         txtFechaDeNacimiento = new javax.swing.JTextField();
-        lblDireccionDeCorreoElectronico = new javax.swing.JLabel();
-        txtDireccionDeCorreoElectronico = new javax.swing.JTextField();
-        lblDireccionDeResidenciaActual = new javax.swing.JLabel();
-        txtDireccionDeResidenciaActual = new javax.swing.JTextField();
-        btnGuardar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        pnlNuevoCivil = new javax.swing.JPanel();
+        txtPrimerNombre2 = new javax.swing.JTextField();
+        lblNombres2 = new javax.swing.JLabel();
+        lblApellidos2 = new javax.swing.JLabel();
+        txtPrimerApellido2 = new javax.swing.JTextField();
+        lblCedula2 = new javax.swing.JLabel();
+        txtCedula2 = new javax.swing.JTextField();
+        lblFechaDeNacimiento2 = new javax.swing.JLabel();
+        txtFechaDeNacimiento2 = new javax.swing.JTextField();
+        btnAnadir = new javax.swing.JButton();
+        pnlBuscar = new javax.swing.JPanel();
+        lblCedulaBusqueda = new javax.swing.JLabel();
+        txtCedulaBusqueda = new javax.swing.JTextField();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -105,13 +122,13 @@ public class GestionCivil extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(1100, 700));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(lblLogoPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, -40, 340, 190));
+        pnlFondo.setPreferredSize(new java.awt.Dimension(1100, 700));
+        pnlFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlFondo.add(lblLogoPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, -40, 340, 190));
 
         lblDerechosReservados.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblDerechosReservados.setText("EPN © Todos los Derechos Reservados.");
-        jPanel1.add(lblDerechosReservados, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 640, 230, -1));
+        pnlFondo.add(lblDerechosReservados, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 640, 230, -1));
 
         tblGestionCivil.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tblGestionCivil.setModel(new javax.swing.table.DefaultTableModel(
@@ -129,33 +146,44 @@ public class GestionCivil extends javax.swing.JFrame {
         tblGestionCivil.setAlignmentY(0.0F);
         jScrollPane2.setViewportView(tblGestionCivil);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 550, -1));
+        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 550, -1));
 
         btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 65, 65));
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 65, 65));
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 65, 65));
+
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 65, 65));
 
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 65, 65));
+        pnlFondo.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 40, 65, 65));
 
-        lblDatosDelCiudadano.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblDatosDelCiudadano.setText("Datos del Ciudadano");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 65, 65));
 
-        lblPrimerNombre.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblPrimerNombre.setText("Primer Nombre");
+        pnlEditarCivil.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del Votante", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12))); // NOI18N
 
-        lblSegundoNombre.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblSegundoNombre.setText("Segundo Nombre");
+        lblNombres.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNombres.setText("Nombres");
 
-        lblPrimerApellido.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblPrimerApellido.setText("Primer Apellido");
-
-        lblSegundoApellido.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblSegundoApellido.setText("Segundo Apellido");
+        lblApellidos.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblApellidos.setText("Apellidos");
 
         lblCedula.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblCedula.setText("Cédula");
@@ -163,132 +191,184 @@ public class GestionCivil extends javax.swing.JFrame {
         lblFechaDeNacimiento.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblFechaDeNacimiento.setText("Fecha de Nacimiento");
 
-        lblNumeroDeContacto.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblNumeroDeContacto.setText("Número de Contacto");
+        btnActualizar.setBackground(new java.awt.Color(0, 153, 255));
+        btnActualizar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
-        lblDireccionDeCorreoElectronico.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblDireccionDeCorreoElectronico.setText("Dirección de Correo Electrónico");
-
-        lblDireccionDeResidenciaActual.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblDireccionDeResidenciaActual.setText("Dirección de Residencia Actual");
-
-        btnGuardar.setBackground(new java.awt.Color(0, 153, 255));
-        btnGuardar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardar.setText("Guardar");
-
-        javax.swing.GroupLayout pnlGestionCivilLayout = new javax.swing.GroupLayout(pnlGestionCivil);
-        pnlGestionCivil.setLayout(pnlGestionCivilLayout);
-        pnlGestionCivilLayout.setHorizontalGroup(
-            pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlGestionCivilLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCedula)
-                    .addComponent(lblDatosDelCiudadano)
-                    .addGroup(pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(pnlGestionCivilLayout.createSequentialGroup()
-                            .addGroup(pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(pnlGestionCivilLayout.createSequentialGroup()
-                                    .addGroup(pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblPrimerNombre)
-                                        .addComponent(lblSegundoNombre)
-                                        .addComponent(lblPrimerApellido)
-                                        .addComponent(lblSegundoApellido))
-                                    .addGap(137, 137, 137))
-                                .addGroup(pnlGestionCivilLayout.createSequentialGroup()
-                                    .addComponent(lblFechaDeNacimiento)
-                                    .addGap(117, 117, 117)))
-                            .addGroup(pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtPrimerNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtSegundoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtPrimerApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtSegundoApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtFechaDeNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(pnlGestionCivilLayout.createSequentialGroup()
-                            .addGroup(pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(pnlGestionCivilLayout.createSequentialGroup()
-                                    .addGroup(pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblNumeroDeContacto)
-                                        .addComponent(lblDireccionDeCorreoElectronico))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlGestionCivilLayout.createSequentialGroup()
-                                    .addComponent(lblDireccionDeResidenciaActual)
-                                    .addGap(59, 59, 59)))
-                            .addGroup(pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtNumeroDeContacto, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                .addComponent(txtDireccionDeCorreoElectronico)
-                                .addComponent(txtDireccionDeResidenciaActual)))))
-                .addContainerGap(79, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlGestionCivilLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(220, 220, 220))
+        javax.swing.GroupLayout pnlEditarCivilLayout = new javax.swing.GroupLayout(pnlEditarCivil);
+        pnlEditarCivil.setLayout(pnlEditarCivilLayout);
+        pnlEditarCivilLayout.setHorizontalGroup(
+            pnlEditarCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEditarCivilLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlEditarCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNombres)
+                    .addGroup(pnlEditarCivilLayout.createSequentialGroup()
+                        .addGroup(pnlEditarCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblApellidos)
+                            .addComponent(lblCedula)
+                            .addComponent(lblFechaDeNacimiento))
+                        .addGap(155, 155, 155)
+                        .addGroup(pnlEditarCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFechaDeNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrimerApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrimerNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(11, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEditarCivilLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(134, 134, 134))
         );
-        pnlGestionCivilLayout.setVerticalGroup(
-            pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlGestionCivilLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(lblDatosDelCiudadano)
-                .addGap(18, 18, 18)
-                .addGroup(pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPrimerNombre)
+        pnlEditarCivilLayout.setVerticalGroup(
+            pnlEditarCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEditarCivilLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(pnlEditarCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombres)
                     .addComponent(txtPrimerNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSegundoNombre)
-                    .addComponent(txtSegundoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPrimerApellido)
+                .addGroup(pnlEditarCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblApellidos)
                     .addComponent(txtPrimerApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSegundoApellido)
-                    .addComponent(txtSegundoApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlEditarCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCedula)
                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFechaDeNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFechaDeNacimiento))
-                .addGap(18, 18, 18)
-                .addGroup(pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNumeroDeContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNumeroDeContacto))
-                .addGap(18, 18, 18)
-                .addGroup(pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDireccionDeCorreoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDireccionDeCorreoElectronico))
-                .addGap(18, 18, 18)
-                .addGroup(pnlGestionCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblDireccionDeResidenciaActual)
-                    .addComponent(txtDireccionDeResidenciaActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(pnlEditarCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFechaDeNacimiento)
+                    .addComponent(txtFechaDeNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(79, 79, 79)
+                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
-        jPanel1.add(pnlGestionCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 40, 610, 570));
+        pnlFondo.add(pnlEditarCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, 500, 350));
+
+        pnlNuevoCivil.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del Votante", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12))); // NOI18N
+
+        lblNombres2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNombres2.setText("Nombres");
+
+        lblApellidos2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblApellidos2.setText("Apellidos");
+
+        lblCedula2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblCedula2.setText("Cédula");
+
+        lblFechaDeNacimiento2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblFechaDeNacimiento2.setText("Fecha de Nacimiento");
+
+        btnAnadir.setBackground(new java.awt.Color(0, 153, 255));
+        btnAnadir.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnAnadir.setForeground(new java.awt.Color(255, 255, 255));
+        btnAnadir.setText("Añadir");
+        btnAnadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnadirActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlNuevoCivilLayout = new javax.swing.GroupLayout(pnlNuevoCivil);
+        pnlNuevoCivil.setLayout(pnlNuevoCivilLayout);
+        pnlNuevoCivilLayout.setHorizontalGroup(
+            pnlNuevoCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlNuevoCivilLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlNuevoCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNombres2)
+                    .addGroup(pnlNuevoCivilLayout.createSequentialGroup()
+                        .addGroup(pnlNuevoCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblApellidos2)
+                            .addComponent(lblCedula2)
+                            .addComponent(lblFechaDeNacimiento2))
+                        .addGap(155, 155, 155)
+                        .addGroup(pnlNuevoCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFechaDeNacimiento2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCedula2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrimerApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrimerNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(11, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNuevoCivilLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(134, 134, 134))
+        );
+        pnlNuevoCivilLayout.setVerticalGroup(
+            pnlNuevoCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlNuevoCivilLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(pnlNuevoCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombres2)
+                    .addComponent(txtPrimerNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlNuevoCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblApellidos2)
+                    .addComponent(txtPrimerApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlNuevoCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCedula2)
+                    .addComponent(txtCedula2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlNuevoCivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFechaDeNacimiento2)
+                    .addComponent(txtFechaDeNacimiento2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(79, 79, 79)
+                .addComponent(btnAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
+        pnlFondo.add(pnlNuevoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, 500, 320));
+
+        pnlBuscar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar votante", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12))); // NOI18N
+
+        lblCedulaBusqueda.setText("Número de cédula");
+
+        javax.swing.GroupLayout pnlBuscarLayout = new javax.swing.GroupLayout(pnlBuscar);
+        pnlBuscar.setLayout(pnlBuscarLayout);
+        pnlBuscarLayout.setHorizontalGroup(
+            pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBuscarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblCedulaBusqueda)
+                .addGap(18, 18, 18)
+                .addComponent(txtCedulaBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+        pnlBuscarLayout.setVerticalGroup(
+            pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBuscarLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(pnlBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCedulaBusqueda)
+                    .addComponent(txtCedulaBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
+        pnlFondo.add(pnlBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 350, 100));
 
         lblFondo.setPreferredSize(new java.awt.Dimension(1100, 700));
-        jPanel1.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        pnlFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -297,12 +377,98 @@ public class GestionCivil extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        pnlGestionCivil.setVisible(true);
+        limpiarFormulario1();
+        try {
+            pnlEditarCivil.setVisible(true);
+            pnlNuevoCivil.setVisible(false);
+            llenarDatosAEditar();
+            limpiarTablaDVotantes();
+            mostrarDatosDeVotantes();
+
+        } catch (IndexOutOfBoundsException iobe) {
+            JOptionPane.showMessageDialog(rootPane, "No se seleccionó ningún votante para editar", "Error", JOptionPane.ERROR_MESSAGE);
+            pnlEditarCivil.setVisible(false);
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         Administracion.ventanaAdministracion.setEnabled(true);
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        try{
+            obtenerVotanteSeleccionado();
+            FrmPrincipal.listaVotantes.remove(filaSeleccionada);
+            tblGestionCivil.clearSelection();
+            limpiarTablaDVotantes();
+            mostrarDatosDeVotantes();
+        } catch(IndexOutOfBoundsException iobe) {
+            JOptionPane.showMessageDialog(rootPane, "No se seleccionó ningún votante para eliminar", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        try{
+            if(txtCedulaBusqueda.getText().isBlank()){
+                JOptionPane.showMessageDialog(rootPane, "No se ingresó un número de cédula", "Error",JOptionPane.ERROR_MESSAGE);
+            } else {
+                String cedulaBusqueda = txtCedulaBusqueda.getText();
+                int posicionDelVotanteEncontrado = ManejoDeListas.buscarEnListaDeVotantes(cedulaBusqueda);
+                tblGestionCivil.setRowSelectionInterval(posicionDelVotanteEncontrado, posicionDelVotanteEncontrado);
+                llenarDatosAEditar();
+                pnlEditarCivil.setVisible(true);
+                txtCedulaBusqueda.setText("");
+            }
+        } catch (IllegalArgumentException iae) {
+            JOptionPane.showMessageDialog(rootPane, "No se encontró el votante con número de cédula:\n"
+                    + txtCedulaBusqueda.getText(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+        limpiarFormulario2();
+        pnlEditarCivil.setVisible(false);
+        tblGestionCivil.clearSelection();
+        pnlNuevoCivil.setVisible(true);
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+        String nuevosNombres = txtPrimerNombre.getText();
+        String nuevosApellidos = txtPrimerApellido.getText();
+        String nuevaFechaNacimiento = txtFechaDeNacimiento.getText();
+        String nuevaCedula = txtCedula.getText();
+        
+        votanteSeleccionado.setApellidos(nuevosApellidos);
+        votanteSeleccionado.setNombres(nuevosNombres);
+        votanteSeleccionado.setFechaNacimiento(nuevaFechaNacimiento);
+        votanteSeleccionado.setNumeroCedula(nuevaCedula);
+        
+        pnlEditarCivil.setVisible(false);
+        limpiarFormulario1();
+        tblGestionCivil.clearSelection();
+        limpiarTablaDVotantes();
+        mostrarDatosDeVotantes();
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
+        // TODO add your handling code here:
+        String nombreNuevoVotante = txtPrimerNombre2.getText();
+        String apellidoNuevoVotante = txtPrimerApellido2.getText();
+        String fechaNacimientoNuevoVotante = txtFechaDeNacimiento2.getText();
+        String cedulaNuevoVotante = txtCedula2.getText();
+        
+        Votante nuevoVotante = new Votante(nombreNuevoVotante, apellidoNuevoVotante, fechaNacimientoNuevoVotante, cedulaNuevoVotante);
+        FrmPrincipal.listaVotantes.add(nuevoVotante);
+        
+        limpiarTablaDVotantes();
+        mostrarDatosDeVotantes();
+        
+        pnlNuevoCivil.setVisible(false);
+    }//GEN-LAST:event_btnAnadirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -340,35 +506,78 @@ public class GestionCivil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAnadir;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblApellidos;
+    private javax.swing.JLabel lblApellidos2;
     private javax.swing.JLabel lblCedula;
-    private javax.swing.JLabel lblDatosDelCiudadano;
+    private javax.swing.JLabel lblCedula2;
+    private javax.swing.JLabel lblCedulaBusqueda;
     private javax.swing.JLabel lblDerechosReservados;
-    private javax.swing.JLabel lblDireccionDeCorreoElectronico;
-    private javax.swing.JLabel lblDireccionDeResidenciaActual;
     private javax.swing.JLabel lblFechaDeNacimiento;
+    private javax.swing.JLabel lblFechaDeNacimiento2;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblLogoPrincipal;
-    private javax.swing.JLabel lblNumeroDeContacto;
-    private javax.swing.JLabel lblPrimerApellido;
-    private javax.swing.JLabel lblPrimerNombre;
-    private javax.swing.JLabel lblSegundoApellido;
-    private javax.swing.JLabel lblSegundoNombre;
-    private javax.swing.JPanel pnlGestionCivil;
+    private javax.swing.JLabel lblNombres;
+    private javax.swing.JLabel lblNombres2;
+    private javax.swing.JPanel pnlBuscar;
+    private javax.swing.JPanel pnlEditarCivil;
+    private javax.swing.JPanel pnlFondo;
+    private javax.swing.JPanel pnlNuevoCivil;
     private javax.swing.JTable tblGestionCivil;
     private javax.swing.JTextField txtCedula;
-    private javax.swing.JTextField txtDireccionDeCorreoElectronico;
-    private javax.swing.JTextField txtDireccionDeResidenciaActual;
+    private javax.swing.JTextField txtCedula2;
+    private javax.swing.JTextField txtCedulaBusqueda;
     private javax.swing.JTextField txtFechaDeNacimiento;
-    private javax.swing.JTextField txtNumeroDeContacto;
+    private javax.swing.JTextField txtFechaDeNacimiento2;
     private javax.swing.JTextField txtPrimerApellido;
+    private javax.swing.JTextField txtPrimerApellido2;
     private javax.swing.JTextField txtPrimerNombre;
-    private javax.swing.JTextField txtSegundoApellido;
-    private javax.swing.JTextField txtSegundoNombre;
+    private javax.swing.JTextField txtPrimerNombre2;
     // End of variables declaration//GEN-END:variables
+
+    private void llenarDatosAEditar() {
+        obtenerVotanteSeleccionado();
+        txtCedula.setText(votanteSeleccionado.getNumeroCedula());
+        txtFechaDeNacimiento.setText(votanteSeleccionado.getFechaNacimiento());
+        txtPrimerApellido.setText(votanteSeleccionado.getApellidos());
+        txtPrimerNombre.setText(votanteSeleccionado.getNombres());
+    }
+
+    private void obtenerVotanteSeleccionado() {
+        filaSeleccionada = tblGestionCivil.getSelectedRow();
+        votanteSeleccionado = FrmPrincipal.listaVotantes.get(filaSeleccionada);
+    }
+    
+    private void mostrarDatosDeVotantes() {
+        for (Votante v : FrmPrincipal.listaVotantes) {
+            dtmTablaGestionCivil.addRow(new Object[]{v.getNombres(),v.getApellidos(),v.getNumeroCedula(),v.getFechaNacimiento()});
+        }
+    }
+    
+    private void limpiarTablaDVotantes() {
+        for (int i = 0; i < tblGestionCivil.getRowCount(); i++) {
+            dtmTablaGestionCivil.removeRow(i);
+            i -= 1;
+        }
+    }
+
+    private void limpiarFormulario1() {
+        txtCedula.setText("");
+        txtFechaDeNacimiento.setText("");
+        txtPrimerApellido.setText("");
+        txtPrimerNombre.setText("");
+    }
+
+    private void limpiarFormulario2() {
+        txtCedula2.setText("");
+        txtFechaDeNacimiento2.setText("");
+        txtPrimerApellido2.setText("");
+        txtPrimerNombre2.setText("");
+    }
 }

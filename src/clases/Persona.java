@@ -7,17 +7,29 @@ public class Persona implements Serializable, Comparable<Persona> {
     private static final long serialVersionUID = 1L;
     protected String nombres;
     protected String apellidos;
-    protected int [] fechaNacimiento; // dia, mes, año
+    protected String fechaNacimiento; // dia, mes, año
     protected String numeroCedula;
     protected String provincia;
 
-    public Persona(String nombres, String apellidos, int[] fechaNacimiento, String numeroCedula) {
+    /**
+     * Constructor para crear una persona
+     * @param nombres nombres de la persona
+     * @param apellidos apellidos de la persona
+     * @param fechaNacimiento fecha de nacimiento de la persona
+     * @param numeroCedula cedula de la persona
+     */
+    public Persona(String nombres, String apellidos, String fechaNacimiento, String numeroCedula) {
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
         this.numeroCedula = numeroCedula;
     }
     
+    /**
+     * Constructor para crear una persona con menos parámetros
+     * @param nombres nombres de la persona
+     * @param apellidos apellidos de la persona
+     */
     public Persona(String nombres, String apellidos) {
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -46,11 +58,11 @@ public class Persona implements Serializable, Comparable<Persona> {
         return apellidos;
     }
 
-    public int[] getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(int[] fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

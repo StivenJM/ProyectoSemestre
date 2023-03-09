@@ -10,18 +10,31 @@ public class ManejoDeListas {
 
     /*Esta clase se enfoca unicamente en las listas declaradas en la 
     ventana Principal FrmPrincipal*/
+    /**
+     * Método para ordenar la lista de binomios
+     */
     public static void ordenarListaDeBinomios() {
         Collections.sort(FrmPrincipal.listaBinomios);
     }
 
+    /**
+     * Método para ordenar la lista de votantes
+     */
     public static void ordenarListaDeVotantes() {
         Collections.sort(FrmPrincipal.listaVotantes);
     }
 
+    /**
+     * Método para ordenar la lista de administradores
+     */
     public static void ordenarListaDeAdministradores() {
         Collections.sort(FrmPrincipal.listaAdministradores);
     }
-
+    
+    /**
+     * Método para obtener una lista ordenada a partir de una lista desordenada
+     * @return lista de binomios ordenada
+     */
     public static ArrayList<Binomio> obtenerListaBinomiosOrdenadaPorVotos() {
         ArrayList<Binomio> listaBinomios = new ArrayList<>();
         OrdenarBinomiosPorNumeroVotos o = new OrdenarBinomiosPorNumeroVotos();
@@ -32,6 +45,11 @@ public class ManejoDeListas {
         return listaBinomios;
     }
 
+    /**
+     * Método para buscar un binomio por el nombre del movimiento
+     * @param nombreDeLista nombre del movimiento a buscar
+     * @return posición dento de la lista de binomios, del binomio buscado
+     */
     public static int buscarEnListaDeBinomios(String nombreDeLista) {
         boolean existeNombreDeMovimiento;
         int posicionBinomio = -1;
@@ -45,6 +63,11 @@ public class ManejoDeListas {
         return posicionBinomio;
     }
     
+    /**
+     * Método para buscar un binomio por el número del movimiento
+     * @param numeroDeLista número del movimiento a buscar
+     * @return posición dento de la lista de binomios, del binomio buscado
+     */
     public static int buscarEnListaDeBinomios(int numeroDeLista) {
         boolean existeNumeroDeLista;
         int posicionBinomio = -1;
@@ -58,6 +81,12 @@ public class ManejoDeListas {
         return posicionBinomio;
     }
 
+    /**
+     * Método para buscar un votante dentro de la lista mediante el número de
+     * cédula
+     * @param numeroCedula número de cédula del votante a buscar
+     * @return posición del votante buscado dentro de la lista
+     */
     public static int buscarEnListaDeVotantes(String numeroCedula) {
         boolean votanteEncontrado;
         int posicionVotante = -1;
@@ -71,10 +100,12 @@ public class ManejoDeListas {
         return posicionVotante;
     }
 
-    
-    /*El metodo retorna -1 cuando no encuentra coincidencias y retorna otro valor
-    positivi cuando si lo encuentra, este valor corresponde con la posicion de 
-    la lista*/
+    /**
+     * Método para buscar un administrador dentro de la lista mediante el nombre
+     * de usuario
+     * @param nombreDeUsuario nombre de usuario del administrador a buscar
+     * @return posición del administrador buscado dentro de la lista de administradores
+     */
     public static int buscarEnListaDeAdministradores(String nombreDeUsuario) {
         boolean adminEncontrado;
         int posicionAdmin = -1;

@@ -12,6 +12,9 @@ public class Administracion extends javax.swing.JFrame {
     public static Administracion ventanaAdministracion;
     public static Administrador administrador;
     
+    /**
+     * Inicialización de ventana de administración con sus componentes
+     */
     public Administracion() {
         initComponents();
         setSize(1100,700);
@@ -42,6 +45,10 @@ public class Administracion extends javax.swing.JFrame {
         ComponentesDeVentana.redondearBordesJButton(btnGestionCivil, 20, 2, Color.GRAY);
     }
     
+    /**
+     * Método para asignarle un icono a la ventana
+     * @return el icono de la ventana
+     */
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(
@@ -172,54 +179,90 @@ public class Administracion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Efecto de animación al pasar el mouse por encima del botón 
+     * @param evt 
+     */
     private void btnGestionCivilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionCivilMouseEntered
         // TODO add your handling code here:
         btnGestionCivil.setSize(btnGestionCivil.getWidth() + 10, 
                 btnGestionCivil.getHeight() + 10);
     }//GEN-LAST:event_btnGestionCivilMouseEntered
 
+    /**
+     * Fin de la animación del botón
+     * @param evt 
+     */
     private void btnGestionCivilMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionCivilMouseExited
         // TODO add your handling code here:
         btnGestionCivil.setSize(btnGestionCivil.getWidth() - 10, 
                 btnGestionCivil.getHeight() - 10);
     }//GEN-LAST:event_btnGestionCivilMouseExited
 
+    /**
+     * Efecto de animación al pasar el mouse por encima del botón 
+     * @param evt 
+     */
     private void btnGestionBinomiosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionBinomiosMouseEntered
         // TODO add your handling code here:
         btnGestionBinomios.setSize(btnGestionBinomios.getWidth() + 10, 
                 btnGestionBinomios.getHeight() + 10);
     }//GEN-LAST:event_btnGestionBinomiosMouseEntered
 
+    /**
+     * Fin de la animación del botón
+     * @param evt 
+     */
     private void btnGestionBinomiosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionBinomiosMouseExited
         // TODO add your handling code here:
         btnGestionBinomios.setSize(btnGestionBinomios.getWidth() - 10, 
                 btnGestionBinomios.getHeight() - 10);
     }//GEN-LAST:event_btnGestionBinomiosMouseExited
 
+    /**
+     * Efecto de animación al pasar el mouse por encima del botón 
+     * @param evt 
+     */
     private void btnGestionAdministradoresMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionAdministradoresMouseEntered
         // TODO add your handling code here:
         btnGestionAdministradores.setSize(btnGestionAdministradores.getWidth() + 10, 
                 btnGestionAdministradores.getHeight() + 10);
     }//GEN-LAST:event_btnGestionAdministradoresMouseEntered
 
+    /**
+     * Fin de la animación del botón
+     * @param evt 
+     */
     private void btnGestionAdministradoresMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionAdministradoresMouseExited
         // TODO add your handling code here:
         btnGestionAdministradores.setSize(btnGestionAdministradores.getWidth() - 10, 
                 btnGestionAdministradores.getHeight() - 10);
     }//GEN-LAST:event_btnGestionAdministradoresMouseExited
 
+    /**
+     * Inicializar la ventana de gestión civil
+     * @param evt 
+     */
     private void btnGestionCivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionCivilActionPerformed
         this.ventanaAdministracion.setEnabled(false);
         GestionCivil gestionCivil = new GestionCivil();
         gestionCivil.setVisible(true);
     }//GEN-LAST:event_btnGestionCivilActionPerformed
 
+    /**
+     * Inicializar la ventana de gestión de binomios
+     * @param evt 
+     */
     private void btnGestionBinomiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionBinomiosActionPerformed
         this.ventanaAdministracion.setEnabled(false);
         GestionBinomios gestionBinomios = new GestionBinomios();
         gestionBinomios.setVisible(true);
     }//GEN-LAST:event_btnGestionBinomiosActionPerformed
 
+    /**
+     * Inicializar la ventana de gestión de administradores
+     * @param evt 
+     */
     private void btnGestionAdministradoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionAdministradoresActionPerformed
         this.ventanaAdministracion.setEnabled(false);
         GestionAdministradores gestionAdministradores = 

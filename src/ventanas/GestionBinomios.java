@@ -692,6 +692,7 @@ public class GestionBinomios extends javax.swing.JFrame {
             rutaImagenVicepresidenteSeleccionada = null;
         } catch (IndexOutOfBoundsException iobe) {
             JOptionPane.showMessageDialog(rootPane, "No se seleccionó ningún binomio para editar", "Error", JOptionPane.ERROR_MESSAGE);
+            pnlEditarBinomio.setVisible(false);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -708,6 +709,7 @@ public class GestionBinomios extends javax.swing.JFrame {
             btnAnadir.setEnabled(false);
         } else {
             JOptionPane.showMessageDialog(rootPane, "Ya alcanzó el numero maximo\nde binomios permitidos");
+            pnlNuevoBinomio.setVisible(false);
         }
     }//GEN-LAST:event_btnNuevoActionPerformed
 

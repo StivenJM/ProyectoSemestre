@@ -2,15 +2,33 @@ package herramientas;
 
 public class Validador {
 
+    /**
+     * Método para comprobar si los nombres están correctamente ingresados
+     *
+     * @param nombre cadena de texto a validar
+     * @return
+     */
     public static boolean esNombreCorrecto(String nombre) {
         return nombre.matches("^[A-Z][a-z]+\\ [A-Z][a-z]+$");
     }
 
+    /**
+     * Método para comprobar si los apellidos están correctamente ingresados
+     *
+     * @param apellido cadena de texto a validar
+     * @return
+     */
     public static boolean esApellidoCorrecto(String apellido) {
         return apellido.matches("^[A-Z][a-z]+\\ [A-Z][a-z]+$");
     }
 
-    //Este metodo es unicamente necesario para el metodo de validacion de cedula
+    /**
+     * Método para validar el número de cédula según el algoritmo del dígito
+     * verificador
+     *
+     * @param cedula cadena de caracteres a validar
+     * @return
+     */
     private static boolean validarUltimoDigitoCedula(String cedula) {
 
         // algoritmo de validación módulo 10
@@ -29,35 +47,62 @@ public class Validador {
 
         return (digitoVerificador == ultimoDigito);
     }
-    
-    public static boolean esNumeroDeCedulaCorrecto (String cedula) {
+
+    /**
+     * Validar número de cédula por completo
+     *
+     * @param cedula cadena de caracteres a evaluar
+     * @return true si es una cédula correcta
+     */
+    public static boolean esNumeroDeCedulaCorrecto(String cedula) {
         boolean retorno;
-        
-        retorno = cedula.matches("^(0[1-9]|1\\d|2[0-4]|30)\\d{7}[0-9]$") &&
-                validarUltimoDigitoCedula(cedula);
-        
+
+        retorno = cedula.matches("^(0[1-9]|1\\d|2[0-4]|30)\\d{7}[0-9]$")
+                && validarUltimoDigitoCedula(cedula);
+
         return retorno;
     }
-    
-    public static boolean esNombreUsuarioCorrecto (String usuario) {
-        /*Se valida unicamente nombres de usuario con mas de 3 digitos y 
-        con menos de 20, puede tener Mayusculas, Minusculas, numeros y guiones*/
+
+    /**
+     * Método para comprobar si un nombre de usuario de administrador es válido
+     * El nombre de usuario puede tener entre 3 a 20 caracteres y puede contener
+     * mayúsculas, minúsculas, números y guiones
+     *
+     * @param usuario cadena de caracteres a validar
+     * @return true si es correcto el nombre de usuario
+     */
+    public static boolean esNombreUsuarioCorrecto(String usuario) {
         return usuario.matches("^[a-zA-Z0-9_-]{3,20}$");
     }
-    
-    public static boolean esContrasenaCorrecta (String contrasena) {
-        /*Se valida contraseñas con almenos 8 digitos, debería tener por lo
-        menos una mayuscula, una minuscula y un numero, para estas condiciones
-        se usa un lookahead*/
+
+    /**
+     * Método para validar una contraseña de administrador Solo se aceptan
+     * contraseñas con mínimo 8 caracteres que contenga por lo menos una
+     * mayúscula, una minúscula y un número
+     *
+     * @param contrasena
+     * @return
+     */
+    public static boolean esContrasenaCorrecta(String contrasena) {
         return contrasena.matches(
                 "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
     }
-    
-    public static boolean esNumeroNaturalCorrecto (String numero) {
+
+    /**
+     * Método para determinar si una cadena de caracteres es un número natural
+     * @param numero cadena a validar
+     * @return true si es un número natural
+     */
+    public static boolean esNumeroNaturalCorrecto(String numero) {
         return numero.matches("[0-9]+");
     }
-    
-    public static boolean esRutaDeArchivoImagenCorrecto (String ruta) {
+
+    /**
+     * Método para determinar si la ruta de una imagen es correcta
+     * @param ruta la cadena de caracteres a evaluar
+     * @return
+     */
+    public static boolean esRutaDeArchivoImagenCorrecto(String ruta) {
         return ruta.matches("^.+\\.(png|jpe?g)$");
     }
 

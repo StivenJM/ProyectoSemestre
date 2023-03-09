@@ -4,6 +4,19 @@
  */
 package ventanas;
 
+import clases.*;
+import herramientas.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.util.ArrayList;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 /**
  *
  * @author Erick
@@ -16,6 +29,20 @@ public class Resultados extends javax.swing.JFrame {
     public Resultados() {
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        setSize(1100, 700);
+        setResizable(false);
+        setTitle("CONSEJO NACIONAL ELECTORAL");
+        setLocationRelativeTo(null);
+
+        mostrarResultados();
+    }
+
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(
+                ClassLoader.getSystemResource("imagenes/logoCNEConFondo.png"));
+        return retValue;
     }
 
     /**
@@ -28,12 +55,10 @@ public class Resultados extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlFondo = new javax.swing.JPanel();
-        lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnlFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pnlFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 700));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,8 +109,37 @@ public class Resultados extends javax.swing.JFrame {
         });
     }
 
+    private void mostrarResultados() {
+
+        ArrayList<Binomio> binomiosOrdenados = ManejoDeListas.obtenerListaBinomiosOrdenadaPorVotos();
+
+        int cantidadDeVotantes = 0;
+        for (Votante v : FrmPrincipal.listaVotantes) {
+            if (v.getTieneVotoRegistrado()) {
+                cantidadDeVotantes++;
+            }
+        }
+        
+        DefaultCategoryDataset datos = new DefaultCategoryDataset();
+
+        for (Binomio b : binomiosOrdenados) {
+            datos.setValue((((double)b.getNumeroDeVotosAFavor())/22)*100, b.getMovimientoPolitico().getNombre(), "");
+        }
+
+        JFreeChart graficoResultados = ChartFactory.createBarChart("RESULTADOS", "", "PORCENTAJE DE VOTOS", datos, PlotOrientation.VERTICAL, true, true, false);
+
+        ChartPanel panel = new ChartPanel(graficoResultados);
+        panel.setMouseWheelEnabled(true);
+        panel.setPreferredSize(new Dimension(1100, 700));
+
+        pnlFondo.setLayout(new BorderLayout());
+        pnlFondo.add(panel, BorderLayout.NORTH);
+
+        pack();
+        repaint();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lblFondo;
     private javax.swing.JPanel pnlFondo;
     // End of variables declaration//GEN-END:variables
 }

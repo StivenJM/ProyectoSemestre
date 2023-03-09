@@ -8,6 +8,13 @@ public class Candidato extends Persona{
     private String cargoPublicoPostulado;
     private String rutaImagen;
 
+    /**
+     * Constructor para crear un candidato
+     * @param cargoPublicoPostulado texto que indica el cargo al que aspira el
+     * candidato
+     * @param nombres nombres del candidato
+     * @param apellidos apellidos del candidato
+     */
     public Candidato(String cargoPublicoPostulado, String nombres, 
             String apellidos) {
         super(nombres, apellidos);

@@ -561,6 +561,7 @@ public class GestionAdministradores extends javax.swing.JFrame {
             llenarDatosAEditar();
         } catch(IndexOutOfBoundsException iobe) {
             JOptionPane.showMessageDialog(rootPane,"No se seleccionó ningun administrador para editar", "Error", JOptionPane.ERROR_MESSAGE);
+            pnlEditarAdministrador.setVisible(false);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
